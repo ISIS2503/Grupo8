@@ -18,13 +18,20 @@
 	V: 5V  
 
 ## Sensor de Sonido: ---
-	Modelo:  
-	Pin:   
-	V:   
+	Modelo: LM393
+	Pin: A0
+	V: 5V
 
 # Protocolo de Comunicación:
 
-::: Separa atributos de un mismo tipo (Valor, Unidades)  
-    i.e: valor:::unidad  
-;;; Separa las diferentes medidas de tipo (Temperatura, Iluminación, ppm, dB)  
-    i.e: tipo;;;tipo;;;tipo;;;tipo
+| Descripción                 | Valor           | Ejemplo  |
+| --------------------------- |:---------------:| :--------:|
+| Separador de atributos      | :::             | 27:::C   |
+| Separador de tipos          | ;;;             |  \<Temperatura\>;;;\<Iluminación\>  |
+| Valor Nulo                  | NULL            |    \<Ruido\>;;;NULL |
+
+El orden de los tipos en el protocolo está dado por:
+1. Temperatura
+2. Iluminación
+3. Gases (Monóxido de Carbono)
+4. Ruido

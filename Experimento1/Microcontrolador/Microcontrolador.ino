@@ -4,52 +4,53 @@
 #include <DHT11.h>
 
 // ---------------------------------CONSTANTES---------------------------------
+// Id del microcontrolador
+const int id = 1;
 // Selecciona el pin de entrada analoga a leer la Temperatura.
-int temperaturaPin = 3;
-// Selecciona el pin de entrada analoga a leer el CO2.
-int co2Pin = 2;
+const int temperaturaPin = 3;
+// Selecciona el pin de entrada analoga a leer el CO.
+const int COPin = 2;
 // Selecciona el pin de entrada analoga a leer la Ilumunacion.
-int iluminacionPin = -1; // 5 y 4
+const int iluminacionPin = -1; // 5 y 4
 // Selecciona el pin de entrada analoga a leer el Sonido.
-int sonidoPin = 1;
-
+const int sonidoPin = 0;
 // Link con el sensor de temperatura
-DHT11 dht11(temperaturaPin);
+const DHT11 dht11(temperaturaPin);
+// Link con el sensor de iluminación
+const Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
 
-// Link con el sensor de temperatura
-Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
+const String separadorAtributos = ":::";
+const String separadorTipos = ";;;";
+
+const String temperaturaTipo = "C";
+const String COTipo = "ppm";
+const String iluminacionTipo = "Lux";
+const String sonidoTipo = "dB";
 
 // ---------------------------------VARIABLES---------------------------------
 float temperatura = 0.0;
-int co2 = 0;
+int CO = 0;
 int iluminacion = 0;
 int sonido = 0;
-
-String temperaturaTipo = "C";
-String co2Tipo = "ppm";
-String iluminacionTipo = "Lux";
-String sonidoTipo = "dB";
 
 int actualChar = 0;
 String tempString = "";
 String paquete = "";
 
+int enviaRuidoEIluminacion = 0;
+
 // Preparacion del proceso
 void setup() 
 {
-    // Abre puerto serial y lo configura a 9600 bps
+    // Abre puerto serial y lo configura a 9600 BPS
     Serial.begin( 9600 );
-
+    // Configura el sensor de iluminación
     setupIluminacion();
- }
- 
+}
+
+// Configura el sensor de iluminación
 void setupIluminacion()
 {
-    // Connect SCL to analog 5
-    // Connect SDA to analog 4
-    // Connect VDD to 3.3V DC
-    // Connect GROUND to common ground
-
     if(!tsl.begin())
     {
         Serial.println("Error con TSL");
@@ -59,20 +60,38 @@ void setupIluminacion()
     tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
 }
 
-// Ejecuta el procesamiento del sensor
+// Ejecuta el procesamiento del microcontrolador
 void loop() 
 {
+    tempString = id + separadorAtributos + "ID" + separadorTipos;
+    // Lee el nivel de la temperatura 
     readTemperatura();
-    readCO2();
-    readIluminacion();
-    readSonido();
-    // Espera 1 segundo para repetir el procedimiento
-    delay(1000);
+    // Lee los niveles de CO
+    readCO();
 
+    if( enviaRuidoEIluminacion )
+    {
+        // Lee los niveles de la iluminación
+        readIluminacion();
+        // Lee los niveles de Sonido
+        readSonido();
+    }
+    else
+    {
+        sendNull();
+        sendNull();
+    }
+
+    // Envia la información por el puerto Serial
     Serial.println(tempString);
     tempString = "";
+
+    // Espera 1 segundo para repetir el procedimiento
+    enviaRuidoEIluminacion = (enviaRuidoEIluminacion + 1) % 2;
+    delay(60000);
 }
 
+// Lee los nivels de temperatura
 void readTemperatura()
 {
     float humedad;
@@ -80,9 +99,9 @@ void readTemperatura()
     if( err == 0)    // Si devuelve 0 es que ha leido bien
     { 
       tempString += String(temperatura);
-      tempString += ":::";
+      tempString += separadorAtributos;
       tempString += temperaturaTipo;
-      tempString += ";;;";
+      tempString += separadorTipos;
     }
     else
     {
@@ -92,14 +111,14 @@ void readTemperatura()
     }
 }
 
-void readCO2()
+void readCO()
 {
-    co2 = analogRead(co2Pin);
+    CO = analogRead(COPin);
 
-    tempString += String(co2);
-    tempString += ":::";
-    tempString += co2Tipo;
-    tempString += ";;;";
+    tempString += String(CO);
+    tempString += separadorAtributos;
+    tempString += COTipo;
+    tempString += separadorTipos;
 }
 
 void readIluminacion()
@@ -110,20 +129,26 @@ void readIluminacion()
     if(event.light)
     {
         tempString += String(event.light);
-        tempString += ":::";
+        tempString += separadorAtributos;
         tempString += iluminacionTipo;
-        tempString += ";;;";
+        tempString += separadorTipos;
     }
 }
 
 void readSonido()
 {
-    // sonido = analogRead(sonidoPin);
-    sonido = 40;//TODO
+    sonido = analogRead(sonidoPin);
 
     tempString += String(sonido);
-    tempString += ":::";
+    tempString += separadorAtributos;
     tempString += sonidoTipo;
-    tempString += ";;;";
+    tempString += separadorTipos;
 }
+
+void sendNull()
+{
+    tempString += "NULL";
+    tempString += separadorTipos;
+}
+
 
