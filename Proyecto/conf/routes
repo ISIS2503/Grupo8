@@ -1,0 +1,80 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET /                                                                                controllers.Application.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET /assets/*file                                                                    controllers.Assets.at(path="/public", file)
+
+# REST
+# GET
+GET /minas                                                                           controllers.SistemaMinasController.retrieveAll()
+
+GET /minas/niveles                                                                   controllers.NivelController.retrieveAll()
+
+GET /minas/reportes                                                                  controllers.ReporteController.retrieveAll()
+
+GET /minas/nivel/:idNivel/areas                                                      controllers.AreaController.retrieveAll(idNivel: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                   controllers.MicrocontroladorController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/alertas                                              controllers.AlertaController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
+
+GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
+
+#POST
+POST /minas/niveles                                                                  controllers.NivelController.create()
+
+POST /minas/reportes                                                                 controllers.ReporteController.create()
+
+POST /minas/nivel/:idNivel/areas                                                     controllers.AreaController.create(idNivel: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                  controllers.MicrocontroladorController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/alertas                                             controllers.AlertaController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/actuadores                                          controllers.ActuadorController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                   controllers.SensorController.create(idMicrocontrolador: Long)
+
+POST /[a-zA-Z0-9]+/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
+
+# PUT
+PUT /minas/niveles/:id                                                               controllers.NivelController.update(id: Long)
+
+PUT /minas/reportes/:id                                                              controllers.ReporteController.update(id: Long)
+
+PUT /minas/nivel/:idNivel/areas/:id                                                  controllers.AreaController.update(idNivel: Long, id: Long)
+
+PUT /[a-zA-Z0-9]+/areas/:idArea/microcontroladores/:id                               controllers.MicrocontroladorController.update(idArea: Long, id: Long)
+
+PUT /[a-zA-Z0-9]+/areas/:idArea/alertas/:id                                          controllers.AlertaController.update(idArea: Long, id: Long)
+
+PUT /[a-zA-Z0-9]+/areas/:idArea/actuadores/:id                                       controllers.ActuadorController.update(idArea: Long, id: Long)
+
+PUT /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores/:id                controllers.SensorController.update(idMicrocontrolador: Long, id: Long)
+
+PUT /[a-zA-Z0-9]+/sensor/:idSensor/datos/:id                                         controllers.DatoController.update(idSensor: Long, id: Long)
+
+# DELETE
+DELETE /minas/niveles/:idNivel                                                       controllers.NivelController.delete(idNivel:Long)
+
+DELETE /minas/reportes/:idReporte                                                    controllers.ReporteController.delete(idReporte:Long)
+
+DELETE /minas/nivel/:idNivel/areas/:idArea                                           controllers.AreaController.delete(idNivel: Long, idArea:Long)
+
+DELETE /[a-zA-Z0-9]+/areas/:idArea/microcontroladores/:idMicrocontrolador            controllers.MicrocontroladorController.delete(idArea: Long, idMicrocontrolador:Long)
+
+DELETE /[a-zA-Z0-9]+/areas/:idArea/alertas/:idAlerta                                 controllers.AlertaController.delete(idArea: Long, idAlerta:Long)
+
+DELETE /[a-zA-Z0-9]+/areas/:idArea/actuadores/:idActuador                            controllers.ActuadorController.delete(idArea: Long, idActuador:Long)
+
+DELETE /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores/:idSensor       controllers.SensorController.delete(idMicrocontrolador: Long, idSensor:Long)
+
+DELETE /[a-zA-Z0-9]+/sensor/:idSensor/datos/:idDato                                  controllers.DatoController.delete(idSensor: Long, idDato:Long)
