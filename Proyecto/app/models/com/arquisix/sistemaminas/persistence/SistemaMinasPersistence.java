@@ -2,6 +2,7 @@ package models.com.arquisix.sistemaminas.persistence;
 
 import models.com.arquisix.sistemaminas.entities.SistemaMinas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class SistemaMinasPersistence
 
     public List<SistemaMinas> retrieveAll()
     {
-        return null;
+        return new ArrayList<>();
     }
 
     public SistemaMinas update(Long id, SistemaMinas entity)

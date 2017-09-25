@@ -13,9 +13,9 @@ import java.util.Map;
 public class SistemaMinas {
 
     private Map<Long, Long[]> mapaSensores;
-    private List<com.arquisix.sistemaminas.entities.Nivel> niveles;
-    private List<com.arquisix.sistemaminas.entities.Reporte> reportes;
-    private  List<com.arquisix.sistemaminas.entities.Usuario> usuarios;
+    private List<Nivel> niveles;
+    private List<Reporte> reportes;
+    private  List<Usuario> usuarios;
 
     public SistemaMinas(Map<Long, Long[]> mapaSensores) {
         this.mapaSensores = mapaSensores;
@@ -29,15 +29,15 @@ public class SistemaMinas {
         this.mapaSensores = mapaSensores;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Nivel> getNiveles() {
+    public List<Nivel> getNiveles() {
         return niveles;
     }
 
-    public void setNiveles(List<com.arquisix.sistemaminas.entities.Nivel> niveles) {
+    public void setNiveles(List<Nivel> niveles) {
         this.niveles = niveles;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Reporte> getReportes() {
+    public List<Reporte> getReportes() {
         return reportes;
     }
 
@@ -45,7 +45,7 @@ public class SistemaMinas {
         this.reportes = reportes;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Usuario> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 

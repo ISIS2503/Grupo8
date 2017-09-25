@@ -6,39 +6,33 @@ import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 import play.mvc.Result;
 
-import javax.inject.Inject;
-
-/**
- * Created by juanchaves on 24/09/17.
- */
 public class AlertaController extends AbstractController<Alerta>
 {
-    @Inject
-    private AlertaLogic logic;
+    private static AlertaLogic logic = new AlertaLogic();
 
-    public Result create(Long idArea)
+    public static Result create(Long idArea)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.create(idArea,jsonToObject(json))));
+        return ok(Json.toJson(logic.create(idArea,jsonToObject(json, Alerta.class))));
     }
 
-    public Result retrieveAll(Long idArea)
+    public static Result retrieveAll(Long idArea)
     {
         return ok(Json.toJson(logic.retrieveAll(idArea)));
     }
 
-    public Result retrieve(Long id)
+    public static Result retrieve(Long id)
     {
         return ok(Json.toJson(logic.retrieve(id)));
     }
 
-    public Result update(Long idArea, Long id)
+    public static Result update(Long idArea, Long id)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.update(idArea, id, jsonToObject(json))));
+        return ok(Json.toJson(logic.update(idArea, id, jsonToObject(json, Alerta.class))));
     }
 
-    public Result delete(Long idArea, Long idAlerta)
+    public static Result delete(Long idArea, Long idAlerta)
     {
         return ok(Json.toJson(logic.delete(idArea, idAlerta)));
     }

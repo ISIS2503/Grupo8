@@ -10,14 +10,13 @@ import play.mvc.Controller;
  */
 public class AbstractController<T> extends Controller
 {
-    private ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
-    public T jsonToObject(JsonNode node)
+    public static <T> T jsonToObject(JsonNode node, Class<T> clase)
     {
         try
         {
-            T obj = (T) new Object();
-            return mapper.treeToValue(node, (Class<T>) obj.getClass());
+            return mapper.treeToValue(node, clase);
         }
         catch (JsonProcessingException e)
         {

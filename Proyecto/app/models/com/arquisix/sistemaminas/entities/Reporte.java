@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Reporte {
     private ZonedDateTime fecha;
-    private List<com.arquisix.sistemaminas.entities.Nivel> niveles;
+    private List<Nivel> niveles;
     public Reporte(ZonedDateTime fecha) {
         this.fecha = fecha;
     }
@@ -23,7 +23,7 @@ public class Reporte {
         this.fecha = fecha;
     }
 
-    public Reporte(ZonedDateTime fecha, List<com.arquisix.sistemaminas.entities.Nivel> niveles) {
+    public Reporte(ZonedDateTime fecha, List<Nivel> niveles) {
         this.fecha = fecha;
         this.niveles = niveles;
     }

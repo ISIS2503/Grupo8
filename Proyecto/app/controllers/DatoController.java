@@ -13,32 +13,31 @@ import javax.inject.Inject;
  */
 public class DatoController extends AbstractController<Dato>
 {
-    @Inject
-    private DatoLogic logic;
+    private static DatoLogic logic = new DatoLogic();
 
-    public Result create(Long idSensor)
+    public static Result create(Long idSensor)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.create(idSensor, jsonToObject(json))));
+        return ok(Json.toJson(logic.create(idSensor, jsonToObject(json, Dato.class))));
     }
 
-    public Result retrieveAll(Long idSensor)
+    public static Result retrieveAll(Long idSensor)
     {
         return ok(Json.toJson(logic.retrieveAll(idSensor)));
     }
 
-    public Result retrieve(Long id)
+    public static Result retrieve(Long idSensor, Long id)
     {
-        return ok(Json.toJson(logic.retrieve(id)));
+        return ok(Json.toJson(logic.retrieve(idSensor, id)));
     }
 
-    public Result update(Long idSensor, Long id)
+    public static Result update(Long idSensor, Long id)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.update(idSensor, id, jsonToObject(json))));
+        return ok(Json.toJson(logic.update(idSensor, id, jsonToObject(json, Dato.class))));
     }
 
-    public Result delete(Long idSensor, Long idDato)
+    public static Result delete(Long idSensor, Long idDato)
     {
         return ok(Json.toJson(logic.delete(idSensor, idDato)));
     }

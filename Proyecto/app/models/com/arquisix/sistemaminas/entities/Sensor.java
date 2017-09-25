@@ -13,7 +13,7 @@ public class Sensor {
     private Float minimo;
     private Float maximo;
     private VariableAmbiental tipo;
-    private List<com.arquisix.sistemaminas.entities.Dato> datos;
+    private List<Dato> datos;
 
     public Sensor(Long id, Float minimo, Float maximo, VariableAmbiental tipo) {
         this.id = id;
@@ -54,11 +54,11 @@ public class Sensor {
         this.tipo = tipo;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Dato> getDatos() {
+    public List<Dato> getDatos() {
         return datos;
     }
 
-    public void setDatos(List<com.arquisix.sistemaminas.entities.Dato> datos) {
+    public void setDatos(List<Dato> datos) {
         this.datos = datos;
     }
 }

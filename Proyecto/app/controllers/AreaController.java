@@ -8,37 +8,33 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 
-/**
- * Created by juanchaves on 24/09/17.
- */
 public class AreaController extends AbstractController<Area>
 {
-    @Inject
-    private AreaLogic logic;
+    private static AreaLogic logic = new AreaLogic();
 
-    public Result create(Long idNivel)
+    public static Result create(Long idNivel)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.create(idNivel, jsonToObject(json))));
+        return ok(Json.toJson(logic.create(idNivel, jsonToObject(json, Area.class))));
     }
 
-    public Result retrieveAll(Long idNivel)
+    public static Result retrieveAll(Long idNivel)
     {
         return ok(Json.toJson(logic.retrieveAll(idNivel)));
     }
 
-    public Result retrieve(Long id)
+    public static Result retrieve(Long id)
     {
         return ok(Json.toJson(logic.retrieve(id)));
     }
 
-    public Result update(Long idNivel, Long id)
+    public static Result update(Long idNivel, Long id)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.update(idNivel, id, jsonToObject(json))));
+        return ok(Json.toJson(logic.update(idNivel, id, jsonToObject(json, Area.class))));
     }
 
-    public Result delete(Long idNivel, Long idArea)
+    public static Result delete(Long idNivel, Long idArea)
     {
         return ok(Json.toJson(logic.delete(idNivel, idArea)));
     }

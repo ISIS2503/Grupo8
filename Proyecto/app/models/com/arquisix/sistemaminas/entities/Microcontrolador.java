@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Microcontrolador {
     private Long id;
-    private List<com.arquisix.sistemaminas.entities.Sensor> sensores;
+    private List<Sensor> sensores;
 
     public Microcontrolador(Long id) {
         this.id = id;
@@ -23,11 +23,11 @@ public class Microcontrolador {
         this.id = id;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Sensor> getSensores() {
+    public List<Sensor> getSensores() {
         return sensores;
     }
 
-    public void setSensores(List<com.arquisix.sistemaminas.entities.Sensor> sensores) {
+    public void setSensores(List<Sensor> sensores) {
         this.sensores = sensores;
     }
 }

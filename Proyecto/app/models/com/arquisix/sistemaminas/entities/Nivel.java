@@ -11,7 +11,7 @@ public class Nivel {
 
     private Long id;
     private Integer nivel;
-    private List<com.arquisix.sistemaminas.entities.Area> areas;
+    private List<Area> areas;
 
     public Nivel(Long id, Integer nivel) {
         this.id = id;
@@ -34,11 +34,11 @@ public class Nivel {
         this.nivel = nivel;
     }
 
-    public List<com.arquisix.sistemaminas.entities.Area> getAreas() {
+    public List<Area> getAreas() {
         return areas;
     }
 
-    public void setAreas(List<com.arquisix.sistemaminas.entities.Area> areas) {
+    public void setAreas(List<Area> areas) {
         this.areas = areas;
     }
 }

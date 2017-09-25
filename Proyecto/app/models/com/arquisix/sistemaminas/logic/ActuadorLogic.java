@@ -1,10 +1,8 @@
 package models.com.arquisix.sistemaminas.logic;
 
 import models.com.arquisix.sistemaminas.entities.Actuador;
-import models.com.arquisix.sistemaminas.exceptions.BusinessLogicException;
 import models.com.arquisix.sistemaminas.persistence.ActuadorPersistence;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -12,13 +10,7 @@ import java.util.List;
  */
 public class ActuadorLogic {
 
-    @Inject
-    private ActuadorPersistence persistence;
-
-    public void validar(Actuador actuador) throws BusinessLogicException
-    {
-
-    }
+    private static ActuadorPersistence persistence = new ActuadorPersistence();
 
     public Actuador create(Long idArea,Actuador entity)
     {

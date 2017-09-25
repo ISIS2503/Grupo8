@@ -11,8 +11,7 @@ import java.util.List;
  */
 public class SistemaMinasLogic
 {
-    @Inject
-    private SistemaMinasPersistence persistence;
+    private SistemaMinasPersistence persistence = new SistemaMinasPersistence();
 
     public SistemaMinas create(SistemaMinas entity)
     {
