@@ -18,7 +18,6 @@ import play.libs.F.*;
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
-
 /**
 *
 * Simple (JUnit) tests that can call all parts of a play app.
