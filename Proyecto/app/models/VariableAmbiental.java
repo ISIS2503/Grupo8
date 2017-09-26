@@ -8,92 +8,104 @@ import javax.persistence.Entity;
 @Entity
 public class VariableAmbiental extends Model
 {
-    private Float valorMaximo;
+	private Long id;
 
-    private Float valorMinimo;
+	private Float valorMaximo;
 
-    private Float variacion;
+	private Float valorMinimo;
 
-    private String uniadadDeMedida;
+	private Float variacion;
 
-    private Float precision;
+	private String uniadadDeMedida;
 
-    private Float frecuencia;
+	private Float precision;
 
-    public VariableAmbiental()
-    {
-    }
+	private Float frecuencia;
 
-    public Float getValorMaximo()
-    {
+	public VariableAmbiental( )
+	{
+	}
 
-        return valorMaximo;
-    }
+	public Float getValorMaximo( )
+	{
 
-    public void setValorMaximo(Float valorMaximo)
-    {
-        this.valorMaximo = valorMaximo;
-    }
+		return valorMaximo;
+	}
 
-    public Float getValorMinimo()
-    {
-        return valorMinimo;
-    }
+	public void setValorMaximo( Float valorMaximo )
+	{
+		this.valorMaximo = valorMaximo;
+	}
 
-    public void setValorMinimo(Float valorMinimo)
-    {
-        this.valorMinimo = valorMinimo;
-    }
+	public Float getValorMinimo( )
+	{
+		return valorMinimo;
+	}
 
-    public Float getVariacion()
-    {
-        return variacion;
-    }
+	public void setValorMinimo( Float valorMinimo )
+	{
+		this.valorMinimo = valorMinimo;
+	}
 
-    public void setVariacion(Float variacion)
-    {
-        this.variacion = variacion;
-    }
+	public Float getVariacion( )
+	{
+		return variacion;
+	}
 
-    public String getUniadadDeMedida()
-    {
-        return uniadadDeMedida;
-    }
+	public void setVariacion( Float variacion )
+	{
+		this.variacion = variacion;
+	}
 
-    public void setUniadadDeMedida(String uniadadDeMedida)
-    {
-        this.uniadadDeMedida = uniadadDeMedida;
-    }
+	public String getUniadadDeMedida( )
+	{
+		return uniadadDeMedida;
+	}
 
-    public Float getPrecision()
-    {
-        return precision;
-    }
+	public void setUniadadDeMedida( String uniadadDeMedida )
+	{
+		this.uniadadDeMedida = uniadadDeMedida;
+	}
 
-    public void setPrecision(Float precision)
-    {
-        this.precision = precision;
-    }
+	public Float getPrecision( )
+	{
+		return precision;
+	}
 
-    public Float getFrecuencia()
-    {
-        return frecuencia;
-    }
+	public void setPrecision( Float precision )
+	{
+		this.precision = precision;
+	}
 
-    public void setFrecuencia(Float frecuencia)
-    {
-        this.frecuencia = frecuencia;
-    }
+	public Float getFrecuencia( )
+	{
+		return frecuencia;
+	}
 
-    public static VariableAmbiental bind(JsonNode json)
-    {
-        VariableAmbiental var = new VariableAmbiental();
-        var.valorMaximo = json.findPath("valorMaximo").floatValue();
-        var.valorMinimo = json.findPath("valorMinimo").floatValue();
-        var.variacion = json.findPath("variacion").floatValue();
-        var.uniadadDeMedida = json.findPath("unidadDeMedida").asText();
-        var.precision = json.findPath("precision").floatValue();
-        var.frecuencia = json.findPath("frecuencia").floatValue();
-        return var;
-    }
+	public void setFrecuencia( Float frecuencia )
+	{
+		this.frecuencia = frecuencia;
+	}
+
+	public Long getId( )
+	{
+		return id;
+	}
+
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
+
+	public static VariableAmbiental bind( JsonNode json )
+	{
+		VariableAmbiental var = new VariableAmbiental( );
+		var.valorMaximo = json.findPath( "valorMaximo" ).floatValue( );
+		var.valorMinimo = json.findPath( "valorMinimo" ).floatValue( );
+		var.variacion = json.findPath( "variacion" ).floatValue( );
+		var.uniadadDeMedida = json.findPath( "unidadDeMedida" ).asText( );
+		var.precision = json.findPath( "precision" ).floatValue( );
+		var.frecuencia = json.findPath( "frecuencia" ).floatValue( );
+		return var;
+	}
 }

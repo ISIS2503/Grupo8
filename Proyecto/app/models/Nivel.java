@@ -9,51 +9,51 @@ import java.util.List;
 @Entity
 public class Nivel extends Model
 {
-    private Long id;
+	private Long id;
 
-    private Integer nivel;
+	private Integer nivel;
 
-    private List<Area> areas;
+	private List<Area> areas;
 
-    public Nivel()
-    {
-    }
+	public Nivel( )
+	{
+	}
 
-    public Long getId()
-    {
-        return id;
-    }
+	public Long getId( )
+	{
+		return id;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
 
-    public Integer getNivel()
-    {
-        return nivel;
-    }
+	public Integer getNivel( )
+	{
+		return nivel;
+	}
 
-    public void setNivel(Integer nivel)
-    {
-        this.nivel = nivel;
-    }
+	public void setNivel( Integer nivel )
+	{
+		this.nivel = nivel;
+	}
 
-    public List<Area> getAreas()
-    {
-        return areas;
-    }
+	public List<Area> getAreas( )
+	{
+		return areas;
+	}
 
-    public void setAreas(List<Area> areas)
-    {
-        this.areas = areas;
-    }
+	public void setAreas( List<Area> areas )
+	{
+		this.areas = areas;
+	}
 
-    public static Nivel bind(JsonNode json)
-    {
-        Nivel nivel = new Nivel();
-        nivel.id = json.findPath("id").asLong();
-        nivel.nivel = json.findPath("nivel").asInt();
-        return nivel;
-    }
+	public static Nivel bind( JsonNode json )
+	{
+		Nivel nivel = new Nivel( );
+		nivel.id = json.findPath( "id" ).asLong( );
+		nivel.nivel = json.findPath( "nivel" ).asInt( );
+		return nivel;
+	}
 }

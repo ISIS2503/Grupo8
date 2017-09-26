@@ -9,38 +9,39 @@ import java.util.List;
 @Entity
 public class Microcontrolador extends Model
 {
-    private Long id;
-    private List<Sensor> sensores;
+	private Long id;
 
-    public Microcontrolador()
-    {
-    }
+	private List<Sensor> sensores;
 
-    public Long getId()
-    {
-        return id;
-    }
+	public Microcontrolador( )
+	{
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public Long getId( )
+	{
+		return id;
+	}
 
-    public List<Sensor> getSensores()
-    {
-        return sensores;
-    }
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
 
-    public void setSensores(List<Sensor> sensores)
-    {
-        this.sensores = sensores;
-    }
+	public List<Sensor> getSensores( )
+	{
+		return sensores;
+	}
 
-    public static Microcontrolador bind(JsonNode json)
-    {
-        Microcontrolador microcontrolador = new Microcontrolador();
-        microcontrolador.id = json.findPath("id").asLong();
-        return microcontrolador;
-    }
+	public void setSensores( List<Sensor> sensores )
+	{
+		this.sensores = sensores;
+	}
+
+	public static Microcontrolador bind( JsonNode json )
+	{
+		Microcontrolador microcontrolador = new Microcontrolador( );
+		microcontrolador.id = json.findPath( "id" ).asLong( );
+		return microcontrolador;
+	}
 }
 

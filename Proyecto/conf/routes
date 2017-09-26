@@ -3,84 +3,82 @@
 # ~~~~
 
 # Home page
-GET         /                       controllers.Application.index()
+GET /                                                                                controllers.Application.index()
 
 #POST        /ciudad                 controllers.CiudadController.create()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
+GET /assets/*file                                                                    controllers.Assets.versioned(path="/public", file: Asset)
 
 # REST
 # GET
 GET /minas                                                                           controllers.SistemaMinasController.retrieveAll()
-
-POST /minas                                                                           controllers.SistemaMinasController.create()
 #
 GET /minas/niveles                                                                   controllers.NivelController.retrieveAll()
 
-POST /minas/niveles                                                                   controllers.NivelController.create()
-#
-#GET /minas/reportes                                                                  controllers.ReporteController.retrieveAll()
-#
-#GET /minas/nivel/:idNivel/areas                                                      controllers.AreaController.retrieveAll(idNivel: Long)
-#
-#GET /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                   controllers.MicrocontroladorController.retrieveAll(idArea: Long)
-#
-#GET /[a-zA-Z0-9]+/areas/:idArea/alertas                                              controllers.AlertaController.retrieveAll(idArea: Long)
-#
-#GET /[a-zA-Z0-9]+/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
-#
-#GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
-#
-#GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
-#
-##POST
-#POST /minas/niveles                                                                  controllers.NivelController.create()
-#
-#POST /minas/reportes                                                                 controllers.ReporteController.create()
-#
-#POST /minas/nivel/:idNivel/areas                                                     controllers.AreaController.create(idNivel: Long)
-#
-#POST /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                  controllers.MicrocontroladorController.create(idArea: Long)
-#
-#POST /[a-zA-Z0-9]+/areas/:idArea/alertas                                             controllers.AlertaController.create(idArea: Long)
-#
-#POST /[a-zA-Z0-9]+/areas/:idArea/actuadores                                          controllers.ActuadorController.create(idArea: Long)
-#
-#POST /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                   controllers.SensorController.create(idMicrocontrolador: Long)
-#
-#POST /[a-zA-Z0-9]+/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
-#
-## PUT
-#PUT /minas/niveles/:id                                                               controllers.NivelController.update(id: Long)
-#
-#PUT /minas/reportes/:id                                                              controllers.ReporteController.update(id: Long)
-#
-#PUT /minas/nivel/:idNivel/areas/:id                                                  controllers.AreaController.update(idNivel: Long, id: Long)
-#
-#PUT /[a-zA-Z0-9]+/areas/:idArea/microcontroladores/:id                               controllers.MicrocontroladorController.update(idArea: Long, id: Long)
-#
-#PUT /[a-zA-Z0-9]+/areas/:idArea/alertas/:id                                          controllers.AlertaController.update(idArea: Long, id: Long)
-#
-#PUT /[a-zA-Z0-9]+/areas/:idArea/actuadores/:id                                       controllers.ActuadorController.update(idArea: Long, id: Long)
-#
-#PUT /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores/:id                controllers.SensorController.update(idMicrocontrolador: Long, id: Long)
-#
-#PUT /[a-zA-Z0-9]+/sensor/:idSensor/datos/:id                                         controllers.DatoController.update(idSensor: Long, id: Long)
-#
-## DELETE
-#DELETE /minas/niveles/:idNivel                                                       controllers.NivelController.delete(idNivel:Long)
-#
-#DELETE /minas/reportes/:idReporte                                                    controllers.ReporteController.delete(idReporte:Long)
-#
-#DELETE /minas/nivel/:idNivel/areas/:idArea                                           controllers.AreaController.delete(idNivel: Long, idArea:Long)
-#
-#DELETE /[a-zA-Z0-9]+/areas/:idArea/microcontroladores/:idMicrocontrolador            controllers.MicrocontroladorController.delete(idArea: Long, idMicrocontrolador:Long)
-#
-#DELETE /[a-zA-Z0-9]+/areas/:idArea/alertas/:idAlerta                                 controllers.AlertaController.delete(idArea: Long, idAlerta:Long)
-#
-#DELETE /[a-zA-Z0-9]+/areas/:idArea/actuadores/:idActuador                            controllers.ActuadorController.delete(idArea: Long, idActuador:Long)
-#
-#DELETE /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores/:idSensor       controllers.SensorController.delete(idMicrocontrolador: Long, idSensor:Long)
-#
-#DELETE /[a-zA-Z0-9]+/sensor/:idSensor/datos/:idDato                                  controllers.DatoController.delete(idSensor: Long, idDato:Long)
+GET /minas/reportes                                                                  controllers.ReporteController.retrieveAll()
+
+GET /minas/nivel/:idNivel/areas                                                      controllers.AreaController.retrieveAll(idNivel: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                   controllers.MicrocontroladorController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/alertas                                              controllers.AlertaController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
+
+GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
+
+GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
+
+#POST
+POST /minas                                                                          controllers.SistemaMinasController.create()
+
+POST /minas/niveles                                                                  controllers.NivelController.create()
+
+POST /minas/nivel/:idNivel/areas                                                     controllers.AreaController.create(idNivel: Long)
+
+POST /minas/nivel/:idNivel/reportes                                                  controllers.ReporteController.create(idNivel: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                  controllers.MicrocontroladorController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/alertas                                             controllers.AlertaController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/areas/:idArea/actuadores                                          controllers.ActuadorController.create(idArea: Long)
+
+POST /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                   controllers.SensorController.create(idMicrocontrolador: Long)
+
+POST /[a-zA-Z0-9]+/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
+
+# PUT
+PUT /minas/niveles/:id                                                               controllers.NivelController.update(id: Long)
+
+PUT /minas/reportes/:id                                                              controllers.ReporteController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/areas/:id                                                          controllers.AreaController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/microcontroladores/:id                                             controllers.MicrocontroladorController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/alertas/:id                                                        controllers.AlertaController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/actuadores/:id                                                     controllers.ActuadorController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/sensores/:id                                                       controllers.SensorController.update(id: Long)
+
+PUT /[a-zA-Z0-9]+/datos/:id                                                          controllers.DatoController.update(id: Long)
+
+# DELETE
+DELETE /minas/niveles/:idNivel                                                       controllers.NivelController.delete(idNivel:Long)
+
+DELETE /minas/reportes/:idReporte                                                    controllers.ReporteController.delete(idReporte:Long)
+
+DELETE /minas[a-zA-Z0-9]+/areas/:idArea                                              controllers.AreaController.delete(idArea:Long)
+
+DELETE /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador                          controllers.MicrocontroladorController.delete(idMicrocontrolador:Long)
+
+DELETE /[a-zA-Z0-9]+/alertas/:idAlerta                                               controllers.AlertaController.delete(idAlerta:Long)
+
+DELETE /[a-zA-Z0-9]+/actuadores/:idActuador                                          controllers.ActuadorController.delete(idActuador:Long)
+
+DELETE /[a-zA-Z0-9]+/sensores/:idSensor                                              controllers.SensorController.delete(idSensor:Long)
+
+DELETE /[a-zA-Z0-9]+/datos/:idDato                                                   controllers.DatoController.delete(idDato:Long)

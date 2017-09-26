@@ -9,79 +9,78 @@ import java.util.List;
 @Entity
 public class Sensor extends Model
 {
+	private Long id;
 
-    private Long id;
+	private Float minimo;
 
-    private Float minimo;
+	private Float maximo;
 
-    private Float maximo;
+	private VariableAmbiental tipo;
 
-    private VariableAmbiental tipo;
+	private List<Dato> datos;
 
-    private List<Dato> datos;
+	public Sensor( )
+	{
+	}
 
-    public Sensor()
-    {
-    }
+	public Long getId( )
+	{
+		return id;
+	}
 
-    public Long getId()
-    {
-        return id;
-    }
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public Float getMinimo( )
+	{
+		return minimo;
+	}
 
-    public Float getMinimo()
-    {
-        return minimo;
-    }
+	public void setMinimo( Float minimo )
+	{
+		this.minimo = minimo;
+	}
 
-    public void setMinimo(Float minimo)
-    {
-        this.minimo = minimo;
-    }
+	public Float getMaximo( )
+	{
+		return maximo;
+	}
 
-    public Float getMaximo()
-    {
-        return maximo;
-    }
+	public void setMaximo( Float maximo )
+	{
+		this.maximo = maximo;
+	}
 
-    public void setMaximo(Float maximo)
-    {
-        this.maximo = maximo;
-    }
+	public VariableAmbiental getTipo( )
+	{
+		return tipo;
+	}
 
-    public VariableAmbiental getTipo()
-    {
-        return tipo;
-    }
+	public void setTipo( VariableAmbiental tipo )
+	{
+		this.tipo = tipo;
+	}
 
-    public void setTipo(VariableAmbiental tipo)
-    {
-        this.tipo = tipo;
-    }
+	public List<Dato> getDatos( )
+	{
+		return datos;
+	}
 
-    public List<Dato> getDatos()
-    {
-        return datos;
-    }
+	public void setDatos( List<Dato> datos )
+	{
+		this.datos = datos;
+	}
 
-    public void setDatos(List<Dato> datos)
-    {
-        this.datos = datos;
-    }
-
-    public static Sensor bind(JsonNode json)
-    {
-        Sensor sensor = new Sensor();
-        sensor.id = json.findPath("i").asLong();
-        sensor.maximo = json.findPath("maximo").floatValue();
-        sensor.minimo = json.findPath("minimo").floatValue();
-        // TODO Variable Ambiental
-        return sensor;
-    }
+	public static Sensor bind( JsonNode json )
+	{
+		Sensor sensor = new Sensor( );
+		sensor.id = json.findPath( "i" ).asLong( );
+		sensor.maximo = json.findPath( "maximo" ).floatValue( );
+		sensor.minimo = json.findPath( "minimo" ).floatValue( );
+		// TODO Variable Ambiental
+		return sensor;
+	}
 }
 

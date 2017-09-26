@@ -11,39 +11,39 @@ import javax.persistence.Entity;
 @Entity
 public class Alerta extends Model
 {
-    private Long id;
+	private Long id;
 
-    private Integer tipo;
+	private Integer tipo;
 
-    public Alerta()
-    {
-    }
+	public Alerta( )
+	{
+	}
 
-    public Long getId()
-    {
-        return id;
-    }
+	public Long getId( )
+	{
+		return id;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
 
-    public Integer getTipo()
-    {
-        return tipo;
-    }
+	public Integer getTipo( )
+	{
+		return tipo;
+	}
 
-    public void setTipo(Integer tipo)
-    {
-        this.tipo = tipo;
-    }
+	public void setTipo( Integer tipo )
+	{
+		this.tipo = tipo;
+	}
 
-    public static Alerta bind(JsonNode json)
-    {
-        Alerta alerta = new Alerta();
-        alerta.id = json.findPath("id").asLong();
-        alerta.tipo = json.findPath("tipo").asInt();
-        return alerta;
-    }
+	public static Alerta bind( JsonNode json )
+	{
+		Alerta alerta = new Alerta( );
+		alerta.id = json.findPath( "id" ).asLong( );
+		alerta.tipo = json.findPath( "tipo" ).asInt( );
+		return alerta;
+	}
 }

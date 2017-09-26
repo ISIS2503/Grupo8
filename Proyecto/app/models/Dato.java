@@ -11,52 +11,53 @@ import java.time.ZonedDateTime;
 @Entity
 public class Dato extends Model
 {
-    private Long id;
-    private Float valor;
-    private ZonedDateTime timeStamp;
+	private Long id;
 
-    public Dato()
-    {
-    }
+	private Float valor;
 
-    public Long getId()
-    {
-        return id;
-    }
+	private ZonedDateTime timeStamp;
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public Dato( )
+	{
+	}
 
-    public Float getValor()
-    {
-        return valor;
-    }
+	public Long getId( )
+	{
+		return id;
+	}
 
-    public void setValor(Float valor)
-    {
-        this.valor = valor;
-    }
+	public void setId( Long id )
+	{
+		this.id = id;
+	}
 
-    public ZonedDateTime getTimeStamp()
-    {
-        return timeStamp;
-    }
+	public Float getValor( )
+	{
+		return valor;
+	}
 
-    public void setTimeStamp(ZonedDateTime timeStamp)
-    {
-        this.timeStamp = timeStamp;
-    }
+	public void setValor( Float valor )
+	{
+		this.valor = valor;
+	}
 
-    public static Dato bind(JsonNode json)
-    {
-        Dato dato = new Dato();
-        dato.id = json.findPath("id").asLong();
-        dato.valor = json.findPath("valor").floatValue();
-        Instant i = Instant.ofEpochSecond(json.findPath("inicio").asLong());
-        dato.timeStamp = ZonedDateTime.ofInstant(i, ZoneId.systemDefault());
-        return dato;
+	public ZonedDateTime getTimeStamp( )
+	{
+		return timeStamp;
+	}
 
-    }
+	public void setTimeStamp( ZonedDateTime timeStamp )
+	{
+		this.timeStamp = timeStamp;
+	}
+
+	public static Dato bind( JsonNode json )
+	{
+		Dato dato = new Dato( );
+		dato.id = json.findPath( "id" ).asLong( );
+		dato.valor = json.findPath( "valor" ).floatValue( );
+		Instant i = Instant.ofEpochSecond( json.findPath( "inicio" ).asLong( ) );
+		dato.timeStamp = ZonedDateTime.ofInstant( i, ZoneId.systemDefault( ) );
+		return dato;
+	}
 }
