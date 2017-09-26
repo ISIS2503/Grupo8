@@ -17,7 +17,7 @@ public class MicrocontroladorController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Microcontrolador microcontrolador = Microcontrolador.bind( json );
-		//TODO
+		microcontrolador.setIdArea( idArea );
 		microcontrolador.save( );
 		return ok( Json.toJson( microcontrolador ) );
 	}

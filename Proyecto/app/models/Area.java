@@ -19,6 +19,8 @@ public class Area extends Model
 
 	private List<Microcontrolador> microcontroladores;
 
+	private Long idNivel;
+
 	public Area( )
 	{
 	}
@@ -71,6 +73,16 @@ public class Area extends Model
 	public void setMicrocontroladores( List<Microcontrolador> microcontroladores )
 	{
 		this.microcontroladores = microcontroladores;
+	}
+
+	public Long getIdNivel( )
+	{
+		return idNivel;
+	}
+
+	public void setIdNivel( Long idNivel )
+	{
+		this.idNivel = idNivel;
 	}
 
 	public static Area bind( JsonNode json )

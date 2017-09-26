@@ -17,7 +17,7 @@ public class AlertaController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Alerta alerta = Alerta.bind( json );
-		//TODO
+		alerta.setIdArea( idArea );
 		alerta.save( );
 		return ok( Json.toJson( alerta ) );
 	}

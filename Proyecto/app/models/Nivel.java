@@ -15,6 +15,8 @@ public class Nivel extends Model
 
 	private List<Area> areas;
 
+	private List<Reporte> reportes;
+
 	public Nivel( )
 	{
 	}
@@ -47,6 +49,16 @@ public class Nivel extends Model
 	public void setAreas( List<Area> areas )
 	{
 		this.areas = areas;
+	}
+
+	public java.util.List<Reporte> getReportes( )
+	{
+		return reportes;
+	}
+
+	public void setReportes( java.util.List<Reporte> reportes )
+	{
+		this.reportes = reportes;
 	}
 
 	public static Nivel bind( JsonNode json )

@@ -17,7 +17,7 @@ public class AreaController extends Controller
 	{
 		com.fasterxml.jackson.databind.JsonNode json = request( ).body( ).asJson( );
 		Area area = Area.bind( json );
-		//TODO
+		area.setIdNivel( idNivel );
 		area.save( );
 		return ok( Json.toJson( area ) );
 	}

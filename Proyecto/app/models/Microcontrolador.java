@@ -13,6 +13,8 @@ public class Microcontrolador extends Model
 
 	private List<Sensor> sensores;
 
+	private Long idArea;
+
 	public Microcontrolador( )
 	{
 	}
@@ -35,6 +37,16 @@ public class Microcontrolador extends Model
 	public void setSensores( List<Sensor> sensores )
 	{
 		this.sensores = sensores;
+	}
+
+	public Long getIdArea( )
+	{
+		return idArea;
+	}
+
+	public void setIdArea( Long idArea )
+	{
+		this.idArea = idArea;
 	}
 
 	public static Microcontrolador bind( JsonNode json )

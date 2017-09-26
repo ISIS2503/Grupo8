@@ -17,7 +17,7 @@ public class ActuadorController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Actuador actuador = Actuador.bind( json );
-		//TODO
+		actuador.setIdArea( idArea );
 		actuador.save( );
 		return ok( Json.toJson( actuador ) );
 	}

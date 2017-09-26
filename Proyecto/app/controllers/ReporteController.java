@@ -17,7 +17,7 @@ public class ReporteController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Reporte reporte = Reporte.bind( json );
-		//TODO
+		reporte.setIdNivel( idNivel );
 		reporte.save( );
 		return ok( Json.toJson( reporte ) );
 	}

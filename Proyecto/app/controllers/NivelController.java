@@ -17,7 +17,6 @@ public class NivelController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Nivel nivel = Nivel.bind( json );
-		//TODO
 		nivel.save( );
 		return ok( Json.toJson( nivel ) );
 	}

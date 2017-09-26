@@ -17,6 +17,8 @@ public class Dato extends Model
 
 	private ZonedDateTime timeStamp;
 
+	private Long idSensor;
+
 	public Dato( )
 	{
 	}
@@ -49,6 +51,16 @@ public class Dato extends Model
 	public void setTimeStamp( ZonedDateTime timeStamp )
 	{
 		this.timeStamp = timeStamp;
+	}
+
+	public Long getIdSensor( )
+	{
+		return idSensor;
+	}
+
+	public void setIdSensor( Long idSensor )
+	{
+		this.idSensor = idSensor;
 	}
 
 	public static Dato bind( JsonNode json )

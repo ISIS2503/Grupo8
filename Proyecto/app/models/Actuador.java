@@ -16,6 +16,8 @@ public class Actuador extends Model
 
 	private ZonedDateTime inicio;
 
+	private Long idArea;
+
 	public Actuador( )
 	{
 	}
@@ -50,6 +52,16 @@ public class Actuador extends Model
 		this.inicio = inicio;
 	}
 
+	public Long getIdArea( )
+	{
+		return idArea;
+	}
+
+	public void setIdArea( Long idArea )
+	{
+		this.idArea = idArea;
+	}
+
 	public static Actuador bind( com.fasterxml.jackson.databind.JsonNode json )
 	{
 		Actuador actuador = new Actuador( );
@@ -59,5 +71,4 @@ public class Actuador extends Model
 		actuador.inicio = ZonedDateTime.ofInstant( i, ZoneId.systemDefault( ) );
 		return actuador;
 	}
-
 }

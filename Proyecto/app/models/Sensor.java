@@ -19,6 +19,8 @@ public class Sensor extends Model
 
 	private List<Dato> datos;
 
+	private Long idMicrocontrolador;
+
 	public Sensor( )
 	{
 	}
@@ -71,6 +73,16 @@ public class Sensor extends Model
 	public void setDatos( List<Dato> datos )
 	{
 		this.datos = datos;
+	}
+
+	public Long getIdMicrocontrolador( )
+	{
+		return idMicrocontrolador;
+	}
+
+	public void setIdMicrocontrolador( Long idMicrocontrolador )
+	{
+		this.idMicrocontrolador = idMicrocontrolador;
 	}
 
 	public static Sensor bind( JsonNode json )

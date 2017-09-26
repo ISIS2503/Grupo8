@@ -17,7 +17,7 @@ public class DatoController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Dato dato = Dato.bind( json );
-		//TODO
+		dato.setIdSensor( idSensor );
 		dato.save( );
 		return ok( Json.toJson( dato ) );
 	}

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 @Entity
 public class Reporte extends Model
@@ -16,7 +15,7 @@ public class Reporte extends Model
 
 	private ZonedDateTime fecha;
 
-	private List<Nivel> niveles;
+	private long idNivel;
 
 	public Reporte( )
 	{
@@ -47,14 +46,14 @@ public class Reporte extends Model
 		this.id = id;
 	}
 
-	public java.util.List<Nivel> getNiveles( )
+	public long getIdNivel( )
 	{
-		return niveles;
+		return idNivel;
 	}
 
-	public void setNiveles( java.util.List<Nivel> niveles )
+	public void setIdNivel( long idNivel )
 	{
-		this.niveles = niveles;
+		this.idNivel = idNivel;
 	}
 
 	public static Reporte bind( JsonNode json )

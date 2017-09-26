@@ -96,7 +96,7 @@ public class VariableAmbiental extends Model
 	{
 		this.id = id;
 	}
-
+	
 	public static VariableAmbiental bind( JsonNode json )
 	{
 		VariableAmbiental var = new VariableAmbiental( );

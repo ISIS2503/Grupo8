@@ -15,6 +15,8 @@ public class Alerta extends Model
 
 	private Integer tipo;
 
+	private Long idArea;
+
 	public Alerta( )
 	{
 	}
@@ -37,6 +39,16 @@ public class Alerta extends Model
 	public void setTipo( Integer tipo )
 	{
 		this.tipo = tipo;
+	}
+
+	public Long getIdArea( )
+	{
+		return idArea;
+	}
+
+	public void setIdArea( Long idArea )
+	{
+		this.idArea = idArea;
 	}
 
 	public static Alerta bind( JsonNode json )

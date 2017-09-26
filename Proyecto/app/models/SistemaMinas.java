@@ -3,11 +3,9 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import javax.persistence.Entity;
 import java.util.List;
 import java.util.Map;
 
-@Entity
 public class SistemaMinas extends Model
 {
 	private Long id;
