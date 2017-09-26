@@ -1,45 +1,53 @@
 package controllers;
 
-import models.com.arquisix.sistemaminas.entities.Alerta;
-import models.com.arquisix.sistemaminas.logic.AlertaLogic;
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Alerta;
 import play.libs.Json;
+import play.mvc.BodyParser;
+import play.mvc.Controller;
 import play.mvc.Result;
 
-import javax.inject.Inject;
+import java.util.List;
 
-/**
- * Created by juanchaves on 24/09/17.
- */
-public class AlertaController extends AbstractController<Alerta>
+public class AlertaController extends Controller
 {
-    @Inject
-    private AlertaLogic logic;
-
+    @BodyParser.Of(BodyParser.Json.class)
     public Result create(Long idArea)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.create(idArea,jsonToObject(json))));
+        Alerta alerta = Alerta.bind(json);
+        //TODO
+        alerta.save();
+        return ok(Json.toJson(alerta));
     }
 
     public Result retrieveAll(Long idArea)
     {
-        return ok(Json.toJson(logic.retrieveAll(idArea)));
+        List<Alerta> alerta = new Model.Finder<Long, Alerta>(Alerta.class).where().eq("idArea", idArea).findList();
+        return ok(Json.toJson(alerta));
     }
 
     public Result retrieve(Long id)
     {
-        return ok(Json.toJson(logic.retrieve(id)));
+        Alerta alerta = new Model.Finder<Long, Alerta>(Alerta.class).byId(id);
+        return ok(Json.toJson(alerta));
     }
 
-    public Result update(Long idArea, Long id)
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result update(Long id)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.update(idArea, id, jsonToObject(json))));
+        Alerta alerta = Alerta.bind(json);
+        alerta.setId(id);
+        alerta.save();
+        return ok(Json.toJson(alerta));
     }
 
-    public Result delete(Long idArea, Long idAlerta)
+    public Result delete(Long id)
     {
-        return ok(Json.toJson(logic.delete(idArea, idAlerta)));
+        Alerta alerta = new Model.Finder<Long, Alerta>(Alerta.class).byId(id);
+        alerta.delete();
+        return ok(Json.toJson(alerta));
     }
 }

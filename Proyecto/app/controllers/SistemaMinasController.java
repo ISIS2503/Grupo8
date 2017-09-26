@@ -1,47 +1,54 @@
 package controllers;
 
-import models.com.arquisix.sistemaminas.entities.SistemaMinas;
-import models.com.arquisix.sistemaminas.logic.SistemaMinasLogic;
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.SistemaMinas;
 import play.libs.Json;
+import play.mvc.BodyParser;
+import play.mvc.Controller;
 import play.mvc.Result;
 
-import javax.inject.Inject;
+import java.util.List;
 
-/**
- * Created by juanchaves on 24/09/17.
- */
-public class SistemaMinasController extends AbstractController<SistemaMinas>
+
+public class SistemaMinasController extends Controller
 {
-    @Inject
-    private SistemaMinasLogic logic;
-
+    @BodyParser.Of(BodyParser.Json.class)
     public Result create()
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.create(jsonToObject(json))));
+        SistemaMinas sistemaMinas = SistemaMinas.bind(json);
+        //TODO
+        sistemaMinas.save();
+        return ok(Json.toJson(sistemaMinas));
     }
 
     public Result retrieveAll()
     {
-        return ok(Json.toJson(logic.retrieveAll()));
+        List<SistemaMinas> sistemaMinas = new Model.Finder<Long, SistemaMinas>(SistemaMinas.class).findList();
+        return ok(Json.toJson(sistemaMinas));
     }
 
     public Result retrieve(Long id)
     {
-        return ok(Json.toJson(logic.retrieve(id)));
+        SistemaMinas sistemaMinas = new Model.Finder<Long, SistemaMinas>(SistemaMinas.class).byId(id);
+        return ok(Json.toJson(sistemaMinas));
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
     public Result update(Long id)
     {
-
         JsonNode json = request().body().asJson();
-
-        return ok(Json.toJson(logic.update(id, jsonToObject(json))));
+        SistemaMinas sistemaMinas = SistemaMinas.bind(json);
+        sistemaMinas.setId(id);
+        sistemaMinas.save();
+        return ok(Json.toJson(sistemaMinas));
     }
 
     public Result delete(Long id)
     {
-        return ok(Json.toJson(logic.delete(id)));
+        SistemaMinas sistemaMinas = new Model.Finder<Long, SistemaMinas>(SistemaMinas.class).byId(id);
+        sistemaMinas.delete();
+        return ok(Json.toJson(sistemaMinas));
     }
 }
