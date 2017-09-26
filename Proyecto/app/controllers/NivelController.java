@@ -1,41 +1,53 @@
 package controllers;
 
-import models.com.arquisix.sistemaminas.entities.Nivel;
-import models.com.arquisix.sistemaminas.logic.NivelLogic;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Nivel;
 import play.libs.Json;
+import play.mvc.BodyParser;
+import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.List;
 
-public class NivelController extends AbstractController<Nivel>
+public class NivelController extends Controller
 {
-    private static NivelLogic logic = new NivelLogic();
-
-    public static Result create() throws JsonProcessingException
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result create()
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson( logic.create( jsonToObject(json, Nivel.class) ) ));
+        Nivel nivel = Nivel.bind(json);
+        //TODO
+        nivel.save();
+        return ok(Json.toJson(nivel));
     }
 
-    public static Result retrieveAll()
+    public Result retrieveAll()
     {
-        return ok(Json.toJson(logic.retrieveAll()));
+        List<Nivel> nivel = new Model.Finder<Long, Nivel>(Nivel.class).findList();
+        return ok(Json.toJson(nivel));
     }
 
-    public static Result retrieve(Long id)
+    public Result retrieve(Long id)
     {
-        return ok(Json.toJson(logic.retrieve(id)));
+        Nivel nivel = new Model.Finder<Long, Nivel>(Nivel.class).byId(id);
+        return ok(Json.toJson(nivel));
     }
 
-    public static Result update(Long id)
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result update(Long id)
     {
         JsonNode json = request().body().asJson();
-        return ok(Json.toJson(logic.update(id, jsonToObject(json, Nivel.class))));
+        Nivel nivel = Nivel.bind(json);
+        nivel.setId(id);
+        nivel.save();
+        return ok(Json.toJson(nivel));
     }
 
-    public static Result delete(Long id)
+    public Result delete(Long id)
     {
-        return ok(Json.toJson(logic.delete(id)));
+        Nivel nivel = new Model.Finder<Long, Nivel>(Nivel.class).byId(id);
+        nivel.delete();
+        return ok(Json.toJson(nivel));
     }
 }
