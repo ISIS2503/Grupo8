@@ -25,7 +25,7 @@ public class DatoControllerTest {
 
     @Before
     public void setup() {
-//        controller = new DatoController();
+        controller = new DatoController();
     }
 
     @Test
