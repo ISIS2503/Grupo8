@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class DatoControllerTest {
+
     private static final String UTF_8 = "utf-8";
     private DatoController controller;
 
