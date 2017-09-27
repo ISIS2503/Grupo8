@@ -4,16 +4,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.Dato;
 import org.junit.Before;
 import org.junit.Test;
+import play.Application;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
+import play.mvc.Call;
 import play.mvc.Http;
 import play.mvc.Result;
-
+import play.test.Helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static play.test.Helpers.status;
 
 public class DatoControllerTest {
 
@@ -52,8 +55,26 @@ public class DatoControllerTest {
         dato.setValor(20f);
         dato.setIdSensor(30L);
 
-        controller.create(dato.getIdSensor());
-        Result result = controller.retrieve(dato.getId());
+        Call call = new Call() {
+            @Override
+            public String url() {
+                return "/con";
+            }
+
+            @Override
+            public String method() {
+                return "GET";
+            }
+
+            @Override
+            public String fragment() {
+                return null;
+            }
+        };
+        Result result = Helpers.route(Helpers.fakeRequest(call));
+
+        //controller.create(dato.getIdSensor());
+        //Result result = controller.retrieve(dato.getId());
 
         assertEquals("El dato no fue creado correctamente.", Http.Status.OK, result.status());
         assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
