@@ -1,7 +1,7 @@
 package models;
 
-import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import java.time.Instant;
