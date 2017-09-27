@@ -1,3 +1,4 @@
+
 #include <string.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
@@ -6,6 +7,10 @@
 // ---------------------------------CONSTANTES---------------------------------
 // Id del microcontrolador
 const int id = 1;
+// Id del nivel
+const int idNivel = 1;
+// Id del area
+const int idArea = 1;
 // Selecciona el pin de entrada analoga a leer la Temperatura.
 const int temperaturaPin = 3;
 // Selecciona el pin de entrada analoga a leer el CO.
@@ -63,7 +68,7 @@ void setupIluminacion()
 // Ejecuta el procesamiento del microcontrolador
 void loop() 
 {
-    tempString = id + separadorAtributos + "ID" + separadorTipos;
+    tempString = idNivel + separadorAtributos + idArea + separadorAtributos + id + separadorAtributos + "ID" + separadorTipos;
     // Lee el nivel de la temperatura 
     readTemperatura();
     // Lee los niveles de CO

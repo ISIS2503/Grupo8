@@ -9,14 +9,13 @@ import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class DatoControllerTest {
-
-
 
     private static final String UTF_8 = "utf-8";
     private DatoController controller;

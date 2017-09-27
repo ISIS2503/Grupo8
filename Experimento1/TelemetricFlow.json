@@ -1,15 +1,15 @@
 [
     {
-        "id": "f0625d0.1e0582",
+        "id": "6cb79cba.eae8fc",
         "type": "tab",
         "label": "Telemetric Flow",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "5436490a.12f15",
+        "id": "e01ae444.e3527",
         "type": "inject",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Microcontrador Time",
         "topic": "rootTime",
         "payload": "",
@@ -21,30 +21,30 @@
         "y": 120,
         "wires": [
             [
-                "60514bd.a9292b4",
-                "de5c60b5.22857"
+                "3f74a8a7.67c5d8",
+                "4a5937fe.93de58"
             ]
         ]
     },
     {
-        "id": "437625ee.cbff4c",
+        "id": "4bbab8c.2079ac8",
         "type": "serial in",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Nodo de escucha",
-        "serial": "6d432283.db4e4c",
+        "serial": "e17c65f7.8e2e9",
         "x": 240,
         "y": 280,
         "wires": [
             [
-                "13899a88.ef874d",
-                "4f8c7059.2f8378"
+                "fa943628.3b4ae",
+                "38a0bcb5.af8f04"
             ]
         ]
     },
     {
-        "id": "13899a88.ef874d",
+        "id": "fa943628.3b4ae",
         "type": "debug",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "before format",
         "active": true,
         "console": "false",
@@ -54,9 +54,9 @@
         "wires": []
     },
     {
-        "id": "60514bd.a9292b4",
+        "id": "3f74a8a7.67c5d8",
         "type": "debug",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "before format",
         "active": true,
         "console": "false",
@@ -66,26 +66,26 @@
         "wires": []
     },
     {
-        "id": "4f8c7059.2f8378",
+        "id": "38a0bcb5.af8f04",
         "type": "function",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Format VariablesAmbientales",
-        "func": "var res = {};\nvar tempString;\nvar tempArray = [];\nvar subArray = [];\nvar i;\nvar microcontradorId;\nvar tipoVariable;\n\ntempString = msg.payload;\ntempArray = tempString.split(\";;;\");\n\nmicrocontroladorId = (tempArray[0].split(\":::\"))[0];\n\nres.topic = \"variablesAmbientales\";\nres.payload = [];\n\nfor(i = 1; i< (tempArray.length-1); i++)\n{\n    if(tempArray[i] !== \"NULL\")\n    {\n        subArray[i]= tempArray[i].split(\":::\");\n        \n        switch(i)\n        {\n            case 1:\n                tipoVariable = 'Temperatura';\n                break;\n            case 2:\n                tipoVariable = 'Gases(CO)';\n                break;\n            case 3: \n                tipoVariable = 'Iluminacion';\n                break;\n            case 4:\n                tipoVariable = 'Ruido';\n                break;\n        }\n        \n        \n        res.payload[i-1] = {\"data\": parseInt((subArray[i])[0]),\n                    \"tipo\": tipoVariable,\n                    \"unidad\": (subArray[i])[1],\n                    \"microcontroladorId\": microcontroladorId}\n        \n    }\n}\n\nreturn res;",
+        "func": "var res = {};\nvar tempString;\nvar tempArray = [];\nvar subArray = [];\nvar i;\nvar ids;\nvar nivelId;\nvar areaId;\nvar microcontradorId;\nvar tipoVariable;\n\ntempString = msg.payload;\ntempArray = tempString.split(\";;;\");\nids=tempArray[0].split(\":::\");\n\nnivelId=ids[0];\nareaId=ids[1]\nmicrocontroladorId = ids[2];\n\nres.topic = \"variablesAmbientales\";\nres.payload = [];\nres.payload[0]={\"nivelId\": nivelId,\n                \"areaId\": areaId,\n                \"microcontroladorId\": microcontroladorId\n                }\n\n\nfor(i = 1; i< (tempArray.length-1); i++)\n{\n    if(tempArray[i] !== \"NULL\")\n    {\n        subArray[i]= tempArray[i].split(\":::\");\n        \n        switch(i)\n        {\n            case 1:\n                tipoVariable = 'Temperatura';\n                break;\n            case 2:\n                tipoVariable = 'Gases(CO)';\n                break;\n            case 3: \n                tipoVariable = 'Iluminacion';\n                break;\n            case 4:\n                tipoVariable = 'Ruido';\n                break;\n        }\n        \n        \n        res.payload[i] = {\"data\": parseInt((subArray[i])[0]),\n                    \"tipo\": tipoVariable,\n                    \"unidad\": (subArray[i])[1]\n                    }\n        \n    }\n}\n\nreturn res;",
         "outputs": 1,
         "noerr": 0,
         "x": 530,
         "y": 360,
         "wires": [
             [
-                "6c059076.bdc8c8",
-                "5a59cefd.8f6ef8"
+                "4d854a0d.ac6cc4",
+                "d1a360bd.07a37"
             ]
         ]
     },
     {
-        "id": "de5c60b5.22857",
+        "id": "4a5937fe.93de58",
         "type": "function",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Format Time",
         "func": "var res = {};\n\nres.payload = new Date(msg.payload);\nres.topic = msg.topic;\n\nreturn res;",
         "outputs": 1,
@@ -94,15 +94,15 @@
         "y": 160,
         "wires": [
             [
-                "f5b47ee2.f510c",
-                "5a59cefd.8f6ef8"
+                "1c7df554.76becb",
+                "d1a360bd.07a37"
             ]
         ]
     },
     {
-        "id": "6c059076.bdc8c8",
+        "id": "4d854a0d.ac6cc4",
         "type": "debug",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "after format",
         "active": true,
         "console": "false",
@@ -112,9 +112,9 @@
         "wires": []
     },
     {
-        "id": "f5b47ee2.f510c",
+        "id": "1c7df554.76becb",
         "type": "debug",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "after format",
         "active": true,
         "console": "false",
@@ -124,26 +124,26 @@
         "wires": []
     },
     {
-        "id": "5a59cefd.8f6ef8",
+        "id": "d1a360bd.07a37",
         "type": "function",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Merge 2 Messages",
-        "func": "context.data = context.data || {};\n\nswitch (msg.topic) {\n    case \"rootTime\":\n        context.data.sensetime = msg.payload;\n        msg = null;\n        break;\n    case \"variablesAmbientales\":\n        context.data.variablesAmbientales = msg.payload;\n        msg = null;\n        break;\n        \n    default:\n        msg = null;\n    \tbreak;\n}\n\nif(context.data.sensetime !== null && context.data.variablesAmbientales !== null) {\n\tres = {};\n    res.payload = JSON.stringify(context.data);\n    res.topic = \"variablesAmbientales\";\n    context.data = null;\n\treturn res;\n}",
+        "func": "context.data = context.data || {};\n\nswitch (msg.topic) {\n    case \"rootTime\":\n        context.data.sensetime = msg.payload;\n        msg = null;\n        break;\n    case \"variablesAmbientales\":\n        context.data.variablesAmbientales = msg.payload;\n        msg = null;\n        break;\n        \n    default:\n        msg = null;\n    \tbreak;\n}\n\nif(context.data.sensetime && context.data.variablesAmbientales) {\n\tres = {};\n    res.payload = JSON.stringify(context.data);\n    res.topic = \"variablesAmbientales\";\n    context.data = null;\n\treturn res;\n}",
         "outputs": 1,
         "noerr": 0,
         "x": 816,
         "y": 195,
         "wires": [
             [
-                "274b3c8e.3ea6b4",
-                "9db290f9.964648"
+                "2e432098.b6a658",
+                "c0610781.0521c8"
             ]
         ]
     },
     {
-        "id": "274b3c8e.3ea6b4",
+        "id": "2e432098.b6a658",
         "type": "udp out",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "Send VariablesAmbientales",
         "addr": "localhost",
         "iface": "",
@@ -157,9 +157,9 @@
         "wires": []
     },
     {
-        "id": "9db290f9.964648",
+        "id": "c0610781.0521c8",
         "type": "debug",
-        "z": "f0625d0.1e0582",
+        "z": "6cb79cba.eae8fc",
         "name": "after merge",
         "active": true,
         "console": "false",
@@ -169,10 +169,10 @@
         "wires": []
     },
     {
-        "id": "6d432283.db4e4c",
+        "id": "e17c65f7.8e2e9",
         "type": "serial-port",
         "z": "",
-        "serialport": "COM3",
+        "serialport": "COM5",
         "serialbaud": "9600",
         "databits": "8",
         "parity": "none",
