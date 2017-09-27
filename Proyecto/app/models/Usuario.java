@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 
+/**
+ * @author dnarvaez27
+ */
 @Entity
 public class Usuario extends Model
 {

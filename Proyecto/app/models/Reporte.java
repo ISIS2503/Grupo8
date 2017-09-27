@@ -8,6 +8,9 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/**
+ * @author dnarvaez27
+ */
 @Entity
 public class Reporte extends Model
 {

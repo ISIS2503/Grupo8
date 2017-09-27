@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import javax.persistence.Entity;
 
 /**
- * Created by juanchaves on 24/09/17.
+ * @author dnarvaez27
  */
 @Entity
 public class Alerta extends Model

@@ -3,9 +3,13 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author dnarvaez27
+ */
 public class SistemaMinas extends Model
 {
 	private Long id;
@@ -20,6 +24,7 @@ public class SistemaMinas extends Model
 
 	public SistemaMinas( )
 	{
+		mapaSensores = new HashMap<>( );
 	}
 
 	public Map<Long, Long[]> getMapaSensores( )

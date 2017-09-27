@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 
+/**
+ * @author dnarvaez27
+ */
 @Entity
 public class VariableAmbiental extends Model
 {
@@ -96,7 +99,7 @@ public class VariableAmbiental extends Model
 	{
 		this.id = id;
 	}
-	
+
 	public static VariableAmbiental bind( JsonNode json )
 	{
 		VariableAmbiental var = new VariableAmbiental( );

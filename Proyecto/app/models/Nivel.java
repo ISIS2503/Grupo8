@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import javax.persistence.Entity;
 import java.util.List;
 
+/**
+ * @author dnarvaez27
+ */
 @Entity
 public class Nivel extends Model
 {

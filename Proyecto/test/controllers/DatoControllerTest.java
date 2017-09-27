@@ -9,121 +9,129 @@ import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class DatoControllerTest {
-    private static final String UTF_8 = "utf-8";
-    private DatoController controller;
+public class DatoControllerTest
+{
+	private static final String UTF_8 = "utf-8";
 
-    @Before
-    public void setup() {
-        controller = new DatoController();
-    }
+	private DatoController controller;
 
-    @Test
-    public void testCreate() {
-        Dato dato = new Dato();
-        dato.setId(10L);
-        dato.setValor(20f);
-        dato.setIdSensor(30L);
+	@Before
+	public void setup( )
+	{
+		controller = new DatoController( );
+	}
 
-        Result result = controller.create(dato.getIdSensor());
-        assertEquals("El dato no fue creado correctamente.", Http.Status.OK, result.status());
-        assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
-        assertEquals(UTF_8, result.charset());
+	@Test
+	public void testCreate( )
+	{
+		Dato dato = new Dato( );
+		dato.setId( 10L );
+		dato.setValor( 20f );
+		dato.setIdSensor( 30L );
 
-        byte[] body = JavaResultExtractor.getBody(result, 0L);
-        JsonNode json = Json.parse(body);
+		Result result = controller.create( dato.getIdSensor( ) );
+		assertEquals( "El dato no fue creado correctamente.", Http.Status.OK, result.status( ) );
+		assertEquals( "El resultado no es del tipo esperado", "application/json", result.contentType( ) );
+		assertEquals( UTF_8, result.charset( ) );
 
-        assertEquals("El id del dato no es el esperado", (long) dato.getId(), json.get("id").asLong());
-        assertEquals("El valor del dato no es el esperado", (double) dato.getValor(), json.get("valor").asDouble(), 0);
-        assertEquals("El id del sensor del dato no es el esperado", (long) dato.getIdSensor(), json.get("idSensor").asLong());
-    }
+		byte[] body = JavaResultExtractor.getBody( result, 0L );
+		JsonNode json = Json.parse( body );
 
-    @Test
-    public void testRetrieve() {
-        Dato dato = new Dato();
-        dato.setId(10L);
-        dato.setValor(20f);
-        dato.setIdSensor(30L);
+		assertEquals( "El id del dato no es el esperado", ( long ) dato.getId( ), json.get( "id" ).asLong( ) );
+		assertEquals( "El valor del dato no es el esperado", ( double ) dato.getValor( ), json.get( "valor" ).asDouble( ), 0 );
+		assertEquals( "El id del sensor del dato no es el esperado", ( long ) dato.getIdSensor( ), json.get( "idSensor" ).asLong( ) );
+	}
 
-        controller.create(dato.getIdSensor());
-        Result result = controller.retrieve(dato.getId());
+	@Test
+	public void testRetrieve( )
+	{
+		Dato dato = new Dato( );
+		dato.setId( 10L );
+		dato.setValor( 20f );
+		dato.setIdSensor( 30L );
 
-        assertEquals("El dato no fue creado correctamente.", Http.Status.OK, result.status());
-        assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
-        assertEquals(UTF_8, result.charset());
+		controller.create( dato.getIdSensor( ) );
+		Result result = controller.retrieve( dato.getId( ) );
 
-        byte[] body = JavaResultExtractor.getBody(result, 0L);
-        JsonNode json = Json.parse(body);
+		assertEquals( "El dato no fue creado correctamente.", Http.Status.OK, result.status( ) );
+		assertEquals( "El resultado no es del tipo esperado", "application/json", result.contentType( ) );
+		assertEquals( UTF_8, result.charset( ) );
 
-        assertEquals("El id del dato no es el esperado", (long) dato.getId(), json.get("id").asLong());
-        assertEquals("El valor del dato no es el esperado", (double) dato.getValor(), json.get("valor").asDouble(), 0);
-        assertEquals("El id del sensor del dato no es el esperado", (long) dato.getIdSensor(), json.get("idSensor").asLong());
-    }
+		byte[] body = JavaResultExtractor.getBody( result, 0L );
+		JsonNode json = Json.parse( body );
 
-    @Test
-    public void testRetrieveAll() {
-        List<Dato> datos = new ArrayList<>();
+		assertEquals( "El id del dato no es el esperado", ( long ) dato.getId( ), json.get( "id" ).asLong( ) );
+		assertEquals( "El valor del dato no es el esperado", ( double ) dato.getValor( ), json.get( "valor" ).asDouble( ), 0 );
+		assertEquals( "El id del sensor del dato no es el esperado", ( long ) dato.getIdSensor( ), json.get( "idSensor" ).asLong( ) );
+	}
 
-        int cant = 10;
-        for (int i = 0; i < cant; i++) {
-            Dato dato = new Dato();
-            dato.setId((long) i);
-            dato.setValor((float) i);
-            dato.setIdSensor((long) i);
-            datos.add(dato);
-            controller.create(dato.getIdSensor());
-        }
+	@Test
+	public void testRetrieveAll( )
+	{
+		List<Dato> datos = new ArrayList<>( );
 
-        for (int i = 0; i < cant; i++) {
-            Dato dato = datos.get(i);
-            Result result = controller.retrieve(dato.getId());
+		int cant = 10;
+		for( int i = 0; i < cant; i++ )
+		{
+			Dato dato = new Dato( );
+			dato.setId( ( long ) i );
+			dato.setValor( ( float ) i );
+			dato.setIdSensor( ( long ) i );
+			datos.add( dato );
+			controller.create( dato.getIdSensor( ) );
+		}
 
-            assertEquals("El dato no fue creado correctamente.", Http.Status.OK, result.status());
-            assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
-            assertEquals(UTF_8, result.charset());
+		for( int i = 0; i < cant; i++ )
+		{
+			Dato dato = datos.get( i );
+			Result result = controller.retrieve( dato.getId( ) );
 
-            byte[] body = JavaResultExtractor.getBody(result, 0L);
-            JsonNode json = Json.parse(body);
+			assertEquals( "El dato no fue creado correctamente.", Http.Status.OK, result.status( ) );
+			assertEquals( "El resultado no es del tipo esperado", "application/json", result.contentType( ) );
+			assertEquals( UTF_8, result.charset( ) );
 
-            assertEquals("El id del dato no es el esperado", (long) dato.getId(), json.get("id").asLong());
-            assertEquals("El valor del dato no es el esperado", (double) dato.getValor(), json.get("valor").asDouble(), 0);
-            assertEquals("El id del sensor del dato no es el esperado", (long) dato.getIdSensor(), json.get("idSensor").asLong());
-        }
-    }
+			byte[] body = JavaResultExtractor.getBody( result, 0L );
+			JsonNode json = Json.parse( body );
 
-    @Test
-    public void testUpdate() {
-        Dato dato = new Dato();
-        dato.setId(10L);
-        dato.setValor(20f);
-        dato.setIdSensor(30L);
-        controller.create(dato.getIdSensor());
+			assertEquals( "El id del dato no es el esperado", ( long ) dato.getId( ), json.get( "id" ).asLong( ) );
+			assertEquals( "El valor del dato no es el esperado", ( double ) dato.getValor( ), json.get( "valor" ).asDouble( ), 0 );
+			assertEquals( "El id del sensor del dato no es el esperado", ( long ) dato.getIdSensor( ), json.get( "idSensor" ).asLong( ) );
+		}
+	}
 
-        dato.setId(50L);
-        dato.setValor(60f);
-        dato.setIdSensor(70L);
+	@Test
+	public void testUpdate( )
+	{
+		Dato dato = new Dato( );
+		dato.setId( 10L );
+		dato.setValor( 20f );
+		dato.setIdSensor( 30L );
+		controller.create( dato.getIdSensor( ) );
 
-        Result result = controller.update(dato.getId());
+		dato.setId( 50L );
+		dato.setValor( 60f );
+		dato.setIdSensor( 70L );
 
-        assertEquals("El dato no fue creado correctamente.", Http.Status.OK, result.status());
-        assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
-        assertEquals(UTF_8, result.charset());
+		Result result = controller.update( dato.getId( ) );
 
-        byte[] body = JavaResultExtractor.getBody(result, 0L);
-        JsonNode json = Json.parse(body);
+		assertEquals( "El dato no fue creado correctamente.", Http.Status.OK, result.status( ) );
+		assertEquals( "El resultado no es del tipo esperado", "application/json", result.contentType( ) );
+		assertEquals( UTF_8, result.charset( ) );
 
-        assertEquals("El id del dato no es el esperado", (long) dato.getId(), json.get("id").asLong());
-        assertEquals("El valor del dato no es el esperado", (double) dato.getValor(), json.get("valor").asDouble(), 0);
-        assertEquals("El id del sensor del dato no es el esperado", (long) dato.getIdSensor(), json.get("idSensor").asLong());
+		byte[] body = JavaResultExtractor.getBody( result, 0L );
+		JsonNode json = Json.parse( body );
 
-        assertEquals("El id del dato no es el esperado", (long) dato.getId(), json.get("id").asLong());
-        assertEquals("El valor del dato no es el esperado", (double) dato.getValor(), json.get("valor").asDouble(), 0);
-        assertEquals("El id del sensor del dato no es el esperado", (long) dato.getIdSensor(), json.get("idSensor").asLong());
-    }
+		assertEquals( "El id del dato no es el esperado", ( long ) dato.getId( ), json.get( "id" ).asLong( ) );
+		assertEquals( "El valor del dato no es el esperado", ( double ) dato.getValor( ), json.get( "valor" ).asDouble( ), 0 );
+		assertEquals( "El id del sensor del dato no es el esperado", ( long ) dato.getIdSensor( ), json.get( "idSensor" ).asLong( ) );
+
+		assertEquals( "El id del dato no es el esperado", ( long ) dato.getId( ), json.get( "id" ).asLong( ) );
+		assertEquals( "El valor del dato no es el esperado", ( double ) dato.getValor( ), json.get( "valor" ).asDouble( ), 0 );
+		assertEquals( "El id del sensor del dato no es el esperado", ( long ) dato.getIdSensor( ), json.get( "idSensor" ).asLong( ) );
+	}
 }

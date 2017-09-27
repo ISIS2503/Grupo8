@@ -10,6 +10,9 @@ import play.mvc.Result;
 
 import java.util.List;
 
+/**
+ * @author dnarvaez27
+ */
 public class UsuarioController extends Controller
 {
 	@BodyParser.Of( BodyParser.Json.class )

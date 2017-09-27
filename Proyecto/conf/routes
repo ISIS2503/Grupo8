@@ -12,7 +12,8 @@ GET /assets/*file                                                               
 
 # REST
 # GET
-GET /minas                                                                           controllers.SistemaMinasController.retrieveAll()
+GET /minas                                                                           controllers.Application.index()
+#GET /minas                                                                          controllers.SistemaMinasController.retrieveAll()
 #
 GET /minas/niveles                                                                   controllers.NivelController.retrieveAll()
 
@@ -31,7 +32,7 @@ GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores               
 GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
 
 #POST
-POST /minas                                                                          controllers.SistemaMinasController.create()
+# POST /minas                                                                          controllers.SistemaMinasController.create()
 
 POST /minas/niveles                                                                  controllers.NivelController.create()
 

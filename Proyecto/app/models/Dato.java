@@ -1,13 +1,16 @@
 package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import play.db.ebean.Model;
+import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/**
+ * @author dnarvaez27
+ */
 @Entity
 public class Dato extends Model
 {
