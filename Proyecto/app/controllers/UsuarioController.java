@@ -16,7 +16,7 @@ import java.util.List;
 public class UsuarioController extends Controller
 {
 	@BodyParser.Of( BodyParser.Json.class )
-	public play.mvc.Result create( )
+	public Result create( )
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Usuario usuario = Usuario.bind( json );

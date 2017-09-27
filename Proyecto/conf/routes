@@ -12,8 +12,7 @@ GET /assets/*file                                                               
 
 # REST
 # GET
-GET /minas                                                                           controllers.Application.index()
-#GET /minas                                                                          controllers.SistemaMinasController.retrieveAll()
+# GET /minas                                                                           controllers.SistemaMinasController.retrieveAll()
 #
 GET /minas/niveles                                                                   controllers.NivelController.retrieveAll()
 
@@ -27,12 +26,24 @@ GET /[a-zA-Z0-9]+/areas/:idArea/alertas                                         
 
 GET /[a-zA-Z0-9]+/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
 
+GET /[a-zA-Z0-9]+/actuadores/:id                                                     controllers.ActuadorController.retrieve(id: Long)
+
 GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
 
 GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
 
+GET /usuarios                                                                        controllers.UsuarioController.retrieveAll( )
+
+GET /usuarios/:idUsuario                                                             controllers.UsuarioController.retrieve(idUsuario: Long)
+
+GET /variablesAmbientales                                                            controllers.VariableAmbientalController.retrieveAll( )
+
+GET /variablesAmbientales/:id                                                        controllers.VariableAmbientalController.retrieve(id: Long )
+
 #POST
 # POST /minas                                                                          controllers.SistemaMinasController.create()
+
+POST /usuarios                                                                       controllers.UsuarioController.create()
 
 POST /minas/niveles                                                                  controllers.NivelController.create()
 
@@ -50,6 +61,9 @@ POST /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores              
 
 POST /[a-zA-Z0-9]+/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
 
+POST /variablesAmbientales                                                           controllers.VariableAmbientalController.create()
+
+
 # PUT
 PUT /minas/niveles/:id                                                               controllers.NivelController.update(id: Long)
 
@@ -66,6 +80,10 @@ PUT /[a-zA-Z0-9]+/actuadores/:id                                                
 PUT /[a-zA-Z0-9]+/sensores/:id                                                       controllers.SensorController.update(id: Long)
 
 PUT /[a-zA-Z0-9]+/datos/:id                                                          controllers.DatoController.update(id: Long)
+
+PUT /usuarios/:idUsuario                                                             controllers.UsuarioController.update(idUsuario: Long)
+
+PUT /variablesAmbientales/:id                                                        controllers.VariableAmbientalController.update(id: Long )
 
 # DELETE
 DELETE /minas/niveles/:idNivel                                                       controllers.NivelController.delete(idNivel:Long)
