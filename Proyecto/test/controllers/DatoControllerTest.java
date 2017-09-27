@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.Dato;
 import org.junit.Before;
 import org.junit.Test;
-import play.Application;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
 import play.mvc.Call;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static play.test.Helpers.status;
 
 public class DatoControllerTest {
 

@@ -35,7 +35,7 @@ public class AlertaControllerTest {
         alerta.setIdArea(20L);
         alerta.setTipo(1);
 
-        Result result1 = controller.create(alerta.getId());
+        Result result = controller.create(alerta.getId());
         assertEquals("La alerta no fue creada correctamente.", Http.Status.OK, result.status());
         assertEquals("El resultado no es del tipo esperado", "application/json", result.contentType());
         assertEquals(UTF_8, result.charset());
@@ -47,7 +47,7 @@ public class AlertaControllerTest {
 
         assertEquals("El id de la alerta no es la esperada", (long) alerta.getId(), json.get("id").asLong());
         assertEquals("El area de la alerta no es la esperada", (long) alerta.getIdArea(), json.get("area").asLong());
-        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInteger(),0);
+        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInt(),0);
 
     }
 
@@ -70,7 +70,7 @@ public class AlertaControllerTest {
 
         assertEquals("El id de la alerta no es la esperada", (long) alerta.getId(), json.get("id").asLong());
         assertEquals("El area de la alerta no es la esperada", (long) alerta.getIdArea(), json.get("area").asLong());
-        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInteger(),0);
+        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInt(),0);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AlertaControllerTest {
 
             assertEquals("El id de la alerta no es la esperada", (long) alerta.getId(), json.get("id").asLong());
             assertEquals("El area de la alerta no es la esperada", (long) alerta.getIdArea(), json.get("area").asLong());
-            assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInteger(),0);
+            assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInt(),0);
         }
     }
 
@@ -129,11 +129,11 @@ public class AlertaControllerTest {
 
         assertEquals("El id de la alerta no es la esperada", (long) alerta.getId(), json.get("id").asLong());
         assertEquals("El area de la alerta no es la esperada", (long) alerta.getIdArea(), json.get("area").asLong());
-        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInteger(),0);
+        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInt(),0);
 
         assertEquals("El id de la alerta no es la esperada", (long) alerta.getId(), json.get("id").asLong());
         assertEquals("El area de la alerta no es la esperada", (long) alerta.getIdArea(), json.get("area").asLong());
-        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInteger(),0);
+        assertEquals("El tipo de la alerta no es la esperada", (int)alerta.getTipo(),json.get("tipo").asInt(),0);
 
     }
 
