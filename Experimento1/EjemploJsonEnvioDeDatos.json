@@ -1,5 +1,5 @@
-{"variablesAmbientales":
-	[{"data":17,"tipo":"Temperatura","unidad":"C","microcontroladorId":"1"},
-	{"data":220,"tipo":"Gases(CO)","unidad":"ppm","microcontroladorId":"1"},
-	{"data":65536,"tipo":"Iluminacion","unidad":"Lux","microcontroladorId":"1"},
-	{"data":22,"tipo":"Ruido","unidad":"dB","microcontroladorId":"1"}]}
+{"sensetime":"2017-10-22T18:53:31.614Z","variablesAmbientales":[{"nivelId":"1","areaId":"1","microcontroladorId":"1"},
+								{"data":19,"tipo":"Temperatura","unidad":"C"},
+								{"data":731,"tipo":"Gases(CO)","unidad":"ppm"},
+								{"data":65536,"tipo":"Iluminacion","unidad":"Lux"},
+								{"data":58,"tipo":"Ruido","unidad":"dB"}]}
