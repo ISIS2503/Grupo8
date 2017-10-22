@@ -16,13 +16,15 @@ for message in consumer:
 	microcontroladorId = ids['microcontroladorId']
 	
 	for i in range(len(value)):
-		url = 'http://localhost:9000/minas/nivel/' + nivelId + '/areas/' + areaId + '/microcontroladores/'+microcontroladorId + '/sensor/'+ (i+1)+'/datos'
-		payload = {
-		'valor': (value[i+1])['data'],
-		'timeStamp':sensetime
-		}
 		
-		response = requests.post(url, data=json.dumps(payload),
+		if i>0:
+			url = 'http://localhost:9000/minas/sensor/' + str(i)+ '/datos'
+			payload = {
+			'valor': (value[i])['data'],
+			'timeStamp':sensetime
+			}
+		
+			response = requests.post(url, data=json.dumps(payload),
 							 headers={'Content-type': 'application/json'})
-		print(message.topic)
-		print("Response Status Code: " + str(response.status_code))
+			print(message.topic)
+			print("Response Status Code: " + str(response.status_code))
