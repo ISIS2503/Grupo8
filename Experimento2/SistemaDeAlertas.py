@@ -62,16 +62,14 @@ def offline(dato):
 
     queue = structure[area][(id_mc, tipo)][1]
 
-    timestamp = None
     now = datetime.datetime.now()
-    if len(queue) == 0:
-        timestamp = datetime.datetime(now.year, now.month, now.day, hora_inicio, 0, 0, 0)
-    else:
-        ultimo = queue[- 1]
-        timestamp = ultimo[1]
+    ultimo = queue[- 1]
+    timestamp = ultimo[1]
 
     temp = 5 * ref[tipo]['freq']
     timestamp += datetime.timedelta(seconds=temp)
+
+    print(timestamp, now)
 
     if timestamp < now:
         alerta(1, dato)
@@ -109,6 +107,7 @@ def alerta(tipo, data):
                    '\nArea: ' + metadata['area'] + \
                    '\nMicrocontrolador: ' + metadata['microcontrolador']
         util.sendTo(receivers, None, sbj_alerta1, msg_body)
+        print('Alerta 1')
     elif tipo == 2:
         # Actuador data['metadata']['area']. algo = dato
         if (data['metadata']['area'], data['tipo']) not in areas_alerta:
@@ -164,59 +163,10 @@ def initial_config():
 
 
 def prueba():
+    now = datetime.datetime.now()
     initial_config()
     message = {
-        "sensetime": datetime.datetime.now(),
-        "variablesAmbientales": [
-            {
-                "data": 19,
-                "tipo": "Temperatura",
-                "unidad": "C"
-            },
-            {
-                "data": 731,
-                "tipo": "Gases(CO)",
-                "unidad": "ppm"
-            },
-            {
-                "data": 65536,
-                "tipo": "Iluminacion",
-                "unidad": "Lux"
-            },
-            {
-                "data": 58,
-                "tipo": "Ruido",
-                "unidad": "dB"
-            }
-        ],
-        "metadata": {
-            "nivelId": "1",
-            "areaId": "1",
-            "microcontroladorId": "1"
-        }
-    }
-
-    sensetime = message['sensetime']
-    value = list(message['variablesAmbientales'])
-    ids = message['metadata']
-    nivel_id = ids['nivelId']
-    area_id = ids['areaId']
-    microcontrolador_id = ids['microcontroladorId']
-
-    for elem in value:
-        rules({
-            'valor': elem['data'],
-            'tipo': elem['tipo'],
-            'timeStamp': sensetime,
-            'metadata': {
-                'nivel': nivel_id,
-                'area': area_id,
-                'microcontrolador': microcontrolador_id,
-            }
-        })
-
-    message = {
-        "sensetime": datetime.datetime.now() + datetime.timedelta(hours=100),
+        "sensetime": datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second,0) - datetime.timedelta(seconds=(60 * 5) ),
         "variablesAmbientales": [
             {
                 "data": 19,
