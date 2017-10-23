@@ -1,9 +1,11 @@
 import datetime
+import time
+from  sched import scheduler
 
 import E2Utils as util
 
 # {
-#   { area:
+#   { (nivel, area):
 #       (id_mc, tipo), (Bool, [
 #                               (timestamp, dato)
 #                             ]
@@ -43,7 +45,8 @@ hora_fin = 17
 
 sbj_alerta1 = "Alerta! Sensor Fuera de Linea"
 sbj_alerta3 = "Alerta! Actuador Ineficiente"
-receivers = []
+receivers = ['destinatario1@mail.com', 'destinatario2@mail.com']
+event = scheduler(time.time, time.sleep)
 
 
 def rules(dato):
@@ -52,15 +55,15 @@ def rules(dato):
 
         offline(dato)
         out_of_range(dato)
-        inefficient(dato)
 
 
 def offline(dato):
     id_mc = dato['metadata']['microcontrolador']
     tipo = dato['tipo']
+    nivel = dato['metadata']['nivel']
     area = dato['metadata']['area']
 
-    queue = structure[area][(id_mc, tipo)][1]
+    queue = structure[(nivel, area)][(id_mc, tipo)][1]
 
     now = datetime.datetime.now()
     ultimo = queue[- 1]
@@ -69,8 +72,6 @@ def offline(dato):
     temp = 5 * ref[tipo]['freq']
     timestamp += datetime.timedelta(seconds=temp)
 
-    print(timestamp, now)
-
     if timestamp < now:
         alerta(1, dato)
 
@@ -78,9 +79,10 @@ def offline(dato):
 def out_of_range(dato):
     id_mc = dato['metadata']['microcontrolador']
     tipo = dato['tipo']
+    nivel = dato['metadata']['nivel']
     area = dato['metadata']['area']
 
-    tupla = structure[area][(id_mc, tipo)]
+    tupla = structure[(nivel, area)][(id_mc, tipo)]
     suma = 0
     for elem in tupla[1]:
         suma += elem[0]
@@ -93,15 +95,13 @@ def out_of_range(dato):
         tupla[0] = False
 
 
-def inefficient(dato):
-    # alerta(3, dato)
-    pass
-
-
 def alerta(tipo, data):
+    tipo = data['tipo']
+    nivel = data['metadata']['nivel']
+    area = data['metadata']['area']
     if tipo == 1:
         metadata = data['metadata']
-        tipo = data['tipo']
+        tipo = tipo
         msg_body = 'El sensor de ' + tipo + \
                    ', en la ubicación: \nNivel:' + metadata['nivel'] + \
                    '\nArea: ' + metadata['area'] + \
@@ -110,14 +110,16 @@ def alerta(tipo, data):
         print('Alerta 1')
     elif tipo == 2:
         # Actuador data['metadata']['area']. algo = dato
-        if (data['metadata']['nivel'], data['metadata']['area'], data['tipo']) not in areas_alerta:
-            areas_alerta[(data['metadata']['nivel'],data['metadata']['area'], data['tipo'])] = 1
-            # TODO Actuador
-            print('Alerta 2', data['tipo'], data['valor'], ref[data['tipo']])
+        if (nivel, area, tipo) not in areas_alerta:
+            areas_alerta[(nivel, area, tipo)] = 0
+            verify(nivel, area, tipo)
+            # TODO ENCENDER ACTUADOR
+            print('Alerta 2', tipo, data['valor'], ref[tipo])
     elif tipo == 3:
         metadata = data['metadata']
         msg_body = 'El actuador en el area: ' + metadata['area'] + ', ha estado encendido por 1 hora'
         util.sendTo(receivers, None, sbj_alerta3, msg_body)
+    return
 
 
 def calcular_rango(arr):
@@ -137,9 +139,9 @@ def add_to_queue(dato):
     value = dato['valor']
     timestamp = dato['timeStamp']
 
-    if not metadata['area'] in structure:
-        structure[metadata['area']] = {}
-    mcs = structure[metadata['area']]
+    if not (metadata['nivel'], metadata['area']) in structure:
+        structure[(metadata['nivel'], metadata['area'])] = {}
+    mcs = structure[(metadata['nivel'], metadata['area'])]
 
     if not (metadata['microcontrolador'], tipo) in mcs:
         mcs[(metadata['microcontrolador'], tipo)] = [False, []]
@@ -150,7 +152,7 @@ def add_to_queue(dato):
     datos_mc[1].append((value, timestamp))
 
     mcs[(metadata['microcontrolador'], tipo)] = datos_mc
-    structure[metadata['area']] = mcs
+    structure[(metadata['nivel'], metadata['area'])] = mcs
 
 
 def initial_config():
@@ -166,7 +168,8 @@ def prueba():
     now = datetime.datetime.now()
     initial_config()
     message = {
-        "sensetime": datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second,0) - datetime.timedelta(seconds=(60 * 5) ),
+        "sensetime": datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second,
+                                       0) - datetime.timedelta(seconds=(60 * 5)),
         "variablesAmbientales": [
             {
                 "data": 19,
@@ -214,6 +217,27 @@ def prueba():
                 'microcontrolador': microcontrolador_id,
             }
         })
+
+
+def verify(nivel, area, tipo):
+    activo = False
+    if (nivel, area, tipo) in areas_alerta:
+        area_tipo = areas_alerta[(nivel, area, tipo)]
+        for elem in structure[(nivel, area)]:  # Si esta en alerta se miran todos los sensores
+            if elem['Bool']:  # Si acualquiera de los sensores genera alerta
+                activo = True
+                if area_tipo >= 6:  # Si se ha activado 6 veces
+                    alerta(3, (nivel, area, tipo))
+                    areas_alerta[(nivel, area, tipo)] = 1  # Volvemos a 1 para verificar despues de enviar el correo
+                else:
+                    areas_alerta[(nivel, area, tipo)] += 1  # Aumentamos porque se vuelve a activar por 10 minutos
+        if not activo:
+            # Saca el area de la lista de alertas
+            areas_alerta.pop([(nivel, area, tipo)], None)
+            # TODO ACA DEBE IR CODIGO PARA APAGAR EL ACTUADOR
+        else:
+            event.enter((10 * 60 * 1000), 1, verify(nivel, area, tipo))  # Agendamos un verify sobre el area en 10 min
+            event.run()
 
 
 prueba()

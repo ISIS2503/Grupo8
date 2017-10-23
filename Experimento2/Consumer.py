@@ -40,8 +40,9 @@ def init_consumer():
     KafkaConsumer(value_deserializer=msgpack.unpackb)
 
 
-def on_consumer(function):
-    function_on_consumer = function
+def on_consumer(funcion):
+    global function_on_consumer
+    function_on_consumer = funcion
 
 
 if __name__ == '__main__':
