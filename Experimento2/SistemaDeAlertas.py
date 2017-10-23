@@ -110,8 +110,8 @@ def alerta(tipo, data):
         print('Alerta 1')
     elif tipo == 2:
         # Actuador data['metadata']['area']. algo = dato
-        if (data['metadata']['area'], data['tipo']) not in areas_alerta:
-            areas_alerta[(data['metadata']['area'], data['tipo'])] = (1, datetime.datetime.now())
+        if (data['metadata']['nivel'], data['metadata']['area'], data['tipo']) not in areas_alerta:
+            areas_alerta[(data['metadata']['nivel'],data['metadata']['area'], data['tipo'])] = 1
             # TODO Actuador
             print('Alerta 2', data['tipo'], data['valor'], ref[data['tipo']])
     elif tipo == 3:
