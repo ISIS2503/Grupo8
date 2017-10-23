@@ -101,7 +101,6 @@ def alerta(tipo, data):
     area = data['metadata']['area']
     if tipo == 1:
         metadata = data['metadata']
-        tipo = tipo
         msg_body = 'El sensor de ' + tipo + \
                    ', en la ubicación: \nNivel:' + metadata['nivel'] + \
                    '\nArea: ' + metadata['area'] + \
@@ -119,7 +118,6 @@ def alerta(tipo, data):
         metadata = data['metadata']
         msg_body = 'El actuador en el area: ' + metadata['area'] + ', ha estado encendido por 1 hora'
         util.sendTo(receivers, None, sbj_alerta3, msg_body)
-    return
 
 
 def calcular_rango(arr):
@@ -139,20 +137,22 @@ def add_to_queue(dato):
     value = dato['valor']
     timestamp = dato['timeStamp']
 
-    if not (metadata['nivel'], metadata['area']) in structure:
-        structure[(metadata['nivel'], metadata['area'])] = {}
-    mcs = structure[(metadata['nivel'], metadata['area'])]
+    key = (metadata['nivel'], metadata['area'])
+    if not key in structure:
+        structure[key] = {}
+    mcs = structure[key]
 
-    if not (metadata['microcontrolador'], tipo) in mcs:
-        mcs[(metadata['microcontrolador'], tipo)] = [False, []]
-    datos_mc = mcs[(metadata['microcontrolador'], tipo)]
+    key2 = (metadata['microcontrolador'], tipo)
+    if not key2 in mcs:
+        mcs[key2] = [False, []]
+    datos_mc = mcs[key2]
 
     if len(datos_mc[1]) == 10:
         datos_mc[1].pop(0)
     datos_mc[1].append((value, timestamp))
 
-    mcs[(metadata['microcontrolador'], tipo)] = datos_mc
-    structure[(metadata['nivel'], metadata['area'])] = mcs
+    mcs[key2] = datos_mc
+    structure[key] = mcs
 
 
 def initial_config():
