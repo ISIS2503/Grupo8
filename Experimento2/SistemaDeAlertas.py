@@ -110,8 +110,9 @@ def alerta(tipo, data):
     elif tipo == 2:
         # Actuador data['metadata']['area']. algo = dato
         if (nivel, area, tipo) not in areas_alerta:
-            areas_alerta[(nivel, area, tipo)] = 0
-            verify(nivel, area, tipo)
+            areas_alerta[(nivel, area, tipo)] = 1
+            event.enter((10 * 60 * 1000), 1, verify(nivel, area, tipo))  # Agendamos un verify sobre el area en 10 min
+            event.run()
             # TODO ENCENDER ACTUADOR
             print('Alerta 2', tipo, data['valor'], ref[tipo])
     elif tipo == 3:
