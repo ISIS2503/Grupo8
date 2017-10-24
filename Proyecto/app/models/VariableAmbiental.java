@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author dnarvaez27
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 @Entity
 public class VariableAmbiental extends Model
 {
+	@Id
 	private Long id;
 
 	private Float valorMaximo;
@@ -103,10 +105,11 @@ public class VariableAmbiental extends Model
 	public static VariableAmbiental bind( JsonNode json )
 	{
 		VariableAmbiental var = new VariableAmbiental( );
+		var.id = json.findPath("id").asLong();
 		var.valorMaximo = json.findPath( "valorMaximo" ).floatValue( );
 		var.valorMinimo = json.findPath( "valorMinimo" ).floatValue( );
 		var.variacion = json.findPath( "variacion" ).floatValue( );
-		var.uniadadDeMedida = json.findPath( "unidadDeMedida" ).asText( );
+		var.uniadadDeMedida = json.findPath( "uniadadDeMedida" ).asText( );
 		var.precision = json.findPath( "precision" ).floatValue( );
 		var.frecuencia = json.findPath( "frecuencia" ).floatValue( );
 		return var;

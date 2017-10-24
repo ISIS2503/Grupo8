@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 public class Sensor extends Model
 {
+	@Id
 	private Long id;
 
 	private Float minimo;
@@ -91,10 +93,10 @@ public class Sensor extends Model
 	public static Sensor bind( JsonNode json )
 	{
 		Sensor sensor = new Sensor( );
-		sensor.id = json.findPath( "i" ).asLong( );
+		sensor.id = json.findPath( "id" ).asLong( );
 		sensor.maximo = json.findPath( "maximo" ).floatValue( );
 		sensor.minimo = json.findPath( "minimo" ).floatValue( );
-		// TODO Variable Ambiental
+		sensor.tipo = VariableAmbiental.bind(json.findPath("tipo"));
 		return sensor;
 	}
 }

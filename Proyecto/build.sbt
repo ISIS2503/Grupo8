@@ -1,3 +1,7 @@
+import play.ebean.sbt.PlayEbean
+import play.routes.compiler.InjectedRoutesGenerator
+import play.sbt.PlayJava
+
 name := """proyecto"""
 
 version := "1.0-SNAPSHOT"
