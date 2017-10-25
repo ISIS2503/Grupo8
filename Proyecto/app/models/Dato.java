@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -14,6 +16,8 @@ import java.time.ZonedDateTime;
 @Entity
 public class Dato extends Model
 {
+	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Float valor;

@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author dnarvaez27
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 @Entity
 public class Usuario extends Model
 {
+	@Id
 	private Long id;
 
 	private String rol;
@@ -67,7 +69,7 @@ public class Usuario extends Model
 	public static Usuario bind( JsonNode json )
 	{
 		Usuario usuario = new Usuario( );
-		usuario.id = json.findPath( "is" ).asLong( );
+		usuario.id = json.findPath( "id" ).asLong( );
 		usuario.login = json.findPath( "login" ).asText( );
 		usuario.rol = json.findPath( "rol" ).asText( );
 		usuario.password = json.findPath( "password" ).asText( ); //TODO

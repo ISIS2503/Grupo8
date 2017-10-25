@@ -20,23 +20,23 @@ GET /minas/reportes                                                             
 
 GET /minas/nivel/:idNivel/areas                                                      controllers.AreaController.retrieveAll(idNivel: Long)
 
-GET /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                   controllers.MicrocontroladorController.retrieveAll(idArea: Long)
+GET /minas/areas/:idArea/microcontroladores                                   controllers.MicrocontroladorController.retrieveAll(idArea: Long)
 
-GET /[a-zA-Z0-9]+/areas/:idArea/alertas                                              controllers.AlertaController.retrieveAll(idArea: Long)
+GET /minas/areas/:idArea/alertas                                              controllers.AlertaController.retrieveAll(idArea: Long)
 
-GET /[a-zA-Z0-9]+/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
+GET /minas/areas/:idArea/actuadores                                           controllers.ActuadorController.retrieveAll(idArea: Long)
 
-GET /[a-zA-Z0-9]+/actuadores/:id                                                     controllers.ActuadorController.retrieve(id: Long)
+GET /minas/actuadores/:id                                                     controllers.ActuadorController.retrieve(id: Long)
 
-GET /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
+GET /minas/microcontroladores/:idMicrocontrolador/sensores                    controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
 
-GET /[a-zA-Z0-9]+/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
+GET /minas/sensor/:idSensor/datos                                             controllers.DatoController.retrieveAll(idSensor: Long)
 
-GET /usuarios                                                                        controllers.UsuarioController.retrieveAll( )
+GET /usuarios                                                                        controllers.UsuarioController.retrieveAll()
 
 GET /usuarios/:idUsuario                                                             controllers.UsuarioController.retrieve(idUsuario: Long)
 
-GET /variablesAmbientales                                                            controllers.VariableAmbientalController.retrieveAll( )
+GET /variablesAmbientales                                                            controllers.VariableAmbientalController.retrieveAll()
 
 GET /variablesAmbientales/:id                                                        controllers.VariableAmbientalController.retrieve(id: Long )
 
@@ -51,15 +51,15 @@ POST /minas/nivel/:idNivel/areas                                                
 
 POST /minas/nivel/:idNivel/reportes                                                  controllers.ReporteController.create(idNivel: Long)
 
-POST /[a-zA-Z0-9]+/areas/:idArea/microcontroladores                                  controllers.MicrocontroladorController.create(idArea: Long)
+POST /minas/areas/:idArea/microcontroladores                                  controllers.MicrocontroladorController.create(idArea: Long)
 
-POST /[a-zA-Z0-9]+/areas/:idArea/alertas                                             controllers.AlertaController.create(idArea: Long)
+POST /minas/areas/:idArea/alertas                                             controllers.AlertaController.create(idArea: Long)
 
-POST /[a-zA-Z0-9]+/areas/:idArea/actuadores                                          controllers.ActuadorController.create(idArea: Long)
+POST /minas/areas/:idArea/actuadores                                          controllers.ActuadorController.create(idArea: Long)
 
-POST /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador/sensores                   controllers.SensorController.create(idMicrocontrolador: Long)
+POST /minas/microcontroladores/:idMicrocontrolador/sensores                   controllers.SensorController.create(idMicrocontrolador: Long)
 
-POST /[a-zA-Z0-9]+/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
+POST /minas/sensor/:idSensor/datos                                            controllers.DatoController.create(idSensor: Long)
 
 POST /variablesAmbientales                                                           controllers.VariableAmbientalController.create()
 
@@ -69,17 +69,17 @@ PUT /minas/niveles/:id                                                          
 
 PUT /minas/reportes/:id                                                              controllers.ReporteController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/areas/:id                                                          controllers.AreaController.update(id: Long)
+PUT /minas/areas/:id                                                          controllers.AreaController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/microcontroladores/:id                                             controllers.MicrocontroladorController.update(id: Long)
+PUT /minas/microcontroladores/:id                                             controllers.MicrocontroladorController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/alertas/:id                                                        controllers.AlertaController.update(id: Long)
+PUT /minas/alertas/:id                                                        controllers.AlertaController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/actuadores/:id                                                     controllers.ActuadorController.update(id: Long)
+PUT /minas/actuadores/:id                                                     controllers.ActuadorController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/sensores/:id                                                       controllers.SensorController.update(id: Long)
+PUT /minas/sensores/:id                                                       controllers.SensorController.update(id: Long)
 
-PUT /[a-zA-Z0-9]+/datos/:id                                                          controllers.DatoController.update(id: Long)
+PUT /minas/datos/:id                                                          controllers.DatoController.update(id: Long)
 
 PUT /usuarios/:idUsuario                                                             controllers.UsuarioController.update(idUsuario: Long)
 
@@ -92,12 +92,12 @@ DELETE /minas/reportes/:idReporte                                               
 
 DELETE /minas[a-zA-Z0-9]+/areas/:idArea                                              controllers.AreaController.delete(idArea:Long)
 
-DELETE /[a-zA-Z0-9]+/microcontroladores/:idMicrocontrolador                          controllers.MicrocontroladorController.delete(idMicrocontrolador:Long)
+DELETE /minas/microcontroladores/:idMicrocontrolador                          controllers.MicrocontroladorController.delete(idMicrocontrolador:Long)
 
-DELETE /[a-zA-Z0-9]+/alertas/:idAlerta                                               controllers.AlertaController.delete(idAlerta:Long)
+DELETE /minas/alertas/:idAlerta                                               controllers.AlertaController.delete(idAlerta:Long)
 
-DELETE /[a-zA-Z0-9]+/actuadores/:idActuador                                          controllers.ActuadorController.delete(idActuador:Long)
+DELETE /minas/actuadores/:idActuador                                          controllers.ActuadorController.delete(idActuador:Long)
 
-DELETE /[a-zA-Z0-9]+/sensores/:idSensor                                              controllers.SensorController.delete(idSensor:Long)
+DELETE /minas/sensores/:idSensor                                              controllers.SensorController.delete(idSensor:Long)
 
-DELETE /[a-zA-Z0-9]+/datos/:idDato                                                   controllers.DatoController.delete(idDato:Long)
+DELETE /minas/datos/:idDato                                                   controllers.DatoController.delete(idDato:Long)
