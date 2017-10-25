@@ -1,6 +1,7 @@
 import datetime
 import time
 from  sched import scheduler
+import Consumer
 
 import E2Utils as util
 
@@ -95,11 +96,11 @@ def out_of_range(dato):
         tupla[0] = False
 
 
-def alerta(tipo, data):
+def alerta(alerta_tipo, data):
     tipo = data['tipo']
     nivel = data['metadata']['nivel']
     area = data['metadata']['area']
-    if tipo == 1:
+    if alerta_tipo == 1:
         metadata = data['metadata']
         msg_body = 'El sensor de ' + tipo + \
                    ', en la ubicación: \nNivel:' + metadata['nivel'] + \
@@ -107,7 +108,7 @@ def alerta(tipo, data):
                    '\nMicrocontrolador: ' + metadata['microcontrolador']
         util.sendTo(receivers, None, sbj_alerta1, msg_body)
         print('Alerta 1')
-    elif tipo == 2:
+    elif alerta_tipo == 2:
         # Actuador data['metadata']['area']. algo = dato
         if (nivel, area, tipo) not in areas_alerta:
             areas_alerta[(nivel, area, tipo)] = 1
@@ -115,7 +116,7 @@ def alerta(tipo, data):
             event.run()
             # TODO ENCENDER ACTUADOR
             print('Alerta 2', tipo, data['valor'], ref[tipo])
-    elif tipo == 3:
+    elif alerta_tipo == 3:
         metadata = data['metadata']
         msg_body = 'El actuador en el area: ' + metadata['area'] + ', ha estado encendido por 1 hora'
         util.sendTo(receivers, None, sbj_alerta3, msg_body)
@@ -241,5 +242,6 @@ def verify(nivel, area, tipo):
             event.run()
 
 
-prueba()
-print(structure)
+if __name__ == '__main__':
+    Consumer.on_consumer(rules)
+    Consumer.init_consumer()
