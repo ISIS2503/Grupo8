@@ -62,7 +62,7 @@ def rules():
 			add_to_queue(dato)
 
 			offline(dato)
-			#out_of_range(dato)
+			out_of_range(dato)
 			response.status_code = 200
 	except:
 		pass
