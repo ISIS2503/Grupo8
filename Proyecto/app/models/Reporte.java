@@ -4,9 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 /**
  * @author dnarvaez27
@@ -16,7 +14,7 @@ public class Reporte extends Model
 {
 	private Long id;
 
-	private ZonedDateTime fecha;
+	private Date fecha;
 
 	private long idNivel;
 
@@ -24,17 +22,17 @@ public class Reporte extends Model
 	{
 	}
 
-	public Reporte( ZonedDateTime fecha )
+	public Reporte( Date fecha )
 	{
 		this.fecha = fecha;
 	}
 
-	public ZonedDateTime getFecha( )
+	public Date getFecha( )
 	{
 		return fecha;
 	}
 
-	public void setFecha( ZonedDateTime fecha )
+	public void setFecha( Date fecha )
 	{
 		this.fecha = fecha;
 	}
@@ -63,8 +61,7 @@ public class Reporte extends Model
 	{
 		Reporte reporte = new Reporte( );
 		reporte.id = json.findPath( "id" ).asLong( );
-		Instant i = Instant.ofEpochSecond( json.findPath( "inicio" ).asLong( ) );
-		reporte.fecha = ZonedDateTime.ofInstant( i, ZoneId.systemDefault( ) );
+		reporte.fecha = new Date( json.findPath( "inicio" ).asLong( ) );
 		return reporte;
 	}
 }

@@ -1,14 +1,12 @@
 package models;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 /**
  * @author dnarvaez27
@@ -22,7 +20,7 @@ public class Dato extends Model
 
 	private Float valor;
 
-	private ZonedDateTime timeStamp;
+	private Date timeStamp;
 
 	private Long idSensor;
 
@@ -50,12 +48,12 @@ public class Dato extends Model
 		this.valor = valor;
 	}
 
-	public ZonedDateTime getTimeStamp( )
+	public Date getTimeStamp( )
 	{
 		return timeStamp;
 	}
 
-	public void setTimeStamp( ZonedDateTime timeStamp )
+	public void setTimeStamp( Date timeStamp )
 	{
 		this.timeStamp = timeStamp;
 	}
@@ -75,8 +73,7 @@ public class Dato extends Model
 		Dato dato = new Dato( );
 		dato.id = json.findPath( "id" ).asLong( );
 		dato.valor = json.findPath( "valor" ).floatValue( );
-		Instant i = Instant.ofEpochSecond( json.findPath( "inicio" ).asLong( ) );
-		dato.timeStamp = ZonedDateTime.ofInstant( i, ZoneId.systemDefault( ) );
+		dato.timeStamp = new Date( json.findPath( "inicio" ).asLong( ) );
 		return dato;
 	}
 }

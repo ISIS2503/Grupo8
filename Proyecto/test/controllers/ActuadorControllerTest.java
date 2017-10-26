@@ -8,7 +8,7 @@ import play.mvc.Call;
 import play.mvc.Result;
 import play.test.Helpers;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class ActuadorControllerTest {
             actuador.setId(1L);
             actuador.setActivo(true);
             actuador.setIdArea(1L);
-            actuador.setInicio(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+            actuador.setInicio(new Date());
 
 
             Call action = controllers.routes.ActuadorController.create(actuador.getIdArea());
@@ -59,7 +59,7 @@ public class ActuadorControllerTest {
             actuador.setId(1L);
             actuador.setActivo(true);
             actuador.setIdArea(1L);
-            actuador.setInicio(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+            actuador.setInicio(new Date());
 
             Call action = controllers.routes.ActuadorController.create(actuador.getIdArea());
             Result result1 = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(actuador)));
@@ -91,7 +91,7 @@ public class ActuadorControllerTest {
                 actuador.setId((long)i);
                 actuador.setActivo((i%2==0));
                 actuador.setIdArea((long)i);
-                actuador.setInicio(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+                actuador.setInicio(new Date());
 
                 Call action = controllers.routes.ActuadorController.create(actuador.getIdArea());
                 Result result1 = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(actuador)));
@@ -121,7 +121,7 @@ public class ActuadorControllerTest {
             actuador.setId(1L);
             actuador.setActivo(true);
             actuador.setIdArea(1L);
-            actuador.setInicio(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+            actuador.setInicio(new Date());
 
             Call action = controllers.routes.ActuadorController.create(actuador.getIdArea());
             Result result1 = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(actuador)));
@@ -130,7 +130,7 @@ public class ActuadorControllerTest {
             actuador.setId(2L);
             actuador.setActivo(false);
             actuador.setIdArea(2L);
-            actuador.setInicio(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+            actuador.setInicio(new Date());
 
             action = controllers.routes.ActuadorController.update(actuador.getId()); // TODO controllers.
             Result result = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(actuador)));
