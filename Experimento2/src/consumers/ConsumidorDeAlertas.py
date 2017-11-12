@@ -1,8 +1,8 @@
 import json
-import requests
-from kafka import KafkaConsumer
-import E2Utils as util
 
+from kafka import KafkaConsumer
+
+from src.utils import E2Utils as util
 
 sbj_alerta1 = "Alerta! Sensor Fuera de Linea"
 sbj_alerta3 = "Alerta! Actuador Ineficiente"

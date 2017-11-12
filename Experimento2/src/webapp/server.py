@@ -1,14 +1,20 @@
+import traceback
+
+import sys
+from flask import Flask, Response, request
 import datetime
 import time
 from  sched import scheduler
-import Consumer
+from datetime import timedelta
+from kafka import KafkaProducer
+from kafka.errors import KafkaError
 
-import E2Utils as util
+app = Flask(__name__)
 
 # {
 #   { (nivel, area):
 #       (id_mc, tipo), (Bool, [
-#                               (timestamp, dato)
+#                               (dato, timeStamp)
 #                             ]
 #                       )
 #       )
@@ -18,6 +24,8 @@ import E2Utils as util
 # }
 structure = {}
 areas_alerta = {}
+ciclos = {}
+
 ref = {
     'Temperatura': {
         'freq': 0,
@@ -50,12 +58,23 @@ receivers = ['destinatario1@mail.com', 'destinatario2@mail.com']
 event = scheduler(time.time, time.sleep)
 
 
-def rules(dato):
-    if 'valor' in dato:
-        add_to_queue(dato)
+@app.route('/generarAlerta', methods=['POST'])
+def rules():
+    response = Response(content_type='text/plain', status=500)
 
-        offline(dato)
-        out_of_range(dato)
+    dato = request.get_json()
+
+    try:
+        if 'valor' in dato:
+            add_to_queue(dato)
+
+            offline(dato)
+            out_of_range(dato)
+            response.status_code = 200
+    except:
+        traceback.print_exc(file=sys.stdout)
+
+    return response
 
 
 def offline(dato):
@@ -65,13 +84,13 @@ def offline(dato):
     area = dato['metadata']['area']
 
     queue = structure[(nivel, area)][(id_mc, tipo)][1]
-
     now = datetime.datetime.now()
-    ultimo = queue[- 1]
+    ultimo = queue[-1]
     timestamp = ultimo[1]
 
     temp = 5 * ref[tipo]['freq']
-    timestamp += datetime.timedelta(seconds=temp)
+    d = timedelta(seconds=temp)
+    timestamp += d
 
     if timestamp < now:
         alerta(1, dato)
@@ -91,35 +110,33 @@ def out_of_range(dato):
 
     if prom < ref[tipo]['lim_inf'] or prom > ref[tipo]['lim_sup']:
         alerta(2, dato)
-        tupla[0] = True
+        tupla[0] = 1
     else:
-        tupla[0] = False
+        tupla[0] = 0
 
 
 def alerta(alerta_tipo, data):
     tipo = data['tipo']
     nivel = data['metadata']['nivel']
     area = data['metadata']['area']
-    if alerta_tipo == 1:
-        metadata = data['metadata']
-        msg_body = 'El sensor de ' + tipo + \
-                   ', en la ubicación: \nNivel:' + metadata['nivel'] + \
-                   '\nArea: ' + metadata['area'] + \
-                   '\nMicrocontrolador: ' + metadata['microcontrolador']
-        util.sendTo(receivers, None, sbj_alerta1, msg_body)
-        print('Alerta 1')
-    elif alerta_tipo == 2:
-        # Actuador data['metadata']['area']. algo = dato
+
+    # producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'), bootstrap_servers=['localhost:8090'])
+    alerta = {'alerta': alerta_tipo,
+              'data': data
+              }
+    # producer.send('alertas', alerta)
+
+    if alerta_tipo == 2:
         if (nivel, area, tipo) not in areas_alerta:
-            areas_alerta[(nivel, area, tipo)] = 1
-            event.enter((10 * 60 * 1000), 1, verify(nivel, area, tipo))  # Agendamos un verify sobre el area en 10 min
-            event.run()
+            areas_alerta[(nivel, area, tipo)] = [1, datetime.datetime.now()]
             # TODO ENCENDER ACTUADOR
             print('Alerta 2', tipo, data['valor'], ref[tipo])
-    elif alerta_tipo == 3:
-        metadata = data['metadata']
-        msg_body = 'El actuador en el area: ' + metadata['area'] + ', ha estado encendido por 1 hora'
-        util.sendTo(receivers, None, sbj_alerta3, msg_body)
+        else:
+            d = timedelta(minutes=10)
+            alerta = areas_alerta[(nivel, area, tipo)]
+            now = datetime.datetime.now()
+            if (now >= alerta[1] + d):
+                verify(data)
 
 
 def calcular_rango(arr):
@@ -139,6 +156,8 @@ def add_to_queue(dato):
     value = dato['valor']
     timestamp = dato['timeStamp']
 
+    timestamp = datetime.datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
+
     key = (metadata['nivel'], metadata['area'])
     if not key in structure:
         structure[key] = {}
@@ -146,7 +165,7 @@ def add_to_queue(dato):
 
     key2 = (metadata['microcontrolador'], tipo)
     if not key2 in mcs:
-        mcs[key2] = [False, []]
+        mcs[key2] = [0, []]
     datos_mc = mcs[key2]
 
     if len(datos_mc[1]) == 10:
@@ -221,27 +240,33 @@ def prueba():
         })
 
 
-def verify(nivel, area, tipo):
+def verify(data):
+    tipo = data['tipo']
+    nivel = data['metadata']['nivel']
+    area = data['metadata']['area']
+    microcontrolador = data['metadata']['microcontrolador']
+
     activo = False
     if (nivel, area, tipo) in areas_alerta:
         area_tipo = areas_alerta[(nivel, area, tipo)]
         for elem in structure[(nivel, area)]:  # Si esta en alerta se miran todos los sensores
-            if elem['Bool']:  # Si acualquiera de los sensores genera alerta
+            hayAlerta = elem[0]
+            if hayAlerta == 1:  # Si acualquiera de los sensores genera alerta
                 activo = True
-                if area_tipo >= 6:  # Si se ha activado 6 veces
-                    alerta(3, (nivel, area, tipo))
-                    areas_alerta[(nivel, area, tipo)] = 1  # Volvemos a 1 para verificar despues de enviar el correo
+                if area_tipo[0] >= 6:
+                    # Si se ha activado 6 veces
+                    alerta(3, data)
+                    areas_alerta[(nivel, area, tipo)][0] = 1  # Volvemos a 1 para verificar despues de enviar el correo
                 else:
-                    areas_alerta[(nivel, area, tipo)] += 1  # Aumentamos porque se vuelve a activar por 10 minutos
+                    areas_alerta[(nivel, area, tipo)][0] += 1  # Aumentamos porque se vuelve a activar por 10 minutos
         if not activo:
             # Saca el area de la lista de alertas
             areas_alerta.pop([(nivel, area, tipo)], None)
             # TODO ACA DEBE IR CODIGO PARA APAGAR EL ACTUADOR
         else:
-            event.enter((10 * 60 * 1000), 1, verify(nivel, area, tipo))  # Agendamos un verify sobre el area en 10 min
-            event.run()
+            areas_alerta[(nivel, area, tipo)][
+                1] = datetime.datetime.now()  # Agendamos un verify sobre el area en 10 min
 
 
 if __name__ == '__main__':
-    Consumer.on_consumer(rules)
-    Consumer.init_consumer()
+    app.run()

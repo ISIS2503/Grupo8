@@ -8,7 +8,7 @@ function_on_consumer = lambda x: x
 
 def init_consumer():
     # To consume latest messages and auto-commit offsets
-    consumer = KafkaConsumer('n.+.a.+.m.+',group_id='variablesAmbientales',bootstrap_servers=['localhost:8090'])
+    consumer = KafkaConsumer('n.+.a.+.m.+', group_id='variablesAmbientales', bootstrap_servers=['localhost:8090'])
 
     for message in consumer:
         json_data = json.loads(message.value.decode('utf-8'))
