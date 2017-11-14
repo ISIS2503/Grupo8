@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -12,6 +13,9 @@ import java.util.List;
 @Entity
 public class Microcontrolador extends Model
 {
+	public static final Model.Finder<Long, Microcontrolador> find = new Finder<>( Microcontrolador.class );
+
+	@Id
 	private Long id;
 
 	private List<Sensor> sensores;

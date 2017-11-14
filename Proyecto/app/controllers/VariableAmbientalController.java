@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.VariableAmbiental;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class VariableAmbientalController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -24,18 +26,21 @@ public class VariableAmbientalController extends Controller
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
-		List<VariableAmbiental> variableAmbiental = new Model.Finder<Long, VariableAmbiental>( VariableAmbiental.class ).findList( );
+		List<VariableAmbiental> variableAmbiental = VariableAmbiental.find.findList( );
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		VariableAmbiental variableAmbiental = new Model.Finder<Long, VariableAmbiental>( VariableAmbiental.class ).byId( id );
+		VariableAmbiental variableAmbiental = VariableAmbiental.find.byId( id );
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -46,9 +51,10 @@ public class VariableAmbientalController extends Controller
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		VariableAmbiental variableAmbiental = new Model.Finder<Long, VariableAmbiental>( VariableAmbiental.class ).byId( id );
+		VariableAmbiental variableAmbiental = VariableAmbiental.find.byId( id );
 		variableAmbiental.delete( );
 		return ok( Json.toJson( variableAmbiental ) );
 	}

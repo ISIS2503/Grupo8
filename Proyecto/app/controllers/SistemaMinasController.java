@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.SistemaMinas;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class SistemaMinasController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -25,18 +27,21 @@ public class SistemaMinasController extends Controller
 		return ok( Json.toJson( sistemaMinas ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
-		List<SistemaMinas> sistemaMinas = new Model.Finder<Long, SistemaMinas>( SistemaMinas.class ).findList( );
+		List<SistemaMinas> sistemaMinas = SistemaMinas.find.findList( );
 		return ok( Json.toJson( sistemaMinas ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		SistemaMinas sistemaMinas = new Model.Finder<Long, SistemaMinas>( SistemaMinas.class ).byId( id );
+		SistemaMinas sistemaMinas = SistemaMinas.find.byId( id );
 		return ok( Json.toJson( sistemaMinas ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +52,10 @@ public class SistemaMinasController extends Controller
 		return ok( Json.toJson( sistemaMinas ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		SistemaMinas sistemaMinas = new Model.Finder<Long, SistemaMinas>( SistemaMinas.class ).byId( id );
+		SistemaMinas sistemaMinas = SistemaMinas.find.byId( id );
 		sistemaMinas.delete( );
 		return ok( Json.toJson( sistemaMinas ) );
 	}

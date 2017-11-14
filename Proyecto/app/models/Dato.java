@@ -14,6 +14,8 @@ import java.util.Date;
 @Entity
 public class Dato extends Model
 {
+	public static final Model.Finder<Long, Dato> find = new Finder<>( Dato.class );
+
 	@Id
 	@GeneratedValue
 	private Long id;

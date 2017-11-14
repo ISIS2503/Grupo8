@@ -3,8 +3,13 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author dnarvaez27
@@ -12,18 +17,22 @@ import javax.persistence.Id;
 @Entity
 public class Usuario extends Model
 {
+	public static final Model.Finder<Long, Usuario> find = new Finder<>( Usuario.class );
+
 	@Id
 	private Long id;
 
-	private String rol;
+	@ManyToMany( cascade = CascadeType.REMOVE )
+	private List<Rol> roles;
 
+	@Column( unique = true )
 	private String login;
 
 	private String password;
 
 	public Usuario( )
 	{
-
+		this.roles = new LinkedList<>( );
 	}
 
 	public Long getId( )
@@ -34,16 +43,6 @@ public class Usuario extends Model
 	public void setId( Long id )
 	{
 		this.id = id;
-	}
-
-	public String getRol( )
-	{
-		return rol;
-	}
-
-	public void setRol( String rol )
-	{
-		this.rol = rol;
 	}
 
 	public String getLogin( )
@@ -66,13 +65,32 @@ public class Usuario extends Model
 		this.password = password;
 	}
 
+	public List<Rol> getRoles( )
+	{
+		return roles;
+	}
+
+	public void setRoles( List<Rol> roles )
+	{
+		this.roles = roles;
+	}
+
 	public static Usuario bind( JsonNode json )
 	{
 		Usuario usuario = new Usuario( );
 		usuario.id = json.findPath( "id" ).asLong( );
 		usuario.login = json.findPath( "login" ).asText( );
-		usuario.rol = json.findPath( "rol" ).asText( );
-		usuario.password = json.findPath( "password" ).asText( ); //TODO
+		usuario.password = json.findPath( "password" ).asText( );
+		usuario.roles = new LinkedList<>( );
+
+		for( JsonNode j : json.findPath( "roles" ) )
+		{
+			Long id = j.asLong( );
+			Rol rol = new Rol( );
+			rol.setId( id );
+			usuario.roles.add( rol );
+		}
+
 		return usuario;
 	}
 }

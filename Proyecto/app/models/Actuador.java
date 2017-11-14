@@ -3,8 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
-import java.time.Instant;
-import java.time.ZoneId;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -13,6 +12,9 @@ import java.util.Date;
 @Entity
 public class Actuador extends Model
 {
+	public static final Model.Finder<Long, Actuador> find = new Finder<>( Actuador.class );
+
+	@Id
 	private Long id;
 
 	private Boolean activo;

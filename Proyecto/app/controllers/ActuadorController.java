@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Actuador;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class ActuadorController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idArea )
 	{
@@ -25,18 +27,22 @@ public class ActuadorController extends Controller
 		return ok( Json.toJson( actuador ) );
 	}
 
+	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
 	public Result retrieveAll( Long idArea )
 	{
-		List<Actuador> actuador = new Model.Finder<Long, Actuador>( Actuador.class ).where( ).eq( "idArea", idArea ).findList( );
+
+		List<Actuador> actuador = Actuador.find.where( ).eq( "idArea", idArea ).findList( );
 		return ok( Json.toJson( actuador ) );
 	}
 
+	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
 	public Result retrieve( Long id )
 	{
-		Actuador actuador = new Model.Finder<Long, Actuador>( Actuador.class ).byId( id );
+		Actuador actuador = Actuador.find.byId( id );
 		return ok( Json.toJson( actuador ) );
 	}
 
+	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +53,10 @@ public class ActuadorController extends Controller
 		return ok( Json.toJson( actuador ) );
 	}
 
+	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
 	public Result delete( Long id )
 	{
-		Actuador actuador = new Model.Finder<Long, Actuador>( Actuador.class ).byId( id );
+		Actuador actuador = Actuador.find.byId( id );
 		actuador.delete( );
 		return ok( Json.toJson( actuador ) );
 	}

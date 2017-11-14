@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Reporte;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class ReporteController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idNivel )
 	{
@@ -25,24 +27,28 @@ public class ReporteController extends Controller
 		return ok( Json.toJson( reporte ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( Long idNivel )
 	{
-		List<Reporte> reporte = new Model.Finder<Long, Reporte>( Reporte.class ).where( ).eq( "idNivel", idNivel ).findList( );
+		List<Reporte> reporte = Reporte.find.where( ).eq( "idNivel", idNivel ).findList( );
 		return ok( Json.toJson( reporte ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
-		List<Reporte> reporte = new Model.Finder<Long, Reporte>( Reporte.class ).findList( );
+		List<Reporte> reporte = Reporte.find.findList( );
 		return ok( Json.toJson( reporte ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Reporte reporte = new Model.Finder<Long, Reporte>( Reporte.class ).byId( id );
+		Reporte reporte = Reporte.find.byId( id );
 		return ok( Json.toJson( reporte ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -53,9 +59,10 @@ public class ReporteController extends Controller
 		return ok( Json.toJson( reporte ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Reporte reporte = new Model.Finder<Long, Reporte>( Reporte.class ).byId( id );
+		Reporte reporte = Reporte.find.byId( id );
 		reporte.delete( );
 		return ok( Json.toJson( reporte ) );
 	}

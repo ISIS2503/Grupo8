@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author dnarvaez27
@@ -11,6 +12,9 @@ import javax.persistence.Entity;
 @Entity
 public class Alerta extends Model
 {
+	public static final Model.Finder<Long, Alerta> find = new Finder<>( Alerta.class );
+
+	@Id
 	private Long id;
 
 	private Integer tipo;

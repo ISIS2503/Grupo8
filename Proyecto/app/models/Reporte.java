@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -12,6 +13,9 @@ import java.util.Date;
 @Entity
 public class Reporte extends Model
 {
+	public static final Model.Finder<Long, Reporte> find = new Finder<>( Reporte.class );
+
+	@Id
 	private Long id;
 
 	private Date fecha;

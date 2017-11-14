@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Area;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class AreaController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idNivel )
 	{
@@ -25,18 +27,21 @@ public class AreaController extends Controller
 		return ok( Json.toJson( area ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public play.mvc.Result retrieveAll( Long idNivel )
 	{
-		List<Area> area = new Model.Finder<Long, Area>( Area.class ).where( ).eq( "idNivel", idNivel ).findList( );
+		List<Area> area = Area.find.where( ).eq( "idNivel", idNivel ).findList( );
 		return ok( Json.toJson( area ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public play.mvc.Result retrieve( Long id )
 	{
-		Area area = new Model.Finder<Long, Area>( Area.class ).byId( id );
+		Area area = Area.find.byId( id );
 		return ok( Json.toJson( area ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +52,10 @@ public class AreaController extends Controller
 		return ok( play.libs.Json.toJson( area ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public play.mvc.Result delete( Long id )
 	{
-		Area area = new Model.Finder<Long, Area>( Area.class ).byId( id );
+		Area area = Area.find.byId( id );
 		area.delete( );
 		return ok( Json.toJson( area ) );
 	}

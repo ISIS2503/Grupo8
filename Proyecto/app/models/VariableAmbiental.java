@@ -12,6 +12,8 @@ import javax.persistence.Id;
 @Entity
 public class VariableAmbiental extends Model
 {
+	public static final Model.Finder<Long, VariableAmbiental> find = new Finder<>( VariableAmbiental.class );
+
 	@Id
 	private Long id;
 
@@ -105,7 +107,7 @@ public class VariableAmbiental extends Model
 	public static VariableAmbiental bind( JsonNode json )
 	{
 		VariableAmbiental var = new VariableAmbiental( );
-		var.id = json.findPath("id").asLong();
+		var.id = json.findPath( "id" ).asLong( );
 		var.valorMaximo = json.findPath( "valorMaximo" ).floatValue( );
 		var.valorMinimo = json.findPath( "valorMinimo" ).floatValue( );
 		var.variacion = json.findPath( "variacion" ).floatValue( );

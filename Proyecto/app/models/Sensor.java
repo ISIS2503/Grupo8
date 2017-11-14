@@ -13,6 +13,8 @@ import java.util.List;
 @Entity
 public class Sensor extends Model
 {
+	public static final Model.Finder<Long, Sensor> find = new Finder<>( Sensor.class );
+
 	@Id
 	private Long id;
 
@@ -96,7 +98,7 @@ public class Sensor extends Model
 		sensor.id = json.findPath( "id" ).asLong( );
 		sensor.maximo = json.findPath( "maximo" ).floatValue( );
 		sensor.minimo = json.findPath( "minimo" ).floatValue( );
-		sensor.tipo = VariableAmbiental.bind(json.findPath("tipo"));
+		sensor.tipo = VariableAmbiental.bind( json.findPath( "tipo" ) );
 		return sensor;
 	}
 }

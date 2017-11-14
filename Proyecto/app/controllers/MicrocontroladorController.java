@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Microcontrolador;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class MicrocontroladorController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idArea )
 	{
@@ -25,18 +27,21 @@ public class MicrocontroladorController extends Controller
 		return ok( Json.toJson( microcontrolador ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( Long idArea )
 	{
-		List<Microcontrolador> microcontrolador = new Model.Finder<Long, Microcontrolador>( Microcontrolador.class ).where( ).eq( "idArea", idArea ).findList( );
+		List<Microcontrolador> microcontrolador = Microcontrolador.find.where( ).eq( "idArea", idArea ).findList( );
 		return ok( Json.toJson( microcontrolador ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Microcontrolador microcontrolador = new Model.Finder<Long, Microcontrolador>( Microcontrolador.class ).byId( id );
+		Microcontrolador microcontrolador = Microcontrolador.find.byId( id );
 		return ok( Json.toJson( microcontrolador ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +52,10 @@ public class MicrocontroladorController extends Controller
 		return ok( Json.toJson( microcontrolador ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Microcontrolador microcontrolador = new Model.Finder<Long, Microcontrolador>( Microcontrolador.class ).byId( id );
+		Microcontrolador microcontrolador = Microcontrolador.find.byId( id );
 		microcontrolador.delete( );
 		return ok( play.libs.Json.toJson( microcontrolador ) );
 	}

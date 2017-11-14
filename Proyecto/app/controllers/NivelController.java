@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Nivel;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class NivelController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -24,18 +26,21 @@ public class NivelController extends Controller
 		return ok( Json.toJson( nivel ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
-		List<Nivel> nivel = new Model.Finder<Long, Nivel>( Nivel.class ).findList( );
+		List<Nivel> nivel = Nivel.find.findList( );
 		return ok( Json.toJson( nivel ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Nivel nivel = new Model.Finder<Long, Nivel>( Nivel.class ).byId( id );
+		Nivel nivel = Nivel.find.byId( id );
 		return ok( Json.toJson( nivel ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -46,9 +51,10 @@ public class NivelController extends Controller
 		return ok( Json.toJson( nivel ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Nivel nivel = new Model.Finder<Long, Nivel>( Nivel.class ).byId( id );
+		Nivel nivel = Nivel.find.byId( id );
 		nivel.delete( );
 		return ok( Json.toJson( nivel ) );
 	}

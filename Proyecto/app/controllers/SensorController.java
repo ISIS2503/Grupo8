@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Sensor;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class SensorController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idMicrocontrolador )
 	{
@@ -25,18 +27,21 @@ public class SensorController extends Controller
 		return ok( Json.toJson( sensor ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( Long idMicrocontrolador )
 	{
-		List<Sensor> sensor = new Model.Finder<Long, Sensor>( Sensor.class ).where( ).eq( "idMicrocontrolador", idMicrocontrolador ).findList( );
+		List<Sensor> sensor = Sensor.find.where( ).eq( "idMicrocontrolador", idMicrocontrolador ).findList( );
 		return ok( Json.toJson( sensor ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Sensor sensor = new Model.Finder<Long, Sensor>( Sensor.class ).byId( id );
+		Sensor sensor = Sensor.find.byId( id );
 		return ok( Json.toJson( sensor ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +52,10 @@ public class SensorController extends Controller
 		return ok( Json.toJson( sensor ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Sensor sensor = new Model.Finder<Long, Sensor>( Sensor.class ).byId( id );
+		Sensor sensor = Sensor.find.byId( id );
 		sensor.delete( );
 		return ok( Json.toJson( sensor ) );
 	}

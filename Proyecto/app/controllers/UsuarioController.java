@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Usuario;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class UsuarioController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -24,18 +26,27 @@ public class UsuarioController extends Controller
 		return ok( Json.toJson( usuario ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
-		List<Usuario> usuario = new Model.Finder<Long, Usuario>( Usuario.class ).findList( );
-		return ok( Json.toJson( usuario ) );
+		List<Usuario> usuarios = Usuario.find.findList( );
+		usuarios.forEach( usuario -> usuario.setPassword( null ) );
+		return ok( Json.toJson( usuarios ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Usuario usuario = new Model.Finder<Long, Usuario>( Usuario.class ).byId( id );
-		return ok( Json.toJson( usuario ) );
+		Usuario usuario = Usuario.find.byId( id );
+		if( usuario != null )
+		{
+			usuario.setPassword( null );
+			return ok( Json.toJson( usuario ) );
+		}
+		return notFound( String.format( "El usuario con id %s no se encuentra en la base de datos", id ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -46,6 +57,7 @@ public class UsuarioController extends Controller
 		return ok( Json.toJson( usuario ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
 		Usuario usuario = new com.avaje.ebean.Model.Finder<Long, Usuario>( Usuario.class ).byId( id );

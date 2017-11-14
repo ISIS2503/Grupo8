@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Alerta;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class AlertaController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idArea )
 	{
@@ -25,18 +27,21 @@ public class AlertaController extends Controller
 		return ok( Json.toJson( alerta ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( Long idArea )
 	{
-		List<Alerta> alerta = new Model.Finder<Long, Alerta>( Alerta.class ).where( ).eq( "idArea", idArea ).findList( );
+		List<Alerta> alerta = Alerta.find.where( ).eq( "idArea", idArea ).findList( );
 		return ok( Json.toJson( alerta ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Alerta alerta = new Model.Finder<Long, Alerta>( Alerta.class ).byId( id );
+		Alerta alerta = Alerta.find.byId( id );
 		return ok( Json.toJson( alerta ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -47,9 +52,10 @@ public class AlertaController extends Controller
 		return ok( Json.toJson( alerta ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Alerta alerta = new Model.Finder<Long, Alerta>( Alerta.class ).byId( id );
+		Alerta alerta = Alerta.find.byId( id );
 		alerta.delete( );
 		return ok( Json.toJson( alerta ) );
 	}

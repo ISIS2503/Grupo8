@@ -1,11 +1,11 @@
 package controllers;
 
-import com.avaje.ebean.Model;
+import actions.Roles;
+import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Dato;
 import play.libs.Json;
 import play.mvc.BodyParser;
-import play.mvc.Call;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class DatoController extends Controller
 {
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idSensor )
 	{
@@ -26,18 +27,21 @@ public class DatoController extends Controller
 		return ok( Json.toJson( dato ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( Long idSensor )
 	{
-		List<Dato> dato = new Model.Finder<Long, Dato>( Dato.class ).where( ).eq( "idSensor", idSensor ).findList( );
+		List<Dato> dato = Dato.find.where( ).eq( "idSensor", idSensor ).findList( );
 		return ok( Json.toJson( dato ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieve( Long id )
 	{
-		Dato dato = new Model.Finder<Long, Dato>( Dato.class ).byId( id );
+		Dato dato = Dato.find.byId( id );
 		return ok( Json.toJson( dato ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -48,9 +52,10 @@ public class DatoController extends Controller
 		return ok( Json.toJson( dato ) );
 	}
 
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Dato dato = new Model.Finder<Long, Dato>( Dato.class ).byId( id );
+		Dato dato = Dato.find.byId( id );
 		dato.delete( );
 		return ok( Json.toJson( dato ) );
 	}

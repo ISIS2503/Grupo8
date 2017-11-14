@@ -9,7 +9,6 @@ import models.Usuario;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
 import play.mvc.Call;
-import play.mvc.Http;
 import play.mvc.Result;
 import play.test.Helpers;
 
@@ -31,7 +30,7 @@ public class UsuarioControllerTest {
             usuario.setId(100L);
             usuario.setLogin("usuario1");
             usuario.setPassword("contrasena1");
-            usuario.setRol("rol1");
+            usuario.setRoles( "rol1");
 
             Call action = controllers.routes.UsuarioController.create();
             Result result = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(usuario)));
@@ -46,7 +45,7 @@ public class UsuarioControllerTest {
             //assertEquals("El id del usuario no es el esperado", (long) usuario.getId(), json.get("id").asLong());
             //assertEquals("El login del usuario no es el esperado",  usuario.getLogin(), json.get("login").asText());
             //assertEquals("El password del usuario no es el esperado", usuario.getPassword(), json.get("password").asText());
-            //assertEquals("El rol del usuario no es el esperado", usuario.getRol(), json.get("rol").asText());
+            //assertEquals("El rol del usuario no es el esperado", usuario.getRoles(), json.get("rol").asText());
         });
 
     }
@@ -59,7 +58,7 @@ public class UsuarioControllerTest {
             usuario.setId(100L);
             usuario.setLogin("usuario1");
             usuario.setPassword("contrasena1");
-            usuario.setRol("rol1");
+            usuario.setRoles( "rol1");
 
             Call action = controllers.routes.UsuarioController.create();
             Result result1 = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(usuario)));
@@ -75,7 +74,7 @@ public class UsuarioControllerTest {
             //assertEquals("El id del usuario no es el esperado", (long) usuario.getId(), json.get("id").asLong());
             //assertEquals("El login del usuario no es el esperado",  usuario.getLogin(), json.get("login").asText());
             //assertEquals("El password del usuario no es el esperado", usuario.getPassword(), json.get("password").asText());
-            //assertEquals("El rol del usuario no es el esperado", usuario.getRol(), json.get("rol").asText());
+            //assertEquals("El rol del usuario no es el esperado", usuario.getRoles(), json.get("rol").asText());
         });
 
     }
@@ -92,7 +91,7 @@ public class UsuarioControllerTest {
                 usuario.setId((long)i);
                 usuario.setLogin("usuario"+i);
                 usuario.setPassword("contrasena"+i);
-                usuario.setRol("rol"+1);
+                usuario.setRoles( "rol" + 1);
                 usuarios.add(usuario);
 
                 Call action = controllers.routes.UsuarioController.create();
@@ -112,7 +111,7 @@ public class UsuarioControllerTest {
                 //assertEquals("El id del usuario no es el esperado", (long) usuario.getId(), json.get("id").asLong());
                 //assertEquals("El login del usuario no es el esperado",  usuario.getLogin(), json.get("login").asText());
                 //assertEquals("El password del usuario no es el esperado", usuario.getPassword(), json.get("password").asText());
-                //assertEquals("El rol del usuario no es el esperado", usuario.getRol(), json.get("rol").asText());
+                //assertEquals("El rol del usuario no es el esperado", usuario.getRoles(), json.get("rol").asText());
             }
         });
     }
@@ -124,7 +123,7 @@ public class UsuarioControllerTest {
             usuario.setId(100L);
             usuario.setLogin("usuario1");
             usuario.setPassword("contrasena1");
-            usuario.setRol("rol1");
+            usuario.setRoles( "rol1");
 
             Call action = controllers.routes.UsuarioController.create();
             Result result1 = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(usuario)));
@@ -132,7 +131,7 @@ public class UsuarioControllerTest {
             usuario.setId(20L);
             usuario.setLogin("usuario2");
             usuario.setPassword("contrasena2");
-            usuario.setRol("rol2");
+            usuario.setRoles( "rol2");
 
             action = controllers.routes.UsuarioController.update(usuario.getId()); // TODO controllers.
             Result result = route(Helpers.fakeRequest(action).bodyJson(Json.toJson(usuario)));
@@ -147,7 +146,7 @@ public class UsuarioControllerTest {
             //assertEquals("El id del usuario no es el esperado", (long) usuario.getId(), json.get("id").asLong());
             //assertEquals("El login del usuario no es el esperado",  usuario.getLogin(), json.get("login").asText());
             //assertEquals("El password del usuario no es el esperado", usuario.getPassword(), json.get("password").asText());
-            //assertEquals("El rol del usuario no es el esperado", usuario.getRol(), json.get("rol").asText());
+            //assertEquals("El rol del usuario no es el esperado", usuario.getRoles(), json.get("rol").asText());
         });
     }
 }
