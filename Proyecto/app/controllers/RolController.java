@@ -23,7 +23,7 @@ public class RolController extends Controller
 		return ok( Json.toJson( rol ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result retrieveAll( )
 	{
 		List<Rol> roles = Rol.find.findList( );

@@ -10,7 +10,7 @@ POST          /login                                                        cont
 
 POST          /logout                                                       controllers.Application.logout()
 
-GET           /roles                                                        controllers.Application.rolesActualUser()
+GET           /actual/roles                                                 controllers.Application.rolesActualUser()
 
 GET           /actual                                                       controllers.Application.actualUser()
 

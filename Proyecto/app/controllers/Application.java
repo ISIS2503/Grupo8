@@ -10,8 +10,6 @@ import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import javax.swing.*;
-
 public class Application extends Controller
 {
 	public Result index( )
@@ -59,7 +57,6 @@ public class Application extends Controller
 
 	public Result actualUser( )
 	{
-		JOptionPane.showMessageDialog( new JFrame( ), request( ).cookie( "user" ) + ":" + response( ).cookie( "user" ).isPresent( ) );
 		String user = session( ).get( "user" );
 		Usuario usuarioActual = Usuario.find.where( ).eq( "login", user ).findUnique( );
 		if( usuarioActual != null )
