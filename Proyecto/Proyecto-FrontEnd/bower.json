@@ -1,0 +1,22 @@
+{
+  "name": "2PDS",
+  "description": "Proyecto Mitad de Carrera - Universidad de Los Andes",
+  "version": "1.0.0",
+  "homepage": "https://dnarvaez27.github.io/2PDS",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "angular-ui-router": "~0.2.14",
+    "angular-bootstrap": "^0.13.4"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/bower_components",
+    "test",
+    "tests"
+  ]
+}

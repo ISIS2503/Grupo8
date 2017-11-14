@@ -1,0 +1,21 @@
+<div class="full-size">
+    <div class="header">
+        <div>
+            <button ng-show="showMenu[1]" class="btn btn-default" ng-click="goToState('usuarios')">Usuarios</button>
+            <button ng-show="showMenu[2]" class="btn btn-default" ng-click="goToState('actuadores')">Actuadores</button>
+            <button ng-show="showMenu[3]" class="btn btn-default" ng-click="goToState('alertas')">Alertas</button>
+            <button ng-show="showMenu[4]" class="btn btn-default" ng-click="goToState('niveles')">Niveles</button>
+            <!--TODO: Areas-->
+            <!--TODO: Microcontrolador-->
+            <!--TODO: Sensor-->
+            <!--TODO: Dato-->
+            <button ng-show="showMenu[5]" class="btn btn-default" ng-click="goToState('reportes')">Reportes</button>
+            <button ng-show="showMenu[6]" class="btn btn-default" ng-click="goToState('roles')">Rol</button>
+            <button ng-show="showMenu[7]" class="btn btn-default" ng-click="goToState('variables')">
+                Variables Ambientales
+            </button>
+        <button class="btn-logout btn btn-default fa fa-sign-out pull-right" ng-click="logout()"></button>
+        </div>
+    </div>
+    <div class="list-container" ui-view="listView"></div>
+</div>

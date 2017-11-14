@@ -1,0 +1,166 @@
+html, body, .full-size {
+    height: 100%;
+    width: 100%;
+}
+
+.login-container {
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.background-login {
+    background: url('../imgs/splash.jpg') no-repeat center;
+    background-size: cover;
+    position: fixed;
+}
+
+.login-container > h1 {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.header {
+    width: 100%;
+    position: fixed;
+    height: 8%;
+    box-shadow: 0 1px 3px -2px;
+    text-align: center;
+}
+
+.header > div {
+    position: relative;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.list-container {
+    padding-top: 5%;
+}
+
+.usuario-table-header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 4fr;
+    text-align: center;
+    padding: 5px;
+    margin-right: 45px;
+    margin-left: 5px;
+    -webkit-box-shadow: 0 1px 3px -1px;
+    -moz-box-shadow: 0 1px 3px -1px;
+    box-shadow: 0 1px 3px -1px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.usuario-table-item {
+    display: grid;
+    grid-template-columns: 1fr 4fr 4fr 0fr 0fr;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.usuario-table-item:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.badge {
+    margin: 2px;
+}
+
+.btn-round {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    height: 25px;
+    width: 27px;
+    padding: 0 0px 1px 0;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.unauthorized-container {
+    display: grid;
+    padding-top: 5%;
+}
+
+.unauthorized-container > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.unauthorized-bar {
+    height: 8%;
+    background-color: brown;
+}
+
+.alert-login {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -145%);
+}
+
+.usuario-items-container {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.rol-selector {
+    display: inline-block;
+}
+
+.btn-add {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40px;
+    width: 40px;
+}
+
+.role-close {
+    cursor: pointer;
+    text-shadow: 0 0 1px white;
+    color: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    padding-top: 1px;
+    border: 1px solid white;
+    padding-right: 0;
+}
+
+.role-close:hover {
+    background-color: brown;
+    color: white;
+    border: 1px solid brown;
+}
