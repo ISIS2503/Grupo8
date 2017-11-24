@@ -32,6 +32,11 @@ public class Global extends GlobalSettings
 			userRol.setId( 3L );
 			userRol.setName( "USER" );
 			userRol.save( );
+
+			Rol bridgeRol = new Rol( );
+			bridgeRol.setId( 4L );
+			bridgeRol.setName( "BRIDGE" );
+			bridgeRol.save( );
 		}
 
 		List<Usuario> usuarios = Usuario.find.all( );
@@ -54,6 +59,15 @@ public class Global extends GlobalSettings
 			syso.setPassword( "syso" );
 			syso.setRoles( Collections.singletonList( sysoRol ) );
 			syso.save( );
+
+			Rol bridgeRol = new Rol( );
+			bridgeRol.setId( 4L );
+
+			Usuario bridge = new Usuario( );
+			bridge.setLogin( "bridge" );
+			bridge.setPassword( "bridge123" );
+			bridge.setRoles( Collections.singletonList( bridgeRol ) );
+			bridge.save( );
 		}
 	}
 

@@ -72,10 +72,21 @@ public class Dato extends Model
 
 	public static Dato bind( JsonNode json )
 	{
+		java.text.DateFormat format = new java.text.SimpleDateFormat( "yyyy-MM-dd HH:mm" );
 		Dato dato = new Dato( );
 		dato.setId( json.findPath( "id" ).asLong( ) );
 		dato.setValor( json.findPath( "valor" ).floatValue( ) );
-		dato.setTimeStamp( new Date( json.findPath( "inicio" ).asLong( ) ) );
+		String timeStamp = json.findPath( "timeStamp" ).asText( );
+		timeStamp = timeStamp.replace( "T", " " );
+
+		try
+		{
+			dato.setTimeStamp( format.parse( timeStamp ) );
+		}
+		catch( java.text.ParseException e )
+		{
+			e.printStackTrace( );
+		}
 		return dato;
 	}
 }

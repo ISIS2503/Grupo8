@@ -27,6 +27,7 @@ public class Application extends Controller
 		String password = jsonNode.findPath( "password" ).asText( );
 
 		Usuario usuario = Usuario.find.where( ).eq( "login", username ).eq( "password", password ).findUnique( );
+		System.out.println( "Login "+ username );
 		if( usuario != null )
 		{
 			usuario.setPassword( null );

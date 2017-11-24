@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DatoController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	// @RolesAllowed( { Roles.ADMIN, Roles.SYSO, Roles.BRIDGE } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idSensor )
 	{

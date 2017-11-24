@@ -23,11 +23,13 @@ public class RolesAction extends play.mvc.Action<RolesAllowed>
 			if( Collections.disjoint( usuario.getRoles( ).stream( ).map( Rol::getName ).collect( Collectors.toList( ) ),
 									  Arrays.stream( configuration.value( ) ).map( Enum::name ).collect( Collectors.toList( ) ) ) )
 			{
+				System.out.println( "El usuario no tiene acceso a esta sección" );
 				return F.Promise.promise( ( ) -> forbidden( "El usuario no tiene acceso a esta sección" ) );
 			}
 
 			return this.delegate.call( ctx );
 		}
+		System.out.println( "Debe estar logeado para ver esta sección" );
 		return F.Promise.promise( ( ) -> forbidden( "Debe estar logeado para ver esta sección" ) );
 	}
 }

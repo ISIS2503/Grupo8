@@ -4,5 +4,6 @@ public enum Roles
 {
 	SYSO,
 	ADMIN,
-	USER
+	USER,
+	BRIDGE
 }

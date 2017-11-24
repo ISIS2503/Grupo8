@@ -30,6 +30,7 @@ public class Sensor extends Model
 
 	public Sensor( )
 	{
+		datos = new java.util.LinkedList<>( );
 	}
 
 	public Long getId( )
@@ -99,6 +100,7 @@ public class Sensor extends Model
 		sensor.setMaximo( json.findPath( "maximo" ).floatValue( ) );
 		sensor.setMinimo( json.findPath( "minimo" ).floatValue( ) );
 		sensor.setTipo( VariableAmbiental.bind( json.findPath( "tipo" ) ) );
+		sensor.setDatos( new java.util.LinkedList<>(  ) );
 		return sensor;
 	}
 }
