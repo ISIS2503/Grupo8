@@ -3,7 +3,7 @@ package controllers;
 import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Usuario;
+import models.users.Usuario;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -27,7 +27,7 @@ public class UsuarioController extends Controller
 		}
 		Usuario usuario = Usuario.bind( json );
 		usuario.setId( null );
-		usuario.save( );
+		usuario.insert( "usersdb" );
 		return ok( Json.toJson( Usuario.find.byId( usuario.getId( ) ) ) );
 	}
 
@@ -59,7 +59,7 @@ public class UsuarioController extends Controller
 		Usuario usuario = Usuario.bind( json );
 		usuario.setId( id );
 		usuario.setPassword( usuario.getPassword( ) != null ? usuario.getPassword( ) : Usuario.find.byId( id ).getPassword( ) );
-		usuario.update( );
+		usuario.update( "usersdb" );
 		return ok( Json.toJson( usuario ) );
 	}
 

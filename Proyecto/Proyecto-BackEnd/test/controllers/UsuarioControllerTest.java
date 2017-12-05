@@ -5,7 +5,7 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.route;
 import static play.test.Helpers.running;
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Usuario;
+import models.users.Usuario;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
 import play.mvc.Call;

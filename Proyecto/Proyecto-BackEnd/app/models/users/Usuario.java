@@ -1,4 +1,4 @@
-package models;
+package models.users;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 public class Usuario extends Model
 {
-	public static final Model.Finder<Long, Usuario> find = new Finder<>( Usuario.class );
+	public static final Model.Finder<Long, Usuario> find = new Finder<>( "usersdb", Usuario.class );
 
 	@Id
 	private Long id;
@@ -29,6 +29,8 @@ public class Usuario extends Model
 	private String login;
 
 	private String password;
+
+	private String token;
 
 	public Usuario( )
 	{
@@ -73,6 +75,16 @@ public class Usuario extends Model
 	public void setRoles( List<Rol> roles )
 	{
 		this.roles = roles;
+	}
+
+	public String getToken( )
+	{
+		return token;
+	}
+
+	public void setToken( String token )
+	{
+		this.token = token;
 	}
 
 	public static Usuario bind( JsonNode json )

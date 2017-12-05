@@ -3,7 +3,7 @@ package controllers;
 import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Rol;
+import models.users.Rol;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -19,7 +19,7 @@ public class RolController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Rol rol = Rol.bind( json );
-		rol.save( );
+		rol.insert( "usersdb" );
 		return ok( Json.toJson( rol ) );
 	}
 
@@ -44,7 +44,7 @@ public class RolController extends Controller
 		JsonNode json = request( ).body( ).asJson( );
 		Rol rol = Rol.bind( json );
 		rol.setId( id );
-		rol.update( );
+		rol.update( "usersdb" );
 		return ok( Json.toJson( rol ) );
 	}
 

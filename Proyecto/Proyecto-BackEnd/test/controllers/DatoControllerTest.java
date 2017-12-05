@@ -1,7 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Dato;
+import models.main.Dato;
 import org.junit.Before;
 import org.junit.Test;
 import play.core.j.JavaResultExtractor;

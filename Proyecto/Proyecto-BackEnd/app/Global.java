@@ -1,5 +1,5 @@
-import models.Rol;
-import models.Usuario;
+import models.users.Rol;
+import models.users.Usuario;
 import play.Application;
 import play.GlobalSettings;
 import play.libs.F;
@@ -21,22 +21,22 @@ public class Global extends GlobalSettings
 			Rol adminRol = new Rol( );
 			adminRol.setId( 1L );
 			adminRol.setName( "ADMIN" );
-			adminRol.save( );
+			adminRol.insert( "usersdb" );
 
 			Rol sysoRol = new Rol( );
 			sysoRol.setId( 2L );
 			sysoRol.setName( "SYSO" );
-			sysoRol.save( );
+			sysoRol.insert( "usersdb" );
 
 			Rol userRol = new Rol( );
 			userRol.setId( 3L );
 			userRol.setName( "USER" );
-			userRol.save( );
+			userRol.insert( "usersdb" );
 
 			Rol bridgeRol = new Rol( );
 			bridgeRol.setId( 4L );
 			bridgeRol.setName( "BRIDGE" );
-			bridgeRol.save( );
+			bridgeRol.insert( "usersdb" );
 		}
 
 		List<Usuario> usuarios = Usuario.find.all( );
@@ -49,7 +49,7 @@ public class Global extends GlobalSettings
 			admin.setLogin( "admin" );
 			admin.setPassword( "admin" );
 			admin.setRoles( Collections.singletonList( adminRol ) );
-			admin.save( );
+			admin.insert( "usersdb" );
 
 			Rol sysoRol = new Rol( );
 			sysoRol.setId( 2L );
@@ -58,7 +58,7 @@ public class Global extends GlobalSettings
 			syso.setLogin( "syso" );
 			syso.setPassword( "syso" );
 			syso.setRoles( Collections.singletonList( sysoRol ) );
-			syso.save( );
+			syso.insert( "usersdb" );
 
 			Rol bridgeRol = new Rol( );
 			bridgeRol.setId( 4L );
@@ -67,7 +67,7 @@ public class Global extends GlobalSettings
 			bridge.setLogin( "bridge" );
 			bridge.setPassword( "bridge123" );
 			bridge.setRoles( Collections.singletonList( bridgeRol ) );
-			bridge.save( );
+			bridge.insert( "usersdb" );
 		}
 	}
 
@@ -87,6 +87,10 @@ public class Global extends GlobalSettings
 	public F.Promise<Result> onError( Http.RequestHeader request, Throwable t )
 	{
 		t.printStackTrace( );
-		return F.Promise.promise( ( ) -> Results.internalServerError( t.getMessage( ) ) );
+		return F.Promise.promise( ( ) ->
+								  {
+									  String message = t.getMessage( );
+									  return Results.internalServerError( message != null ? message : "" );
+								  } );
 	}
 }

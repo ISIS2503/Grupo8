@@ -1,11 +1,10 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.VariableAmbiental;
+import models.main.VariableAmbiental;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
 import play.mvc.Call;
-import play.mvc.Http;
 import play.mvc.Result;
 import play.test.Helpers;
 

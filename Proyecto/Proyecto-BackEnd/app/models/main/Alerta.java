@@ -1,4 +1,4 @@
-package models;
+package models.main;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;

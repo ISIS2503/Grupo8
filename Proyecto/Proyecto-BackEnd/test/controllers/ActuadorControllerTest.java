@@ -1,7 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Actuador;
+import models.main.Actuador;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
 import play.mvc.Call;

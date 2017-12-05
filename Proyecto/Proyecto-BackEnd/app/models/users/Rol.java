@@ -1,4 +1,4 @@
-package models;
+package models.users;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Rol extends Model
 {
-	public static final Model.Finder<Long, Rol> find = new Finder<>( Rol.class );
+	public static final Model.Finder<Long, Rol> find = new Finder<>( "usersdb", Rol.class );
 
 	@Id
 	private Long id;

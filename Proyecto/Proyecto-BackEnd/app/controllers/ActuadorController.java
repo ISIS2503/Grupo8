@@ -3,7 +3,7 @@ package controllers;
 import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Actuador;
+import models.main.Actuador;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
