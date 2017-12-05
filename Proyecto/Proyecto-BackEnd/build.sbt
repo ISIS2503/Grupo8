@@ -15,6 +15,7 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "junit" % "junit" % "4.12" % "test",
+  "org.mockito" % "mockito-core" % "2.10.0" % "test",
   "com.datastax.cassandra" % "cassandra-driver-core" % "2.0.1",
   "org.hibernate" % "hibernate-entitymanager" % "4.3.9.Final",
   filters
