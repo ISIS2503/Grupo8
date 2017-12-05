@@ -52,7 +52,7 @@ public class RolController extends Controller
 	public Result delete( Long id )
 	{
 		Rol rol = Rol.find.byId( id );
-		rol.delete( );
+		rol.delete( "usersdb" );
 		return ok( Json.toJson( rol ) );
 	}
 }

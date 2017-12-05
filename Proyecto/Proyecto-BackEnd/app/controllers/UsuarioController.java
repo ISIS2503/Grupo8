@@ -66,8 +66,8 @@ public class UsuarioController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
 	public Result delete( Long id )
 	{
-		Usuario usuario = new com.avaje.ebean.Model.Finder<Long, Usuario>( Usuario.class ).byId( id );
-		usuario.delete( );
+		Usuario usuario = Usuario.find.byId( id );
+		usuario.delete( "usersdb" );
 		return ok( play.libs.Json.toJson( usuario ) );
 	}
 }
