@@ -15,24 +15,23 @@
                     <span class="badge">0</span>
                 </div>
             </div>
+        </div>
 
+        <div>
+            <div class="list-table-header">
+                <b>ID</b>
+                <b>Fecha</b>
+                <b>Notificaciones</b>
+            </div>
 
-            <div>
-                <div class="list-table-header">
-                    <b>ID</b>
-                    <b>Fecha</b>
-                    <b>Notificaciones</b>
-                </div>
-
-                <div class="list-items-container">
-                    <div class="list-table-item" ng-repeat="reporte in nivel.reportes | sort: nivel.date">
-                        <span>{{reporte.id}}</span>
-                        <span>{{reporte.fecha}}</span>
-                        <span class="badge">0</span>
-                    </div>
+            <div class="list-items-container">
+                <div class="list-table-item" ng-repeat="reporte in nivel.reportes">
+                    <span>{{reporte.id}}</span>
+                    <span>{{reporte.fecha}}</span>
+                    <span class="badge">0</span>
                 </div>
             </div>
-            <div></div>
         </div>
+        <div></div>
     </div>
 </div>

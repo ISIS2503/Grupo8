@@ -17,9 +17,10 @@
                                 }
                             } )
                             .state( 'nivelesDetail', {
-                                url: '/niveles',
+                                url: '/niveles/:idNivel',
                                 params: {
-                                    nivel : null
+                                    idNivel: null,
+                                    nivel: null
                                 },
                                 parent: 'menu',
                                 views: {

@@ -29,9 +29,10 @@
                 //            url: urlBack + '/minas/niveles/' + idNivel
                 //        } );
 
+
                 $scope.niveles.some( function ( item ) {
                     if ( item.id = idNivel ) {
-                        $state.go( 'nivelesDetail', { nivel: item } );
+                        $state.go( 'nivelesDetail', { idNivel: item.id, nivel: item } );
                         return true;
                     }
                 } );
