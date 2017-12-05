@@ -22,7 +22,9 @@ public class SensorController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Sensor sensor = Sensor.bind( json );
-		sensor.setIdMicrocontrolador( idMicrocontrolador );
+		models.main.Microcontrolador microcontrolador = new models.main.Microcontrolador();
+		microcontrolador.setId( idMicrocontrolador );
+		sensor.setMicrocontrolador( microcontrolador );
 		sensor.save( );
 		return ok( Json.toJson( sensor ) );
 	}

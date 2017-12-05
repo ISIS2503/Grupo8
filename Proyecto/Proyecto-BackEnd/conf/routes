@@ -25,7 +25,7 @@ GET           /minas/niveles                                                cont
 
 GET           /minas/reportes                                               controllers.ReporteController.retrieveAll()
 
-GET           /minas/nivel/:idNivel/areas                                   controllers.AreaController.retrieveAll(idNivel: Long)
+GET           /minas/niveles/:idNivel/areas                                 controllers.AreaController.retrieveAll(idNivel: Long)
 
 GET           /minas/areas/:idArea/microcontroladores                       controllers.MicrocontroladorController.retrieveAll(idArea: Long)
 
@@ -37,7 +37,7 @@ GET           /minas/actuadores/:id                                         cont
 
 GET           /minas/microcontroladores/:idMicrocontrolador/sensores        controllers.SensorController.retrieveAll(idMicrocontrolador: Long)
 
-GET           /minas/sensor/:idSensor/datos                                 controllers.DatoController.retrieveAll(idSensor: Long)
+GET           /minas/sensores/:idSensor/datos                               controllers.DatoController.retrieveAll(idSensor: Long)
 
 GET           /usuarios                                                     controllers.UsuarioController.retrieveAll()
 
@@ -58,9 +58,9 @@ POST          /usuarios                                                     cont
 
 POST          /minas/niveles                                                controllers.NivelController.create()
 
-POST          /minas/nivel/:idNivel/areas                                   controllers.AreaController.create(idNivel: Long)
+POST          /minas/niveles/:idNivel/areas                                 controllers.AreaController.create(idNivel: Long)
 
-POST          /minas/nivel/:idNivel/reportes                                controllers.ReporteController.create(idNivel: Long)
+POST          /minas/niveles/:idNivel/reportes                              controllers.ReporteController.create(idNivel: Long)
 
 POST          /minas/areas/:idArea/microcontroladores                       controllers.MicrocontroladorController.create(idArea: Long)
 
@@ -70,7 +70,7 @@ POST          /minas/areas/:idArea/actuadores                               cont
 
 POST          /minas/microcontroladores/:idMicrocontrolador/sensores        controllers.SensorController.create(idMicrocontrolador: Long)
 
-POST          /minas/sensor/:idSensor/datos                                 controllers.DatoController.create(idSensor: Long)
+POST          /minas/sensores/:idSensor/datos                               controllers.DatoController.create(idSensor: Long)
 
 POST          /variablesAmbientales                                         controllers.VariableAmbientalController.create()
 

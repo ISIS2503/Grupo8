@@ -1,12 +1,12 @@
 <div class="full-size">
-    <div class="usuario-table-header">
+    <div class="list-table-header">
         <b>ID</b>
         <b>Login</b>
         <b>Roles</b>
     </div>
 
-    <div class="usuario-items-container">
-        <div class="usuario-table-item" ng-repeat="usuario in usuariosRecords" ng-click="edit(usuario)">
+    <div class="list-items-container">
+        <div class="list-table-item" ng-repeat="usuario in usuariosRecords" ng-click="edit(usuario)">
             <span>{{usuario.id}}</span>
             <span>{{usuario.login}}</span>
             <span>
@@ -18,7 +18,5 @@
             <button class="btn btn-danger pull-right btn-round fa fa-times" ng-click="delete(usuario.id)"></button>
         </div>
     </div>
-
     <button class="btn btn-success btn-round btn-add" ng-click="create()">&plus;</button>
-
 </div>

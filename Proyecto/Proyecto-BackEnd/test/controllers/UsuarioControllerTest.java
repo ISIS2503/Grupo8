@@ -2,9 +2,8 @@ package controllers;
 
 
 import static org.junit.Assert.assertEquals;
-import static play.test.Helpers.fakeApplication;
-import static play.test.Helpers.route;
-import static play.test.Helpers.running;
+import static org.mockito.Mockito.mock;
+import static play.test.Helpers.*;
 
 import actions.Roles;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,10 +13,13 @@ import org.junit.Before;
 import org.junit.Test;
 import play.core.j.JavaResultExtractor;
 import play.libs.Json;
+import play.libs.Scala;
 import play.mvc.Call;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.test.Helpers;
+import scala.Tuple2;
+import scala.collection.Seq;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +55,34 @@ public class UsuarioControllerTest {
 
     private void createContext(){
         if(credentialUser != null){
+
+            Map<String,String> sessionData = Collections.emptyMap();
             Map<String,String> flashData = Collections.emptyMap();
+            Map<String,Object> argData = Collections.emptyMap();
+            Http.Request request = mock(Http.Request.class);
+            play.api.mvc.RequestHeader requestHeader = mock(play.api.mvc.RequestHeader.class);
+
+            String[] user =  {credentialUser.getLogin()};
+            request.headers().put("user",user);
+
+            String[] token =  {credentialUser.getToken()};
+            request.headers().put("token",token);
+
+            System.out.println("REQUEST: " + request);
+            System.out.println("REQUEST.HEADERS: " + request.headers());
+
+            Http.Context context = new Http.Context(1L, requestHeader, request, sessionData, flashData, argData);
+
+            context.request().headers().put("user",user);
+            context.request().headers().put("token",token);
+            System.out.println("CONTEXT.REQUEST.HEADERS: " + context.request().headers());
+
+
+            System.out.println("LOGIN: "+credentialUser.getLogin());
+            System.out.println("TOKEN: "+credentialUser.getToken());
+            System.out.println("LOGIN P: " + context.request().headers().get("user"));
+            System.out.println("TOKEN P: " + context.request().headers().get("token"));
+
         }
     }
 
@@ -62,6 +91,7 @@ public class UsuarioControllerTest {
 
         running(fakeApplication(), ()->{
             setup();
+            createContext();
 
             Usuario usuario = new Usuario();
             usuario.setId(100L);

@@ -20,13 +20,17 @@ public class Area extends Model
 
 	private Integer tipo;
 
+	@javax.persistence.OneToMany( mappedBy = "area" )
 	private List<Actuador> actuadores;
 
+	@javax.persistence.OneToMany( mappedBy = "area" )
 	private List<Alerta> alertas;
 
+	@javax.persistence.OneToMany( mappedBy = "area" )
 	private List<Microcontrolador> microcontroladores;
 
-	private Long idNivel;
+	@javax.persistence.ManyToOne
+	private Nivel nivel;
 
 	public Area( )
 	{
@@ -82,14 +86,14 @@ public class Area extends Model
 		this.microcontroladores = microcontroladores;
 	}
 
-	public Long getIdNivel( )
+	public Nivel getNivel( )
 	{
-		return idNivel;
+		return nivel;
 	}
 
-	public void setIdNivel( Long idNivel )
+	public void setNivel( Nivel nivel )
 	{
-		this.idNivel = idNivel;
+		this.nivel = nivel;
 	}
 
 	public static Area bind( JsonNode json )

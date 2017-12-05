@@ -4,6 +4,7 @@ import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.main.Actuador;
+import models.main.Area;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -22,7 +23,9 @@ public class ActuadorController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Actuador actuador = Actuador.bind( json );
-		actuador.setIdArea( idArea );
+		models.main.Area area = new Area( );
+		area.setId( idArea );
+		actuador.setArea( area );
 		actuador.save( );
 		return ok( Json.toJson( actuador ) );
 	}

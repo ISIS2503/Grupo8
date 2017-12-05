@@ -21,7 +21,8 @@ public class Actuador extends Model
 
 	private Date inicio;
 
-	private Long idArea;
+	@javax.persistence.ManyToOne
+	private Area area;
 
 	public Actuador( )
 	{
@@ -57,14 +58,14 @@ public class Actuador extends Model
 		this.inicio = inicio;
 	}
 
-	public Long getIdArea( )
+	public Area getArea( )
 	{
-		return idArea;
+		return area;
 	}
 
-	public void setIdArea( Long idArea )
+	public void setArea( Area idArea )
 	{
-		this.idArea = idArea;
+		this.area = area;
 	}
 
 	public static Actuador bind( com.fasterxml.jackson.databind.JsonNode json )

@@ -19,7 +19,8 @@ public class Alerta extends Model
 
 	private Integer tipo;
 
-	private Long idArea;
+	@javax.persistence.ManyToOne
+	private Area area;
 
 	public Alerta( )
 	{
@@ -45,14 +46,14 @@ public class Alerta extends Model
 		this.tipo = tipo;
 	}
 
-	public Long getIdArea( )
+	public Area getArea( )
 	{
-		return idArea;
+		return area;
 	}
 
-	public void setIdArea( Long idArea )
+	public void setArea( Area idArea )
 	{
-		this.idArea = idArea;
+		this.area = idArea;
 	}
 
 	public static Alerta bind( JsonNode json )

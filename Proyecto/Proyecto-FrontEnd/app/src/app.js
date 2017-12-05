@@ -3,10 +3,13 @@
         'ui.router',
         'ngCookies',
 
+        'variablesModule',
+        'rolesModule',
+        'nivelesModule',
         'usuariosModule',
         'menuModule',
         'loginModule',
-        'homeModule'
+        'homeModule',
     ] );
 
     app.controller( 'mainCtrl', [ '$scope',
@@ -19,18 +22,25 @@
     app.factory( 'AuthService', [ '$http', '$state', 'urlBack', '$location', 'SessionService', function ( $http, $state, urlBack, $location, SessionService ) {
         return {
             dict: {
-                '/menu': [ 'ADMIN', 'SYSO', 'USER' ],
-                '/menu/usuarios': [ 'ADMIN', 'SYSO' ],
-                '/menu/actuadores': [ 'ADMIN', 'SYSO' ],
-                '/menu/alertas': [ 'ADMIN', 'SYSO' ],
-                '/menu/niveles': [ 'ADMIN', 'SYSO', 'USER' ],
-                '/menu/reportes': [ 'ADMIN', 'SYSO', 'USER' ],
-                '/menu/roles': [ 'ADMIN', 'SYSO' ],
-                '/menu/variables': [ 'ADMIN', 'SYSO' ],
+                '/menu$': [ 'ADMIN', 'SYSO', 'USER' ],
+                '/menu/usuarios$': [ 'ADMIN', 'SYSO' ],
+                '/menu/actuadores$': [ 'ADMIN', 'SYSO' ],
+                '/menu/alertas$': [ 'ADMIN', 'SYSO' ],
+                '/menu/niveles$': [ 'ADMIN', 'SYSO', 'USER' ],
+                '/menu/reportes$': [ 'ADMIN', 'SYSO', 'USER' ],
+                '/menu/roles$': [ 'ADMIN', 'SYSO' ],
+                '/menu/variables$': [ 'ADMIN', 'SYSO' ],
+                '/menu/niveles/[0-9]+$': [ 'ADMIN', 'SYSO' ],
             },
             verifyRol: function ( user ) {
                 let self = this;
-                let rta = user.roles.some( r => self.dict[ $location.path() ].indexOf( r.name ) !== -1 );
+
+                let rta = false;
+                Object.keys( self.dict ).map( p => new RegExp( p, 'g' ) ).forEach( function ( item, index ) {
+                    if ( item.test( $location.path() ) ) {
+                        rta = user.roles.some( r => self.dict[ Object.keys( self.dict )[ index ] ] );
+                    }
+                } );
                 if ( !rta ) {
                     $state.go( 'unauthorized' );
                     return undefined;

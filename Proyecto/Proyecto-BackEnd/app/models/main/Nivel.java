@@ -3,8 +3,11 @@ package models.main;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,14 +21,18 @@ public class Nivel extends Model
 	@Id
 	private Long id;
 
+	@javax.persistence.Column( unique = true )
 	private Integer nivel;
 
+	@OneToMany( cascade = CascadeType.ALL, mappedBy = "nivel" )
 	private List<Area> areas;
 
+	@OneToMany( cascade = CascadeType.ALL, mappedBy = "nivel" )
 	private List<Reporte> reportes;
 
 	public Nivel( )
 	{
+		areas = new LinkedList<>( );
 	}
 
 	public Long getId( )
@@ -58,7 +65,7 @@ public class Nivel extends Model
 		this.areas = areas;
 	}
 
-	public java.util.List<Reporte> getReportes( )
+	public List<Reporte> getReportes( )
 	{
 		return reportes;
 	}
@@ -73,6 +80,8 @@ public class Nivel extends Model
 		Nivel nivel = new Nivel( );
 		nivel.setId( json.findPath( "id" ).asLong( ) );
 		nivel.setNivel( json.findPath( "nivel" ).asInt( ) );
+		nivel.setAreas( new LinkedList<>( ) );
+		nivel.setReportes( new LinkedList<>( ) );
 		return nivel;
 	}
 }

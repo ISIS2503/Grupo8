@@ -53,10 +53,10 @@ html, body, .full-size {
 }
 
 .list-container {
-    padding-top: 5%;
+    padding: 1% 20px 0 20px;
 }
 
-.usuario-table-header {
+.list-table-header {
     display: grid;
     grid-template-columns: 1fr 4fr 4fr;
     text-align: center;
@@ -66,13 +66,13 @@ html, body, .full-size {
     -webkit-box-shadow: 0 1px 3px -1px;
     -moz-box-shadow: 0 1px 3px -1px;
     box-shadow: 0 1px 3px -1px;
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.95);
+    position: sticky;
+    top: 12%;
+    background-color: #24100b;
+    color: white;
 }
 
-.usuario-table-item {
+.list-table-item {
     display: grid;
     grid-template-columns: 1fr 4fr 4fr 0fr 0fr;
     text-align: center;
@@ -81,7 +81,7 @@ html, body, .full-size {
     cursor: pointer;
 }
 
-.usuario-table-item:hover {
+.list-table-item:hover {
     background-color: rgba(0, 0, 0, 0.12);
 }
 
@@ -100,10 +100,7 @@ html, body, .full-size {
 }
 
 .btn-logout {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
+
 }
 
 .unauthorized-container {
@@ -130,7 +127,7 @@ html, body, .full-size {
     transform: translate(-50%, -145%);
 }
 
-.usuario-items-container {
+.list-items-container {
     padding-top: 30px;
     padding-bottom: 50px;
 }
@@ -230,6 +227,7 @@ html, body, .full-size {
 .title-box {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 .title-box > h1 {
@@ -247,4 +245,50 @@ html, body, .full-size {
     right: 10px;
     top: -50px;
     z-index: 101;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+}
+
+.menu-buttons-container {
+    height: 100%;
+
+}
+
+.item-sidebar {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.item-sidebar > button {
+    padding: 15px;
+}
+
+.user-img {
+    background: url(../imgs/user.jpg) no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+}
+
+.sidebar {
+    padding: 10px;
+}
+
+.niveles-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    grid-gap: 15px;
+}
+
+.item-nivel {
+}
+
+.nivel-detail-lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }

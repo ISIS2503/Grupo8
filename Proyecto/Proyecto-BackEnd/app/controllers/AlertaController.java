@@ -22,7 +22,9 @@ public class AlertaController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Alerta alerta = Alerta.bind( json );
-		alerta.setIdArea( idArea );
+		models.main.Area area = new models.main.Area( );
+		area.setId( idArea );
+		alerta.setArea( area );
 		alerta.save( );
 		return ok( Json.toJson( alerta ) );
 	}
