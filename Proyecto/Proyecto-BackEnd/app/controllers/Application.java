@@ -24,18 +24,22 @@ public class Application extends Controller
 	public Result login( )
 	{
 		JsonNode jsonNode = request( ).body( ).asJson( );
-		String username = jsonNode.findPath( "username" ).asText( );
+		String login = jsonNode.findPath( "login" ).asText( );
 		String password = jsonNode.findPath( "password" ).asText( );
 
-		Usuario usuario = Usuario.find.where( ).eq( "login", username ).eq( "password", password ).findUnique( );
+		Usuario usuario = Usuario.find.where( ).eq( "login", login ).eq( "password", password ).findUnique( );
 		if( usuario != null )
 		{
-			System.out.println( String.format( "Login: %s", username ) );
-			usuario.setPassword( null );
-			// session( "user", username );
+			System.out.println( String.format( "Login: %s", login ) );
+			String token = new RandomString( ).nextString( );
 
-			usuario.setToken( new RandomString( ).nextString( ) );
-			usuario.update( "useresdb" );
+			usuario.setToken( token );
+			usuario.update( "usersdb" );
+
+			session( "user", login );
+			session( "token", token );
+
+			usuario.setPassword( null );
 			return ok( Json.toJson( usuario ) );
 		}
 		return badRequest( "Verificar credenciales" );
@@ -47,7 +51,10 @@ public class Application extends Controller
 		if( usuario != null )
 		{
 			usuario.setToken( null );
-			usuario.update( "useresdb" );
+			usuario.update( "usersdb" );
+			session( ).remove( "user" );
+			session( ).remove( "token" );
+			session( ).clear( );
 			return ok( "Bye" );
 		}
 		return ok( "Must be logged in" );
@@ -69,7 +76,9 @@ public class Application extends Controller
 
 	public Result actualUser( )
 	{
-		Usuario usuarioActual = getUsuario( );
+		String user = session( ).get( "user" );
+		String token = session( ).get( "token" );
+		Usuario usuarioActual = Usuario.find.where( ).eq( "login", user ).eq( "token", token ).findUnique( );
 		if( usuarioActual != null )
 		{
 			usuarioActual.setPassword( null );
@@ -80,12 +89,13 @@ public class Application extends Controller
 
 	private Usuario getUsuario( )
 	{
-		String login = request( ).headers( ).get( "user" )[ 0 ];
+		String[] userHeader = request( ).headers( ).get( "user" );
 		String[] tokens = request( ).headers( ).get( "token" );
-		if( tokens.length == 0 )
+		if( tokens == null || userHeader == null || tokens.length == 0 || userHeader.length == 0 )
 		{
 			return null;
 		}
+		String login = userHeader[ 0 ];
 		String token = tokens[ 0 ];
 		return Usuario.find.where( ).eq( "login", login ).eq( "token", token ).findUnique( );
 	}

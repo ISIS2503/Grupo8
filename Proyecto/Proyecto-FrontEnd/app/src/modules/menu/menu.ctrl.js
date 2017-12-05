@@ -1,8 +1,8 @@
 (function ( ng ) {
     let mod = ng.module( 'menuModule' );
 
-    mod.controller( 'menuCtrl', [ '$scope', '$stateParams', 'AuthService', '$state', '$http', 'urlBack', 'RolesService',
-        function ( $scope, $stateParams, AuthService, $state, $http, urlBack, RolesService ) {
+    mod.controller( 'menuCtrl', [ '$scope', 'AuthService', '$state', '$http', 'urlBack', 'RolesService', 'SessionService',
+        function ( $scope, AuthService, $state, $http, urlBack, RolesService, SessionService ) {
             $scope.menuSrc = 'app/src/modules/menu/empty.html';
             $scope.showMenu = {
                 1: false,
@@ -14,7 +14,7 @@
                 7: false,
             };
 
-            AuthService.checkUser( $stateParams.usuario, undefined )
+            AuthService.checkUser( SessionService.user, undefined )
                        .then( function ( response ) {
                            $scope.user = response;
 
@@ -77,10 +77,17 @@
                 $state.go( state );
             };
             $scope.logout = function () {
-                $http.post( urlBack + '/logout' )
-                     .then( function ( response ) {
-                         $state.go( 'login' );
-                     } );
+                $http( {
+                           method: 'POST',
+                           headers: {
+                               'user': SessionService.user.login,
+                               'token': SessionService.user.token
+                           },
+                           url: urlBack + '/logout'
+                       } ).then( function ( response ) {
+                    $state.go( 'login' );
+                    SessionService.user = undefined;
+                } );
             };
         }
     ] );

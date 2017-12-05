@@ -5,7 +5,8 @@
 
         'usuariosModule',
         'menuModule',
-        'loginModule'
+        'loginModule',
+        'homeModule'
     ] );
 
     app.controller( 'mainCtrl', [ '$scope',
@@ -15,7 +16,7 @@
         } ] );
 
     app.constant( 'urlBack', 'http://localhost:9000' );
-    app.factory( 'AuthService', [ '$http', '$state', 'urlBack', '$location', function ( $http, $state, urlBack, $location ) {
+    app.factory( 'AuthService', [ '$http', '$state', 'urlBack', '$location', 'SessionService', function ( $http, $state, urlBack, $location, SessionService ) {
         return {
             dict: {
                 '/menu': [ 'ADMIN', 'SYSO', 'USER' ],
@@ -44,10 +45,12 @@
                              .then( function ( response ) {
                                  if ( !dontVerify ) {
                                      if ( self.verifyRol( response.data ) ) {
+                                         SessionService.user = response.data;
                                          succ( response.data );
                                      }
                                  }
                                  else {
+                                     SessionService.user = response.data;
                                      succ( response.data );
                                  }
                              }, function () {
@@ -63,10 +66,12 @@
                     else {
                         if ( !dontVerify ) {
                             if ( self.verifyRol( obj ) ) {
+                                SessionService.user = obj;
                                 succ( obj );
                             }
                         }
                         else {
+                            SessionService.user = obj;
                             succ( obj );
                         }
                     }
@@ -77,6 +82,11 @@
     app.factory( 'RolesService', function () {
         return {
             roles: []
+        };
+    } );
+    app.factory( 'SessionService', function () {
+        return {
+            user: undefined
         };
     } );
 

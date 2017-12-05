@@ -1,24 +1,37 @@
 (function ( ng ) {
     let mod = ng.module( 'usuariosModule' );
 
-    mod.controller( 'usuariosCtrl', [ '$scope', '$http', 'urlBack', 'RolesService', 'AuthService',
-        function ( $scope, $http, urlBack, RolesService, AuthService ) {
+    mod.controller( 'usuariosCtrl', [ '$scope', '$http', 'urlBack', 'RolesService', 'AuthService', 'SessionService',
+        function ( $scope, $http, urlBack, RolesService, AuthService, SessionService ) {
             AuthService.checkUser( $scope.$parent.user )
                        .then( function ( response ) {
-                           $http.get( urlBack + '/usuarios' )
-                                .then( function ( response ) {
-                                    $scope.usuariosRecords = response.data;
-                                } );
+                           $http( {
+                                      method: 'GET',
+                                      headers: {
+                                          'user': SessionService.user.login,
+                                          'token': SessionService.user.token
+                                      },
+                                      url: urlBack + '/usuarios'
+                                  } ).then( function ( response ) {
+                               $scope.usuariosRecords = response.data;
+                           } );
                        } );
 
             $scope.delete = function ( id ) {
-                $http.delete( urlBack + '/usuarios/' + id )
-                     .then( function ( response ) {
-                         let user = $scope.usuariosRecords.find( function ( item ) {
-                             return item.id === id;
-                         } );
-                         $scope.usuariosRecords.splice( $scope.usuariosRecords.indexOf( user ), 1 );
-                     } );
+                $http( {
+                           method: 'DELETE',
+                           headers: {
+                               'user': SessionService.user.login,
+                               'token': SessionService.user.token
+                           },
+                           url: urlBack + '/usuarios/' + id
+                       } )
+                    .then( function ( response ) {
+                        let user = $scope.usuariosRecords.find( function ( item ) {
+                            return item.id === id;
+                        } );
+                        $scope.usuariosRecords.splice( $scope.usuariosRecords.indexOf( user ), 1 );
+                    } );
             };
             $scope.edit = function ( usuario ) {
                 $scope.$parent.$parent.modal = new function () {
@@ -42,12 +55,19 @@
                         }
                     };
                     this.save = function () {
-                        $http.put( urlBack + '/usuarios/' + usuario.id, this.currentUsuario )
-                             .then( function () {
-                                 let ind = $scope.usuariosRecords.indexOf( usuario );
-                                 $scope.usuariosRecords[ ind ] = self.currentUsuario;
-                                 $( '#modal' ).modal( 'hide' );
-                             }, response => self.errorModal = response.data );
+                        $http( {
+                                   method: 'PUT',
+                                   headers: {
+                                       'user': SessionService.user.login,
+                                       'token': SessionService.user.token
+                                   },
+                                   url: urlBack + '/usuarios/' + usuario.id,
+                                   data: this.currentUsuario
+                               } ).then( function () {
+                            let ind = $scope.usuariosRecords.indexOf( usuario );
+                            $scope.usuariosRecords[ ind ] = self.currentUsuario;
+                            $( '#modal' ).modal( 'hide' );
+                        }, response => self.errorModal = response.data );
                     };
                     this.errorModal = undefined;
 
@@ -89,13 +109,20 @@
                         }
                     };
                     this.save = function () {
-                        $http.post( urlBack + '/usuarios', this.currentUsuario )
-                             .then( function ( response ) {
-                                 $scope.usuariosRecords.push( response.data );
-                                 $( '#modal' ).modal( 'hide' );
-                             }, function ( response ) {
-                                 self.errorModal = response.data;
-                             } );
+                        $http( {
+                                   method: 'POST',
+                                   headers: {
+                                       'user': SessionService.user.login,
+                                       'token': SessionService.user.token
+                                   },
+                                   url: urlBack + '/usuarios',
+                                   data: this.currentUsuario
+                               } ).then( function ( response ) {
+                            $scope.usuariosRecords.push( response.data );
+                            $( '#modal' ).modal( 'hide' );
+                        }, function ( response ) {
+                            self.errorModal = response.data;
+                        } );
                     };
                     this.errorModal = undefined;
 
@@ -107,7 +134,6 @@
                         } );
                     }
                 };
-
 
                 $scope.$parent.$parent.dialogsrc = 'app/src/modules/usuarios/usuario.create.html';
                 $( '#modal' ).modal( 'show' );

@@ -1,17 +1,17 @@
 (function ( ng ) {
     let mod = ng.module( 'loginModule' );
 
-    mod.controller( 'loginCtrl', [ '$scope', '$http', 'urlBack', '$state', 'AuthService',
-        function ( $scope, $http, urlBack, $state, AuthService ) {
+    mod.controller( 'loginCtrl', [ '$scope', '$http', 'urlBack', '$state', 'AuthService', 'SessionService',
+        function ( $scope, $http, urlBack, $state, AuthService, SessionService ) {
             $scope.logIn = function () {
                 $http.post( urlBack + '/login',
                     {
-                        username: $scope.username,
+                        login: $scope.login,
                         password: $scope.password
                     } )
                      .then( function ( response ) {
-                                let usuario = response.data;
-                                $state.go( 'menu', { usuario: usuario } );
+                                SessionService.user = response.data;
+                                $state.go( 'menu' );
                             },
                             function ( response ) {
                                 $scope.loginerror = response.data;

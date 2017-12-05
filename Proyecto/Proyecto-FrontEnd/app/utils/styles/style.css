@@ -10,8 +10,9 @@ html, body, .full-size {
 }
 
 .background-login {
-    background: url('../imgs/splash.jpg') no-repeat center;
-    background-size: cover;
+    /*background: url('../imgs/splash.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    background-color: #24100b;
     position: fixed;
 }
 
@@ -20,6 +21,7 @@ html, body, .full-size {
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
+    color: white;
 }
 
 .login-box {
@@ -37,9 +39,11 @@ html, body, .full-size {
 .header {
     width: 100%;
     position: fixed;
-    height: 8%;
+    height: 10%;
     box-shadow: 0 1px 3px -2px;
     text-align: center;
+    background-color: #24100b;
+    z-index: 100;
 }
 
 .header > div {
@@ -163,4 +167,84 @@ html, body, .full-size {
     background-color: brown;
     color: white;
     border: 1px solid brown;
+}
+
+.content {
+    top: 10%;
+    position: absolute;
+}
+
+.container-home {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../imgs/home.jpg) no-repeat center;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+}
+
+.container-home > div > h1 {
+    color: white;
+    font-weight: bold;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+}
+
+.center-vertical {
+    position: relative;
+    top: 50%;
+}
+
+.left-home-btns > button {
+    width: 60%;
+    padding: 40px 10px;
+    margin: 20px;
+}
+
+.content-full-size {
+    height: 90% !important;
+    width: 100%;
+}
+
+.home-1 {
+    /*background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(../imgs/home.jpg) no-repeat center;*/
+    /*background-size: cover;*/
+    background-color: #24100b;
+}
+
+.btn-home1-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+    padding: 20px;
+    bottom: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.btn-home1-container > button {
+    padding: 30px;
+}
+
+.title-box {
+    position: relative;
+    display: inline-block;
+}
+
+.title-box > h1 {
+    width: 50%;
+    font-weight: bold;
+    color: white;
+    /* top: 50%; */
+    /* position: absolute; */
+    /* left: 50%; */
+    padding: 50px;
+}
+
+.login-home {
+    position: absolute;
+    right: 10px;
+    top: -50px;
+    z-index: 101;
 }

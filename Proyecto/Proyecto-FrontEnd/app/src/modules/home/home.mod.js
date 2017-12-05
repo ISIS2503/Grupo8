@@ -1,17 +1,17 @@
 (function ( ng ) {
-    let mod = ng.module( 'menuModule', [ 'ui.router' ] );
+    let mod = ng.module( 'homeModule', [ 'ui.router' ] );
 
     mod.config( [ '$stateProvider', '$urlRouterProvider',
                     function ( $stateProvider, $urlRouterProvider ) {
-                        // $urlRouterProvider.otherwise( '/login' );
+                        $urlRouterProvider.otherwise( '/home' );
 
                         $stateProvider
-                            .state( 'menu', {
-                                url: '/menu',
+                            .state( 'home', {
+                                url: '/home',
                                 views: {
                                     'mainView': {
-                                        templateUrl: 'app/src/modules/menu/menu.html',
-                                        controller: 'menuCtrl'
+                                        templateUrl: 'app/src/modules/home/home.html',
+                                        controller: 'homeCtrl'
                                     }
                                 }
                             } );
