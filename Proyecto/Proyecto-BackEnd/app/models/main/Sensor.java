@@ -26,7 +26,8 @@ public class Sensor extends Model
 
 	private List<Dato> datos;
 
-	private Long idMicrocontrolador;
+	@javax.persistence.ManyToOne
+	private models.main.Microcontrolador microcontrolador;
 
 	public Sensor( )
 	{
@@ -83,14 +84,14 @@ public class Sensor extends Model
 		this.datos = datos;
 	}
 
-	public Long getIdMicrocontrolador( )
+	public Microcontrolador getMicrocontrolador( )
 	{
-		return idMicrocontrolador;
+		return microcontrolador;
 	}
 
-	public void setIdMicrocontrolador( Long idMicrocontrolador )
+	public void setMicrocontrolador( models.main.Microcontrolador microcontrolador )
 	{
-		this.idMicrocontrolador = idMicrocontrolador;
+		this.microcontrolador = microcontrolador;
 	}
 
 	public static Sensor bind( JsonNode json )
@@ -100,7 +101,7 @@ public class Sensor extends Model
 		sensor.setMaximo( json.findPath( "maximo" ).floatValue( ) );
 		sensor.setMinimo( json.findPath( "minimo" ).floatValue( ) );
 		sensor.setTipo( VariableAmbiental.bind( json.findPath( "tipo" ) ) );
-		sensor.setDatos( new java.util.LinkedList<>(  ) );
+		sensor.setDatos( new java.util.LinkedList<>( ) );
 		return sensor;
 	}
 }

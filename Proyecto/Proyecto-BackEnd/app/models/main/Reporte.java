@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
 
 /**
@@ -20,7 +21,8 @@ public class Reporte extends Model
 
 	private Date fecha;
 
-	private long idNivel;
+	@javax.persistence.ManyToOne
+	private Nivel nivel;
 
 	public Reporte( )
 	{
@@ -51,14 +53,14 @@ public class Reporte extends Model
 		this.id = id;
 	}
 
-	public long getIdNivel( )
+	public Nivel getNivel( )
 	{
-		return idNivel;
+		return nivel;
 	}
 
-	public void setIdNivel( long idNivel )
+	public void setNivel( Nivel nivel )
 	{
-		this.idNivel = idNivel;
+		this.nivel = nivel;
 	}
 
 	public static Reporte bind( JsonNode json )

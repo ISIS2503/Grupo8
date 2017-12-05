@@ -3,6 +3,7 @@ package controllers;
 import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.main.Nivel;
 import models.main.Reporte;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -22,7 +23,9 @@ public class ReporteController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Reporte reporte = Reporte.bind( json );
-		reporte.setIdNivel( idNivel );
+		Nivel nivel = new Nivel( );
+		nivel.setId( idNivel );
+		reporte.setNivel( nivel );
 		reporte.save( );
 		return ok( Json.toJson( reporte ) );
 	}

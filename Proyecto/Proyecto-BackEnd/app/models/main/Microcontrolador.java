@@ -20,7 +20,8 @@ public class Microcontrolador extends Model
 
 	private List<Sensor> sensores;
 
-	private Long idArea;
+	@javax.persistence.ManyToOne
+	private Area area;
 
 	public Microcontrolador( )
 	{
@@ -46,14 +47,14 @@ public class Microcontrolador extends Model
 		this.sensores = sensores;
 	}
 
-	public Long getIdArea( )
+	public Area getArea( )
 	{
-		return idArea;
+		return area;
 	}
 
-	public void setIdArea( Long idArea )
+	public void setArea( Area idArea )
 	{
-		this.idArea = idArea;
+		this.area = area;
 	}
 
 	public static Microcontrolador bind( JsonNode json )

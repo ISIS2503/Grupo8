@@ -2,7 +2,6 @@ package models.main;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
-import models.users.Usuario;
 
 import javax.persistence.Id;
 import java.util.HashMap;
@@ -21,11 +20,11 @@ public class SistemaMinas extends Model
 
 	private Map<Long, Long[]> mapaSensores;
 
+	@javax.persistence.OneToMany( mappedBy = "sistema" )
 	private List<Nivel> niveles;
 
+	@javax.persistence.OneToMany( mappedBy = "sistema" )
 	private List<Reporte> reportes;
-
-	private List<Usuario> usuarios;
 
 	public SistemaMinas( )
 	{
@@ -60,16 +59,6 @@ public class SistemaMinas extends Model
 	public void setReportes( List<Reporte> reportes )
 	{
 		this.reportes = reportes;
-	}
-
-	public List<Usuario> getUsuarios( )
-	{
-		return usuarios;
-	}
-
-	public void setUsuarios( List<Usuario> usuarios )
-	{
-		this.usuarios = usuarios;
 	}
 
 	public Long getId( )

@@ -4,6 +4,7 @@ import actions.Roles;
 import actions.RolesAllowed;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.main.Area;
+import models.main.Nivel;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -22,7 +23,9 @@ public class AreaController extends Controller
 	{
 		com.fasterxml.jackson.databind.JsonNode json = request( ).body( ).asJson( );
 		Area area = Area.bind( json );
-		area.setIdNivel( idNivel );
+		Nivel nivel = new Nivel( );
+		nivel.setId( idNivel );
+		area.setNivel( nivel );
 		area.save( );
 		return ok( Json.toJson( area ) );
 	}

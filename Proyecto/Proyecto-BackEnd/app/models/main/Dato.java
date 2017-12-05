@@ -24,7 +24,7 @@ public class Dato extends Model
 
 	private Date timeStamp;
 
-	private Long idSensor;
+	private Sensor sensor;
 
 	public Dato( )
 	{
@@ -60,14 +60,14 @@ public class Dato extends Model
 		this.timeStamp = timeStamp;
 	}
 
-	public Long getIdSensor( )
+	public Sensor getSensor( )
 	{
-		return idSensor;
+		return sensor;
 	}
 
-	public void setIdSensor( Long idSensor )
+	public void setSensor( Sensor sensor )
 	{
-		this.idSensor = idSensor;
+		this.sensor = sensor;
 	}
 
 	public static Dato bind( JsonNode json )

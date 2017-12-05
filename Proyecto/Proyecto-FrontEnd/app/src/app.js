@@ -3,10 +3,13 @@
         'ui.router',
         'ngCookies',
 
+        'variablesModule',
+        'rolesModule',
+        'nivelesModule',
         'usuariosModule',
         'menuModule',
         'loginModule',
-        'homeModule'
+        'homeModule',
     ] );
 
     app.controller( 'mainCtrl', [ '$scope',
@@ -84,7 +87,8 @@
             roles: []
         };
     } );
-    app.factory( 'SessionService', function () {
+    app.factory( 'Ses' +
+        'sionService', function () {
         return {
             user: undefined
         };

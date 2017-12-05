@@ -22,7 +22,9 @@ public class MicrocontroladorController extends Controller
 	{
 		JsonNode json = request( ).body( ).asJson( );
 		Microcontrolador microcontrolador = Microcontrolador.bind( json );
-		microcontrolador.setIdArea( idArea );
+		models.main.Area area = new models.main.Area( );
+		area.setId( idArea );
+		microcontrolador.setArea( area );
 		microcontrolador.save( );
 		return ok( Json.toJson( microcontrolador ) );
 	}
