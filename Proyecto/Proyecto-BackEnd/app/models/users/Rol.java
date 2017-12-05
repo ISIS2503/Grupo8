@@ -47,4 +47,9 @@ public class Rol extends Model
 		rol.setName( json.findPath( "name" ).asText( ) );
 		return rol;
 	}
+
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }
