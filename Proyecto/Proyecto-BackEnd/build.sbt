@@ -14,6 +14,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
+  "junit" % "junit" % "4.12" % "test",
   "com.datastax.cassandra" % "cassandra-driver-core" % "2.0.1",
   "org.hibernate" % "hibernate-entitymanager" % "4.3.9.Final",
   filters
