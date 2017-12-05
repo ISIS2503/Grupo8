@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="arquisoftApp">
+<head>
+    <!--Metadata-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="author"
+          content="David Narvaez, Juan Camilo Pinilla, Juan David Vega, Juan Diego Chaves, Santiago Cortes">
+    <meta name="theme-color" content="#212121">
+    <title>Sistema de Minas</title>
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="app/utils/libs/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app/utils/libs/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="app/utils/libs/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="app/utils/styles/style.css">
+
+    <!--JavaScript Libraries-->
+    <script type="text/javascript" src="app/utils/libs/bower_components/angular/angular.js"></script>
+    <script type="text/javascript"
+            src="app/utils/libs/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript"
+            src="app/utils/libs/bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="app/utils/libs/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="app/utils/libs/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--Angular Modules-->
+    <script type="text/javascript" src="app/src/modules/login/login.mod.js"></script>
+    <script type="text/javascript" src="app/src/modules/login/login.ctrl.js"></script>
+    <script type="text/javascript" src="app/src/modules/menu/menu.mod.js"></script>
+    <script type="text/javascript" src="app/src/modules/menu/menu.ctrl.js"></script>
+    <script type="text/javascript" src="app/src/modules/usuarios/usuarios.mod.js"></script>
+    <script type="text/javascript" src="app/src/modules/usuarios/usuarios.ctrl.js"></script>
+
+    <script type="text/javascript" src="app/src/app.js"></script>
+
+
+</head>
+<body class="full-size">
+    <div class="header">
+
+    </div>
+
+    <div class="content full-size">
+        <div class="full-size" ui-view="mainView"></div>
+    </div>
+
+    <div id="modal" class="modal fade" role="dialog">
+        <div ng-include="dialogsrc">
+        </div>
+    </div>
+</body>
+</html>

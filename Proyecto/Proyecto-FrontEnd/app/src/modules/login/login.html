@@ -1,0 +1,23 @@
+<div class="full-size login-container">
+    <div class="full-size background-login"></div>
+
+    <h1>Sistema de Minas</h1>
+
+    <div class="thumbnail login-box">
+
+        <div class="alert alert-danger alert-login" ng-show="loginerror">
+            <b>{{loginerror}}</b>
+        </div>
+        <form ng-submit="logIn()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" placeholder="Username" type="text" ng-model="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" placeholder="Password" type="password" ng-model="password">
+            </div>
+            <button class="btn btn-default">Log In</button>
+        </form>
+    </div>
+</div>

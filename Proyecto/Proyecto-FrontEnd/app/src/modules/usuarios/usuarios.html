@@ -1,0 +1,24 @@
+<div class="full-size">
+    <div class="usuario-table-header">
+        <b>ID</b>
+        <b>Login</b>
+        <b>Roles</b>
+    </div>
+
+    <div class="usuario-items-container">
+        <div class="usuario-table-item" ng-repeat="usuario in usuariosRecords" ng-click="edit(usuario)">
+            <span>{{usuario.id}}</span>
+            <span>{{usuario.login}}</span>
+            <span>
+            <span class="badge" ng-repeat="rol in usuario.roles">
+                {{rol.name}}
+            </span>
+        </span>
+            <!--<button class="btn btn-primary pull-right btn-round fa fa-pencil" ng-click="edit(usuario)"></button>-->
+            <button class="btn btn-danger pull-right btn-round fa fa-times" ng-click="delete(usuario.id)"></button>
+        </div>
+    </div>
+
+    <button class="btn btn-success btn-round btn-add" ng-click="create()">&plus;</button>
+
+</div>

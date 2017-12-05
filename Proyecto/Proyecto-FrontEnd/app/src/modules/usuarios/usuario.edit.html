@@ -1,0 +1,48 @@
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Editar {{modal.currentUsuario.login}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" ng-show="modal.errorModal">
+                {{modal.errorModal}}
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input id="id" class="form-control" ng-model="modal.currentUsuario.id" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input id="login" class="form-control" ng-model="modal.currentUsuario.login">
+                </div>
+                <div class="form-group">
+                    <label for="password">New Password</label>
+                    <input id="password" type="password" class="form-control" ng-model="modal.currentUsuario.password">
+                </div>
+                <div>
+                <span class="badge" ng-repeat="rol in modal.currentUsuario.roles">
+                    {{rol.name}}
+                    <span class="role-close" ng-click="modal.removeRolFrom(modal.currentUsuario, rol)">&times;</span>
+                </span>
+                    <div class="form-group rol-selector" ng-show="modal.addRol">
+                        <select class="form-control" ng-model="modal.selectedRol" ng-change="modal.selectRol()">
+                            <option ng-repeat="r in modal.availableRoles" value="{{r.id}}">{{r.name}}</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-success btn-round" ng-click="modal.letsAddRol()"
+                            ng-show="modal.availableRoles.length !== 0">&plus;
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" ng-click="modal.save()">Save</button>
+        </div>
+    </div>
+
+</div>
