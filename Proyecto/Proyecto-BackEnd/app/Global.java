@@ -17,6 +17,7 @@ import play.mvc.Results;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Random;
 
 public class Global extends GlobalSettings
 {
@@ -194,8 +195,6 @@ public class Global extends GlobalSettings
 			area12.save( );
 		}
 
-		System.out.println( "Size: " + Microcontrolador.find.all( ).size( ) );
-
 		if( Microcontrolador.find.all( ).isEmpty( ) )
 		{
 			Area a1 = new Area( );
@@ -252,8 +251,6 @@ public class Global extends GlobalSettings
 			m9.setArea( a2 );
 			m9.save( );
 		}
-
-		System.out.println( "Size: " + Microcontrolador.find.all( ) );
 
 		if( VariableAmbiental.find.all( ).isEmpty( ) )
 		{
@@ -462,244 +459,286 @@ public class Global extends GlobalSettings
 			Sensor s4 = new Sensor( );
 			s4.setId( 4L );
 
+			Random r = new Random( );
+
 			Dato d1 = new Dato( );
 			d1.setId( 1L );
 			d1.setTimeStamp( Calendar.getInstance( ).getTime( ) );
 			d1.setSensor( s1 );
+			d1.setValor( r.nextFloat( ) * 50 );
 			d1.save( );
 
 			models.main.Dato d2 = new models.main.Dato( );
 			d2.setId( 2L );
 			d2.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d2.setSensor( s1 );
+			d2.setValor( r.nextFloat( ) * 50 );
 			d2.save( );
 
 			models.main.Dato d3 = new models.main.Dato( );
 			d3.setId( 3L );
 			d3.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d3.setSensor( s1 );
+			d3.setValor( r.nextFloat( ) * 50 );
 			d3.save( );
 
 			models.main.Dato d4 = new models.main.Dato( );
 			d4.setId( 4L );
 			d4.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d4.setSensor( s1 );
+			d4.setValor( r.nextFloat( ) * 50 );
 			d4.save( );
 
 			models.main.Dato d5 = new models.main.Dato( );
 			d5.setId( 5L );
 			d5.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d5.setSensor( s1 );
+			d5.setValor( r.nextFloat( ) * 50 );
 			d5.save( );
 
 			models.main.Dato d6 = new models.main.Dato( );
 			d6.setId( 6L );
 			d6.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d6.setSensor( s1 );
+			d6.setValor( r.nextFloat( ) * 50 );
 			d6.save( );
 
 			models.main.Dato d7 = new models.main.Dato( );
 			d7.setId( 7L );
 			d7.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d7.setSensor( s1 );
+			d7.setValor( r.nextFloat( ) * 50 );
 			d7.save( );
 
 			models.main.Dato d8 = new models.main.Dato( );
 			d8.setId( 8L );
 			d8.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d8.setSensor( s1 );
+			d8.setValor( r.nextFloat( ) * 50 );
 			d8.save( );
 
 			models.main.Dato d9 = new models.main.Dato( );
 			d9.setId( 9L );
 			d9.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d9.setSensor( s1 );
+			d9.setValor( r.nextFloat( ) * 50 );
 			d9.save( );
 
 			models.main.Dato d10 = new models.main.Dato( );
 			d10.setId( 10L );
 			d10.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d10.setSensor( s1 );
+			d10.setValor( r.nextFloat( ) * 50 );
 			d10.save( );
 
 			models.main.Dato d11 = new models.main.Dato( );
 			d11.setId( 11L );
 			d11.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d11.setSensor( s1 );
+			d11.setValor( r.nextFloat( ) * 50 );
 			d11.save( );
 
 			models.main.Dato d12 = new models.main.Dato( );
 			d12.setId( 12L );
 			d12.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d12.setSensor( s1 );
+			d12.setValor( r.nextFloat( ) * 50 );
 			d12.save( );
 
 			models.main.Dato d13 = new models.main.Dato( );
 			d13.setId( 13L );
 			d13.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d13.setSensor( s2 );
+			d13.setValor( r.nextFloat( ) * 50 );
 			d13.save( );
 
 			models.main.Dato d14 = new models.main.Dato( );
 			d14.setId( 14L );
 			d14.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d14.setSensor( s2 );
+			d14.setValor( r.nextFloat( ) * 50 );
 			d14.save( );
 
 			models.main.Dato d15 = new models.main.Dato( );
 			d15.setId( 15L );
 			d15.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d15.setSensor( s2 );
+			d15.setValor( r.nextFloat( ) * 50 );
 			d15.save( );
 
 			models.main.Dato d16 = new models.main.Dato( );
 			d16.setId( 16L );
 			d16.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d16.setSensor( s2 );
+			d16.setValor( r.nextFloat( ) * 50 );
 			d16.save( );
 
 			models.main.Dato d17 = new models.main.Dato( );
 			d17.setId( 17L );
 			d17.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d17.setSensor( s2 );
+			d17.setValor( r.nextFloat( ) * 50 );
 			d17.save( );
 
 			models.main.Dato d18 = new models.main.Dato( );
 			d18.setId( 18L );
 			d18.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d18.setSensor( s2 );
+			d18.setValor( r.nextFloat( ) * 50 );
 			d18.save( );
 
 			models.main.Dato d19 = new models.main.Dato( );
 			d19.setId( 19L );
 			d19.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d19.setSensor( s2 );
+			d19.setValor( r.nextFloat( ) * 50 );
 			d19.save( );
 
 			models.main.Dato d20 = new models.main.Dato( );
 			d20.setId( 20L );
 			d20.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d20.setSensor( s2 );
+			d20.setValor( r.nextFloat( ) * 50 );
 			d20.save( );
 
 			models.main.Dato d21 = new models.main.Dato( );
 			d21.setId( 21L );
 			d21.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d21.setSensor( s3 );
+			d21.setValor( r.nextFloat( ) * 50 );
 			d21.save( );
 
 			models.main.Dato d22 = new models.main.Dato( );
 			d22.setId( 22L );
 			d22.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d22.setSensor( s3 );
+			d22.setValor( r.nextFloat( ) * 50 );
 			d22.save( );
 
 			models.main.Dato d23 = new models.main.Dato( );
 			d23.setId( 23L );
 			d23.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d23.setSensor( s3 );
+			d23.setValor( r.nextFloat( ) * 50 );
 			d23.save( );
 
 			models.main.Dato d24 = new models.main.Dato( );
 			d24.setId( 24L );
 			d24.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d24.setSensor( s3 );
+			d24.setValor( r.nextFloat( ) * 50 );
 			d24.save( );
 
 			models.main.Dato d25 = new models.main.Dato( );
 			d25.setId( 25L );
 			d25.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d25.setSensor( s3 );
+			d25.setValor( r.nextFloat( ) * 50 );
 			d25.save( );
 
 			models.main.Dato d26 = new models.main.Dato( );
 			d26.setId( 26L );
 			d26.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d26.setSensor( s3 );
+			d26.setValor( r.nextFloat( ) * 50 );
 			d26.save( );
 
 			models.main.Dato d27 = new models.main.Dato( );
 			d27.setId( 27L );
 			d27.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d27.setSensor( s3 );
+			d27.setValor( r.nextFloat( ) * 50 );
 			d27.save( );
 
 			models.main.Dato d28 = new models.main.Dato( );
 			d28.setId( 28L );
 			d28.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d28.setSensor( s3 );
+			d28.setValor( r.nextFloat( ) * 50 );
 			d28.save( );
 
 			models.main.Dato d29 = new models.main.Dato( );
 			d29.setId( 29L );
 			d29.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d29.setSensor( s3 );
+			d29.setValor( r.nextFloat( ) * 50 );
 			d29.save( );
 
 			models.main.Dato d30 = new models.main.Dato( );
 			d30.setId( 30L );
 			d30.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d30.setSensor( s3 );
+			d30.setValor( r.nextFloat( ) * 50 );
 			d30.save( );
 
 			models.main.Dato d31 = new models.main.Dato( );
 			d31.setId( 31L );
 			d31.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d31.setSensor( s4 );
+			d31.setValor( r.nextFloat( ) * 50 );
 			d31.save( );
 
 			models.main.Dato d32 = new models.main.Dato( );
 			d32.setId( 32L );
 			d32.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d32.setSensor( s4 );
+			d32.setValor( r.nextFloat( ) * 50 );
 			d32.save( );
 
 			models.main.Dato d33 = new models.main.Dato( );
 			d33.setId( 33L );
 			d33.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d33.setSensor( s4 );
+			d33.setValor( r.nextFloat( ) * 50 );
 			d33.save( );
 
 			models.main.Dato d34 = new models.main.Dato( );
 			d34.setId( 34L );
 			d34.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d34.setSensor( s4 );
+			d34.setValor( r.nextFloat( ) * 50 );
 			d34.save( );
 
 			models.main.Dato d35 = new models.main.Dato( );
 			d35.setId( 35L );
 			d35.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d35.setSensor( s4 );
+			d35.setValor( r.nextFloat( ) * 50 );
 			d35.save( );
 
 			models.main.Dato d36 = new models.main.Dato( );
 			d36.setId( 36L );
 			d36.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d36.setSensor( s4 );
+			d36.setValor( r.nextFloat( ) * 50 );
 			d36.save( );
 
 			models.main.Dato d37 = new models.main.Dato( );
 			d37.setId( 37L );
 			d37.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d37.setSensor( s4 );
+			d37.setValor( r.nextFloat( ) * 50 );
 			d37.save( );
 
 			models.main.Dato d38 = new models.main.Dato( );
 			d38.setId( 38L );
 			d38.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d38.setSensor( s4 );
+			d38.setValor( r.nextFloat( ) * 50 );
 			d38.save( );
 
 			models.main.Dato d39 = new models.main.Dato( );
 			d39.setId( 39L );
 			d39.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d39.setSensor( s4 );
+			d39.setValor( r.nextFloat( ) * 50 );
 			d39.save( );
 
 			models.main.Dato d40 = new models.main.Dato( );
 			d40.setId( 40L );
 			d40.setTimeStamp( java.util.Calendar.getInstance( ).getTime( ) );
 			d40.setSensor( s4 );
+			d40.setValor( r.nextFloat( ) * 50 );
 			d40.save( );
 
 		}
