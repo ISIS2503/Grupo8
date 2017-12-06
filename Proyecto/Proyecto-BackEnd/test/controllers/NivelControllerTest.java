@@ -69,25 +69,25 @@ public class NivelControllerTest {
         JsonNode json = Json.parse(body);
 
         assertEquals("El id del nivel no es el esperado", (long) nivel.getId(), json.get("id").asLong());
-        assertEquals("El numero del nivel no es el esperado", (long) nivel.getId(), json.get("nivel").asInt());
+        assertEquals("El numero del nivel no es el esperado", (long) nivel.getNivel(), json.get("nivel").asInt());
     }
 
     @Test
     public void testRetrieveAll() {
 
-        List<Alerta> alertas=new ArrayList<>();
+        List<Nivel> niveles=new ArrayList<>();
 
         int cant = 10;
         for (int i = 0; i < cant; i++) {
             Nivel nivel =new Nivel();
             nivel.setId((long)i);
             nivel.setNivel(i);
-            alertas.add(nivel);
-            controller.create(nivel.getId());
+            niveles.add(nivel);
+            controller.create();
         }
 
         for (int i = 0; i < cant; i++) {
-            Nivel nivel =alertas.get(i);
+            Nivel nivel =niveles.get(i);
             Result result = controller.retrieve(nivel.getId());
 
             assertEquals("La nivel no fue creada correctamente.", Http.Status.OK, result.status());
@@ -98,7 +98,7 @@ public class NivelControllerTest {
             JsonNode json = Json.parse(body);
 
             assertEquals("El id de la nivel no es la esperada", (long) nivel.getId(), json.get("id").asLong());
-            assertEquals("El numero del nivel no es el esperado", nivel.getNivel(), json.get("nivel").asInt());
+            assertEquals("El numero del nivel no es el esperado", (int) nivel.getNivel(), json.get("nivel").asInt());
         }
     }
 
@@ -108,10 +108,10 @@ public class NivelControllerTest {
         Nivel nivel =new Nivel();
         nivel.setId(10L);
         nivel.setNivel(20);
-        controller.create(nivel.getId());
+        controller.create();
 
         nivel.setId(30L);
-        nivel.setNivel(40L);
+        nivel.setNivel(40);
         Result result = controller.update(nivel.getId());
 
         assertEquals("La nivel no fue creada correctamente.", Http.Status.OK, result.status());
@@ -122,9 +122,9 @@ public class NivelControllerTest {
         JsonNode json = Json.parse(body);
 
         assertEquals("El id de la nivel no es la esperada", (long) nivel.getId(), json.get("id").asLong());
-        assertEquals("El area de la nivel no es la esperada", nivel.getIdArea(), json.get("nivel").asInt());
+        assertEquals("El area de la nivel no es la esperada", (int) nivel.getNivel(), json.get("nivel").asInt());
 
         assertEquals("El id de la nivel no es el esperado", (long) nivel.getId(), json.get("id").asLong());
-        assertEquals("El numero del nivel no es el esperado", nivel.getIdArea(), json.get("nivel").asInt());
+        assertEquals("El numero del nivel no es el esperado", (int) nivel.getNivel(), json.get("nivel").asInt());
     }
 }
