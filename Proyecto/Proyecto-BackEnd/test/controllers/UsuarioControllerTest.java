@@ -243,4 +243,10 @@ public class UsuarioControllerTest {
             assertEquals("El rol del usuario no es el esperado", usuario.getRoles(), json.get("rol").asText());
         });
     }
+
+    @Test
+    public void testDelete()
+    {
+
+    }
 }
