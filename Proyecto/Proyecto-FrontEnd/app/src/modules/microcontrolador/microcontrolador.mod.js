@@ -9,6 +9,7 @@
                             .state( 'microcontrolador', {
                                 url: '/microcontroladores',
                                 parent: 'menu',
+
                                 views: {
                                     'listView': {
                                         templateUrl: 'app/src/modules/microcontrolador/microcontroladores.html',
@@ -17,9 +18,9 @@
                                 }
                             } )
                             .state( 'microcontroladoresDetail', {
-                                url: '/microcontroladores/:idmicro',
+                                url: '/microcontroladores/:idMicroontrolador',
                                 params: {
-                                    idmicro: null,
+                                    idMicroontrolador: null,
                                 },
                                 parent: 'menu',
                                 views: {

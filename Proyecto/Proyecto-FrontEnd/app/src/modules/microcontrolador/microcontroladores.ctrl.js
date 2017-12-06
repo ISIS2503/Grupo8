@@ -1,8 +1,8 @@
 (function ( ng ) {
     let mod = ng.module( 'microcontroladorModule' );
 
-    mod.controller( 'microcontroladoresCtrl', [ '$scope', '$http', 'SessionService', 'urlBack', 'AuthService', '$state',
-        function ( $scope, $http, SessionService, urlBack, AuthService, $state ) {
+    mod.controller( 'microcontroladoresCtrl', [ '$scope', '$http', 'SessionService', 'urlBack', 'AuthService', '$state','$stateParams',
+        function ( $scope, $http, SessionService, urlBack, AuthService, $state, $stateParams ) {
 
             AuthService.checkUser( $scope.$parent.user )
                        .then( function ( response ) {
@@ -12,19 +12,19 @@
                                           'user': SessionService.user.login,
                                           'token': SessionService.user.token
                                       },
-                                      url: urlBack + '/minas/niveles'
+                                      url: urlBack + '/microcontroladores'
                                   } )
                                .then( function ( response ) {
-                                   $scope.niveles = response.data;
+                                   $scope.microcontroladores = response.data;
                                } );
                        } );
 
-            $scope.seeNivel = function ( idNivel ) {
+            $scope.seemicrocontrolador = function ( idmicrocontrolador ) {
 
 
-                $scope.niveles.some( function ( item ) {
-                    if ( item.id === idNivel ) {
-                        $state.go( 'nivelesDetail', { idNivel: item.id, nivel: item } );
+                $scope.microcontroladores.some( function ( item ) {
+                    if ( item.id === idmicrocontrolador ) {
+                        $state.go( 'microcontroladoresDetail', { idmicrocontrolador: item.id, microcontrolador: item } );
                         return true;
                     }
                 } );
@@ -39,7 +39,7 @@
                 },
 
                 title: {
-                    text: 'niveles'
+                    text: 'microcontroladores'
                 },
 
                 subtitle: {
