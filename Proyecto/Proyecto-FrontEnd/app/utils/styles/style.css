@@ -280,9 +280,7 @@ html, body, .full-size {
 
 .niveles-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     text-align: center;
-    grid-gap: 15px;
 }
 
 .item-nivel {
