@@ -147,4 +147,10 @@ public class ActuadorControllerTest {
             //assertEquals("El idArea del actuador no es el esperado", actuador.getIdArea(), json.get("idArea").asLong());
         });
     }
+
+    @Test
+    public void testDelete()
+    {
+
+    }
 }

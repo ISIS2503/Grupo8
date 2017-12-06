@@ -165,4 +165,10 @@ public class VariableAmbientalControllerTest {
             //assertEquals("El valor maximo de la variable Ambiental no es el esperado", (float) variableAmbiental.getValorMaximo(), json.get("valorMaximo").floatValue());
         });
     }
+
+    @Test
+    public void testDelete()
+    {
+
+    }
 }
