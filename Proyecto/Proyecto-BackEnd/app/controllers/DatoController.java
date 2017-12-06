@@ -32,7 +32,7 @@ public class DatoController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idSensor )
 	{
-		List<Dato> dato = Dato.find.where( ).eq( "idSensor", idSensor ).findList( );
+		List<Dato> dato = Dato.find.where( ).eq( "sensor.id", idSensor ).findList( );
 		return ok( Json.toJson( dato ) );
 	}
 

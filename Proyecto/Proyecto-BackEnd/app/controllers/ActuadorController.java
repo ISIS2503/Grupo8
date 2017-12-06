@@ -34,7 +34,7 @@ public class ActuadorController extends Controller
 	public Result retrieveAll( Long idArea )
 	{
 
-		List<Actuador> actuador = Actuador.find.where( ).eq( "idArea", idArea ).findList( );
+		List<Actuador> actuador = Actuador.find.where( ).eq( "area.id", idArea ).findList( );
 		return ok( Json.toJson( actuador ) );
 	}
 

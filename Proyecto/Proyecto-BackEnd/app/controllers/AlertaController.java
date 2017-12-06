@@ -32,7 +32,7 @@ public class AlertaController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idArea )
 	{
-		List<Alerta> alerta = Alerta.find.where( ).eq( "idArea", idArea ).findList( );
+		List<Alerta> alerta = Alerta.find.where( ).eq( "area.id", idArea ).findList( );
 		return ok( Json.toJson( alerta ) );
 	}
 

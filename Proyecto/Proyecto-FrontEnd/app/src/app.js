@@ -3,6 +3,8 @@
         'ui.router',
         'ngCookies',
 
+        'microcontroladorModule',
+        'areaModule',
         'variablesModule',
         'rolesModule',
         'nivelesModule',
@@ -31,6 +33,8 @@
                 '/menu/roles$': [ 'ADMIN', 'SYSO' ],
                 '/menu/variables$': [ 'ADMIN', 'SYSO' ],
                 '/menu/niveles/[0-9]+$': [ 'ADMIN', 'SYSO' ],
+                '/menu/areas/[0-9]+$': [ 'ADMIN', 'SYSO' ],
+                '/menu/microcontroladores/[0-9]+$': [ 'ADMIN', 'SYSO' ],
             },
             verifyRol: function ( user ) {
                 let self = this;

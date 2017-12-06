@@ -32,7 +32,7 @@ public class MicrocontroladorController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idArea )
 	{
-		List<Microcontrolador> microcontrolador = Microcontrolador.find.where( ).eq( "idArea", idArea ).findList( );
+		List<Microcontrolador> microcontrolador = Microcontrolador.find.where( ).eq( "area.id", idArea ).findList( );
 		return ok( Json.toJson( microcontrolador ) );
 	}
 
@@ -60,5 +60,11 @@ public class MicrocontroladorController extends Controller
 		Microcontrolador microcontrolador = Microcontrolador.find.byId( id );
 		microcontrolador.delete( );
 		return ok( play.libs.Json.toJson( microcontrolador ) );
+	}
+
+	public Result getAll( )
+	{
+		List<Microcontrolador> microcontrolador = Microcontrolador.find.all( );
+		return ok( Json.toJson( microcontrolador ) );
 	}
 }

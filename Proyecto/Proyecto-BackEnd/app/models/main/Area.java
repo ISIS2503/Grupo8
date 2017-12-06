@@ -77,12 +77,12 @@ public class Area extends Model
 		this.alertas = alertas;
 	}
 
-	public List<Microcontrolador> getMicrocontroladores( )
+	public java.util.List<Microcontrolador> getMicrocontroladores( )
 	{
 		return microcontroladores;
 	}
 
-	public void setMicrocontroladores( List<Microcontrolador> microcontroladores )
+	public void setMicrocontroladores( java.util.List<Microcontrolador> microcontroladores )
 	{
 		this.microcontroladores = microcontroladores;
 	}
@@ -102,7 +102,33 @@ public class Area extends Model
 		Area area = new Area( );
 		area.setId( json.findPath( "id" ).asLong( ) );
 		area.setTipo( json.findPath( "tipo" ).asInt( ) );
-		//TODO Lists
+		area.setMicrocontroladores( new java.util.LinkedList<>( ) );
+		area.setAlertas( new java.util.LinkedList<>( ) );
+		area.setActuadores( new java.util.LinkedList<>( ) );
+
+		for( JsonNode j : json.findPath( "microcontroladores" ) )
+		{
+			Long id = j.findPath( "id" ).asLong( );
+			Microcontrolador mc = new Microcontrolador( );
+			mc.setId( id );
+			area.microcontroladores.add( mc );
+		}
+
+		for( JsonNode j : json.findPath( "alertas" ) )
+		{
+			Long id = j.findPath( "id" ).asLong( );
+			Alerta alerta = new Alerta( );
+			alerta.setId( id );
+			area.alertas.add( alerta );
+		}
+
+		for( JsonNode j : json.findPath( "actuadores" ) )
+		{
+			Long id = j.findPath( "id" ).asLong( );
+			models.main.Actuador actuador = new models.main.Actuador( );
+			actuador.setId( id );
+			area.actuadores.add( actuador );
+		}
 		return area;
 	}
 }

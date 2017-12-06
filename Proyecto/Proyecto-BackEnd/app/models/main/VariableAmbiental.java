@@ -31,6 +31,7 @@ public class VariableAmbiental extends Model
 
 	private String nombre;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.OneToMany( mappedBy = "tipo" )
 	private java.util.List<Sensor> sensores;
 

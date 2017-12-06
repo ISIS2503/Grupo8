@@ -1,44 +1,41 @@
 (function ( ng ) {
-    let mod = ng.module( 'nivelesModule' );
+    let mod = ng.module( 'areaModule' );
 
-    mod.controller( 'nivelDetailCtrl', [ '$scope', '$stateParams', 'AuthService', '$http', 'urlBack', 'SessionService', '$state',
-        function ( $scope, $stateParams, AuthService, $http, urlBack, SessionService, $state ) {
+    mod.controller( 'areasCtrl', [ '$scope', '$stateParams', 'AuthService', 'SessionService', '$http', 'urlBack', '$state',
+        function ( $scope, $stateParams, AuthService, SessionService, $http, urlBack, $state ) {
             AuthService.checkUser( $scope.$parent.user )
                        .then( function ( response ) {
                            $http( {
                                       method: 'GET',
-                                      url: urlBack + '/niveles/' + $stateParams.idNivel,
+                                      url: urlBack + '/areas/' + $stateParams.idArea,
                                       headers: {
                                           'user': SessionService.user.login,
                                           'token': SessionService.user.token
                                       }
                                   } )
                                .then( function ( response ) {
-                                   $scope.nivel = response.data;
-                                   $scope.areas = $scope.nivel.areas;
+                                   $scope.area = response.data;
+                                   $scope.microcontroladores = $scope.area.microcontroladores;
 
                                    const maxInRow = 10;
                                    let row = -1;
                                    let temp = [];
-                                   $scope.areas.forEach( function ( item, index ) {
+                                   $scope.microcontroladores.forEach( function ( item, index ) {
                                        if ( index % maxInRow === 0 ) {
                                            row++;
                                        }
                                        let nuevo = {
                                            id: item.id,
-                                           tipo: item.tipo,
-                                           actuadores: item.actuadores,
-                                           alertas: item.alertas,
-                                           microcontroladores: item.microcontroladores,
+                                           sensores: item.sensores,
                                            x: row,
                                            y: index % maxInRow,
                                            value: 10, //TODO
-                                           'hc-a2': 'Area ' + item.id
+                                           'hc-a2': 'MicronControlador ' + item.id
                                        };
                                        temp.push( nuevo );
                                    } );
 
-                                   $scope.areas = temp;
+                                   $scope.microcontroladores = temp;
                                    let info = {
                                        chart: {
                                            type: 'tilemap',
@@ -88,7 +85,7 @@
                                                point: {
                                                    events: {
                                                        click: function () {
-                                                           $scope.seeArea( this.id );
+                                                           $scope.seeMC( this.id );
                                                        }
                                                    }
                                                }
@@ -96,15 +93,14 @@
                                        },
                                        series: [ {
                                            name: '',
-                                           data: $scope.areas
+                                           data: $scope.microcontroladores
                                        } ]
                                    };
-                                   Highcharts.chart( 'containerArea', info );
+                                   Highcharts.chart( 'containerMicrocontrolador', info );
                                } );
                        } );
-
-            $scope.seeArea = function ( id ) {
-                $state.go( 'areas', { idArea: id } );
+            $scope.seeMC = function ( id ) {
+                $state.go( 'microcontroladoresDetail', { idMicrocontrolador: id } );
             };
         }
     ] );

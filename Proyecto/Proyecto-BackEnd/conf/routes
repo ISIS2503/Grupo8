@@ -79,3 +79,6 @@ DELETE        /variablesAmbientales/:idVariable                       controller
 
 # OPTIONS
 # OPTIONS        /*any                                                         controllers.Application.options(any: String)
+
+
+GET           /microcontroladores                                     controllers.MicrocontroladorController.getAll()

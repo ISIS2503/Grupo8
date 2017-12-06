@@ -32,7 +32,7 @@ public class SensorController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idMicrocontrolador )
 	{
-		List<Sensor> sensor = Sensor.find.where( ).eq( "idMicrocontrolador", idMicrocontrolador ).findList( );
+		List<Sensor> sensor = Sensor.find.where( ).eq( "microcontrolador.id", idMicrocontrolador ).findList( );
 		return ok( Json.toJson( sensor ) );
 	}
 

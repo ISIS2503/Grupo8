@@ -33,7 +33,7 @@ public class ReporteController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idNivel )
 	{
-		List<Reporte> reporte = Reporte.find.where( ).eq( "idNivel", idNivel ).findList( );
+		List<Reporte> reporte = Reporte.find.where( ).eq( "nivel.id", idNivel ).findList( );
 		return ok( Json.toJson( reporte ) );
 	}
 

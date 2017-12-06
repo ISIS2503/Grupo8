@@ -194,6 +194,8 @@ public class Global extends GlobalSettings
 			area12.save( );
 		}
 
+		System.out.println( "Size: " + Microcontrolador.find.all( ).size( ) );
+
 		if( Microcontrolador.find.all( ).isEmpty( ) )
 		{
 			Area a1 = new Area( );
@@ -250,6 +252,8 @@ public class Global extends GlobalSettings
 			m9.setArea( a2 );
 			m9.save( );
 		}
+
+		System.out.println( "Size: " + Microcontrolador.find.all( ) );
 
 		if( VariableAmbiental.find.all( ).isEmpty( ) )
 		{

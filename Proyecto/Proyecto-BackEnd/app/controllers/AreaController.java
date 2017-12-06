@@ -33,7 +33,7 @@ public class AreaController extends Controller
 	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public play.mvc.Result retrieveAll( Long idNivel )
 	{
-		List<Area> area = Area.find.where( ).eq( "idNivel", idNivel ).findList( );
+		List<Area> area = Area.find.where( ).eq( "nivel.id", idNivel ).findList( );
 		return ok( Json.toJson( area ) );
 	}
 

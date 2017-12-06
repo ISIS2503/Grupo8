@@ -28,6 +28,7 @@ public class Sensor extends Model
 	@javax.persistence.OneToMany( mappedBy = "sensor" )
 	private List<Dato> datos;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.ManyToOne
 	private models.main.Microcontrolador microcontrolador;
 

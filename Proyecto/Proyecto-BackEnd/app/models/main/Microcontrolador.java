@@ -21,7 +21,9 @@ public class Microcontrolador extends Model
 	@javax.persistence.OneToMany( mappedBy = "microcontrolador" )
 	private List<Sensor> sensores;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.ManyToOne
+	@javax.persistence.Column( nullable = false )
 	private Area area;
 
 	public Microcontrolador( )
@@ -53,7 +55,7 @@ public class Microcontrolador extends Model
 		return area;
 	}
 
-	public void setArea( Area idArea )
+	public void setArea( Area area )
 	{
 		this.area = area;
 	}

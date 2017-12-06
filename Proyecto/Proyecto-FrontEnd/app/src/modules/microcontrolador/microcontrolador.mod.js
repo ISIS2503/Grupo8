@@ -6,26 +6,15 @@
                         $urlRouterProvider.otherwise( '/microcontroladores' );
 
                         $stateProvider
-                            .state( 'microcontrolador', {
-                                url: '/microcontroladores',
-                                parent: 'menu',
-
-                                views: {
-                                    'listView': {
-                                        templateUrl: 'app/src/modules/microcontrolador/microcontroladores.html',
-                                        controller: 'microcontroladoresCtrl'
-                                    }
-                                }
-                            } )
                             .state( 'microcontroladoresDetail', {
-                                url: '/microcontroladores/:idMicroontrolador',
+                                url: '/microcontroladores/:idMicrocontrolador',
                                 params: {
-                                    idMicroontrolador: null,
+                                    idMicrocontrolador: null,
                                 },
                                 parent: 'menu',
                                 views: {
                                     'listView': {
-                                        templateUrl: 'app/src/modules/microcontroladores/detail/microcontrolador.detail.html',
+                                        templateUrl: 'app/src/modules/microcontrolador/detail/microcontroladores.detail.html',
                                         controller: 'microcontroladorDetailCtrl'
                                     }
                                 }

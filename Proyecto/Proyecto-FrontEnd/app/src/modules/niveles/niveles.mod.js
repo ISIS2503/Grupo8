@@ -20,7 +20,6 @@
                                 url: '/niveles/:idNivel',
                                 params: {
                                     idNivel: null,
-                                    nivel: null
                                 },
                                 parent: 'menu',
                                 views: {

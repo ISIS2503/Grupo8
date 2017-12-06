@@ -24,6 +24,7 @@ public class Dato extends Model
 
 	private Date timeStamp;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.ManyToOne
 	private Sensor sensor;
 
