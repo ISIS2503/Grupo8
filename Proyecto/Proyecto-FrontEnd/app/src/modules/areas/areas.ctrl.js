@@ -43,7 +43,7 @@
                                            // height: '50%',
                                        },
                                        title: {
-                                           text: 'Niveles Del Sistema'
+                                           text: 'Microcontroladores Del Area'
                                        },
                                        xAxis: {
                                            visible: false
@@ -55,25 +55,26 @@
                                            dataClasses: [ {
                                                from: 0,
                                                to: 50,
-                                               color: '#F9EDB3',
+                                               color: '#2cbf39',
                                                name: '< 50'
                                            }, {
                                                from: 51,
                                                to: 100,
-                                               color: '#FFC428',
+                                               color: '#dadf30',
                                                name: '50 - 100'
                                            }, {
                                                from: 101,
-                                               color: '#FF7987',
+                                               color: '#d9483a',
                                                name: '> 100'
                                            } ]
                                        },
                                        tooltip: {
                                            headerFormat: '',
-                                           pointFormat: 'The population of <b> {point.name}</b> is <b>{point.value}</b>'
+                                           pointFormat: 'Numero de alertas generadas <b> {point.name}</b> is <b>{point.value}</b>'
                                        },
                                        plotOptions: {
                                            series: {
+                                               cursor: 'pointer',
                                                dataLabels: {
                                                    enabled: true,
                                                    format: '{point.hc-a2}',
