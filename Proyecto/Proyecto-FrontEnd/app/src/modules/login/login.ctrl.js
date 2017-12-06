@@ -18,6 +18,15 @@
                             } );
             };
 
+            $scope.signUp = function () {
+                $scope.$parent.modal = new function () {
+                    let self = this;
+                    console.log( 'hola' );
+                };
+                $scope.$parent.dialogsrc = 'app/src/modules/usuarios/usuario.edit.html';
+                $( '#modal' ).modal( 'show' );
+            };
+
             AuthService.checkUser( undefined, true )
                        .then( function ( response ) {
                            if ( response && response.roles.length !== 0 ) {

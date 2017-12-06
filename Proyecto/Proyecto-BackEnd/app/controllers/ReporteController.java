@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ReporteController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idNivel )
 	{
@@ -30,28 +30,28 @@ public class ReporteController extends Controller
 		return ok( Json.toJson( reporte ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idNivel )
 	{
 		List<Reporte> reporte = Reporte.find.where( ).eq( "idNivel", idNivel ).findList( );
 		return ok( Json.toJson( reporte ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( )
 	{
 		List<Reporte> reporte = Reporte.find.findList( );
 		return ok( Json.toJson( reporte ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Reporte reporte = Reporte.find.byId( id );
 		return ok( Json.toJson( reporte ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -62,7 +62,7 @@ public class ReporteController extends Controller
 		return ok( Json.toJson( reporte ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Reporte reporte = Reporte.find.byId( id );

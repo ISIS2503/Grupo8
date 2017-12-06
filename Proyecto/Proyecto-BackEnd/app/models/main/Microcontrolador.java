@@ -18,6 +18,7 @@ public class Microcontrolador extends Model
 	@Id
 	private Long id;
 
+	@javax.persistence.OneToMany( mappedBy = "microcontrolador" )
 	private List<Sensor> sensores;
 
 	@javax.persistence.ManyToOne

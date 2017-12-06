@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class AlertaController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idArea )
 	{
@@ -29,21 +29,21 @@ public class AlertaController extends Controller
 		return ok( Json.toJson( alerta ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idArea )
 	{
 		List<Alerta> alerta = Alerta.find.where( ).eq( "idArea", idArea ).findList( );
 		return ok( Json.toJson( alerta ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Alerta alerta = Alerta.find.byId( id );
 		return ok( Json.toJson( alerta ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -54,7 +54,7 @@ public class AlertaController extends Controller
 		return ok( Json.toJson( alerta ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Alerta alerta = Alerta.find.byId( id );

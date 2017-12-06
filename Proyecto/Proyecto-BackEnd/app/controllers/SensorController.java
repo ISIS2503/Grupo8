@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class SensorController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idMicrocontrolador )
 	{
@@ -29,21 +29,21 @@ public class SensorController extends Controller
 		return ok( Json.toJson( sensor ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idMicrocontrolador )
 	{
 		List<Sensor> sensor = Sensor.find.where( ).eq( "idMicrocontrolador", idMicrocontrolador ).findList( );
 		return ok( Json.toJson( sensor ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Sensor sensor = Sensor.find.byId( id );
 		return ok( Json.toJson( sensor ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -54,7 +54,7 @@ public class SensorController extends Controller
 		return ok( Json.toJson( sensor ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Sensor sensor = Sensor.find.byId( id );

@@ -5,6 +5,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author dnarvaez27
@@ -21,6 +22,7 @@ public class Actuador extends Model
 
 	private Date inicio;
 
+	@JsonIgnore
 	@javax.persistence.ManyToOne
 	private Area area;
 

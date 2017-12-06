@@ -2,8 +2,9 @@ package actions;
 
 public enum Roles
 {
-	SYSO,
 	ADMIN,
+	SYSO,
 	USER,
+	SUPERVISOR,
 	BRIDGE
 }

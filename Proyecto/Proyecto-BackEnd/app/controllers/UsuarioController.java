@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class UsuarioController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -31,7 +31,7 @@ public class UsuarioController extends Controller
 		return ok( Json.toJson( Usuario.find.byId( usuario.getId( ) ) ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( )
 	{
 		List<Usuario> usuarios = Usuario.find.findList( );
@@ -39,7 +39,7 @@ public class UsuarioController extends Controller
 		return ok( Json.toJson( usuarios ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Usuario usuario = Usuario.find.byId( id );
@@ -51,7 +51,7 @@ public class UsuarioController extends Controller
 		return notFound( String.format( "El usuario con id %s no se encuentra en la base de datos", id ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -63,7 +63,7 @@ public class UsuarioController extends Controller
 		return ok( Json.toJson( usuario ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Usuario usuario = Usuario.find.byId( id );

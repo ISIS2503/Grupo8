@@ -12,7 +12,7 @@
                                           'user': SessionService.user.login,
                                           'token': SessionService.user.token
                                       },
-                                      url: urlBack + '/minas/niveles'
+                                      url: urlBack + '/niveles'
                                   } )
                                .then( function ( response ) {
                                    $scope.niveles = response.data;
@@ -20,25 +20,13 @@
                        } );
 
             $scope.seeNivel = function ( idNivel ) {
-                // $http( {
-                //            method: 'GET',
-                //            headers: {
-                //                'user': SessionService.user.login,
-                //                'token': SessionService.user.token
-                //            },
-                //            url: urlBack + '/minas/niveles/' + idNivel
-                //        } );
-
-
                 $scope.niveles.some( function ( item ) {
                     if ( item.id === idNivel ) {
                         $state.go( 'nivelesDetail', { idNivel: item.id, nivel: item } );
                         return true;
                     }
                 } );
-
             };
-
             Highcharts.chart('container', {
                 chart: {
                     type: 'tilemap',
@@ -465,7 +453,6 @@
                     }]
                 }]
             });
-
         }
     ] );
 })( angular );

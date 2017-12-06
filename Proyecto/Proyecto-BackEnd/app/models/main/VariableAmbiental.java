@@ -29,6 +29,11 @@ public class VariableAmbiental extends Model
 
 	private Float frecuencia;
 
+	private String nombre;
+
+	@javax.persistence.OneToMany( mappedBy = "tipo" )
+	private java.util.List<Sensor> sensores;
+
 	public VariableAmbiental( )
 	{
 	}
@@ -104,6 +109,26 @@ public class VariableAmbiental extends Model
 		this.id = id;
 	}
 
+	public String getNombre( )
+	{
+		return nombre;
+	}
+
+	public void setNombre( String nombre )
+	{
+		this.nombre = nombre;
+	}
+
+	public java.util.List<Sensor> getSensores( )
+	{
+		return sensores;
+	}
+
+	public void setSensores( java.util.List<Sensor> sensores )
+	{
+		this.sensores = sensores;
+	}
+
 	public static VariableAmbiental bind( JsonNode json )
 	{
 		VariableAmbiental var = new VariableAmbiental( );
@@ -114,6 +139,7 @@ public class VariableAmbiental extends Model
 		var.setUniadadDeMedida( json.findPath( "uniadadDeMedida" ).asText( ) );
 		var.setPrecision( json.findPath( "precision" ).floatValue( ) );
 		var.setFrecuencia( json.findPath( "frecuencia" ).floatValue( ) );
+		var.setNombre( json.findPath( "nombre" ).asText( ) );
 		return var;
 	}
 }

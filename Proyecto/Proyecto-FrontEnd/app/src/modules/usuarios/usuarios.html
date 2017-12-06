@@ -6,7 +6,7 @@
     </div>
 
     <div class="list-items-container">
-        <div class="list-table-item" ng-repeat="usuario in usuariosRecords" ng-click="edit(usuario)">
+        <div class="list-table-item list-table-item-usuarios" ng-repeat="usuario in usuariosRecords" ng-click="edit(usuario)">
             <span>{{usuario.id}}</span>
             <span>{{usuario.login}}</span>
             <span>
@@ -14,7 +14,6 @@
                 {{rol.name}}
             </span>
         </span>
-            <!--<button class="btn btn-primary pull-right btn-round fa fa-pencil" ng-click="edit(usuario)"></button>-->
             <button class="btn btn-danger pull-right btn-round fa fa-times" ng-click="delete(usuario.id)"></button>
         </div>
     </div>

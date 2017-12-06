@@ -29,6 +29,7 @@ create table dato (
   id                        bigint not null,
   valor                     float,
   time_stamp                timestamp,
+  sensor_id                 bigint,
   constraint pk_dato primary key (id))
 ;
 
@@ -56,6 +57,7 @@ create table sensor (
   id                        bigint not null,
   minimo                    float,
   maximo                    float,
+  tipo_id                   bigint,
   microcontrolador_id       bigint,
   constraint pk_sensor primary key (id))
 ;
@@ -68,6 +70,7 @@ create table variable_ambiental (
   uniadad_de_medida         varchar(255),
   precision                 float,
   frecuencia                float,
+  nombre                    varchar(255),
   constraint pk_variable_ambiental primary key (id))
 ;
 
@@ -95,12 +98,16 @@ alter table alerta add constraint fk_alerta_area_2 foreign key (area_id) referen
 create index ix_alerta_area_2 on alerta (area_id);
 alter table area add constraint fk_area_nivel_3 foreign key (nivel_id) references nivel (id) on delete restrict on update restrict;
 create index ix_area_nivel_3 on area (nivel_id);
-alter table microcontrolador add constraint fk_microcontrolador_area_4 foreign key (area_id) references area (id) on delete restrict on update restrict;
-create index ix_microcontrolador_area_4 on microcontrolador (area_id);
-alter table reporte add constraint fk_reporte_nivel_5 foreign key (nivel_id) references nivel (id) on delete restrict on update restrict;
-create index ix_reporte_nivel_5 on reporte (nivel_id);
-alter table sensor add constraint fk_sensor_microcontrolador_6 foreign key (microcontrolador_id) references microcontrolador (id) on delete restrict on update restrict;
-create index ix_sensor_microcontrolador_6 on sensor (microcontrolador_id);
+alter table dato add constraint fk_dato_sensor_4 foreign key (sensor_id) references sensor (id) on delete restrict on update restrict;
+create index ix_dato_sensor_4 on dato (sensor_id);
+alter table microcontrolador add constraint fk_microcontrolador_area_5 foreign key (area_id) references area (id) on delete restrict on update restrict;
+create index ix_microcontrolador_area_5 on microcontrolador (area_id);
+alter table reporte add constraint fk_reporte_nivel_6 foreign key (nivel_id) references nivel (id) on delete restrict on update restrict;
+create index ix_reporte_nivel_6 on reporte (nivel_id);
+alter table sensor add constraint fk_sensor_tipo_7 foreign key (tipo_id) references variable_ambiental (id) on delete restrict on update restrict;
+create index ix_sensor_tipo_7 on sensor (tipo_id);
+alter table sensor add constraint fk_sensor_microcontrolador_8 foreign key (microcontrolador_id) references microcontrolador (id) on delete restrict on update restrict;
+create index ix_sensor_microcontrolador_8 on sensor (microcontrolador_id);
 
 
 

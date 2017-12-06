@@ -19,6 +19,7 @@ public class Alerta extends Model
 
 	private Integer tipo;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.ManyToOne
 	private Area area;
 

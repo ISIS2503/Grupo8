@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ActuadorController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.SUPERVISOR, Roles.ADMIN } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idArea )
 	{
@@ -30,7 +30,7 @@ public class ActuadorController extends Controller
 		return ok( Json.toJson( actuador ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
+	@RolesAllowed( { Roles.SUPERVISOR, Roles.ADMIN } )
 	public Result retrieveAll( Long idArea )
 	{
 
@@ -38,14 +38,14 @@ public class ActuadorController extends Controller
 		return ok( Json.toJson( actuador ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
+	@RolesAllowed( { Roles.SUPERVISOR, Roles.ADMIN } )
 	public Result retrieve( Long id )
 	{
 		Actuador actuador = Actuador.find.byId( id );
 		return ok( Json.toJson( actuador ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
+	@RolesAllowed( { Roles.SUPERVISOR, Roles.ADMIN } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -56,7 +56,7 @@ public class ActuadorController extends Controller
 		return ok( Json.toJson( actuador ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO, Roles.ADMIN } )
+	@RolesAllowed( { Roles.SUPERVISOR, Roles.ADMIN } )
 	public Result delete( Long id )
 	{
 		Actuador actuador = Actuador.find.byId( id );

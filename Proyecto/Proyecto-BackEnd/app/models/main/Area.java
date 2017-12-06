@@ -29,6 +29,7 @@ public class Area extends Model
 	@javax.persistence.OneToMany( mappedBy = "area" )
 	private List<Microcontrolador> microcontroladores;
 
+	@com.fasterxml.jackson.annotation.JsonIgnore
 	@javax.persistence.ManyToOne
 	private Nivel nivel;
 

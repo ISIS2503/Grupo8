@@ -22,8 +22,10 @@ public class Sensor extends Model
 
 	private Float maximo;
 
+	@javax.persistence.ManyToOne
 	private VariableAmbiental tipo;
 
+	@javax.persistence.OneToMany( mappedBy = "sensor" )
 	private List<Dato> datos;
 
 	@javax.persistence.ManyToOne

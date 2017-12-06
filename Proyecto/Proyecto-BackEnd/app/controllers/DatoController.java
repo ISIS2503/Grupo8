@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DatoController extends Controller
 {
-	// @RolesAllowed( { Roles.ADMIN, Roles.SYSO, Roles.BRIDGE } )
+	@RolesAllowed( { Roles.ADMIN, Roles.BRIDGE } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( Long idSensor )
 	{
@@ -29,21 +29,21 @@ public class DatoController extends Controller
 		return ok( Json.toJson( dato ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( Long idSensor )
 	{
 		List<Dato> dato = Dato.find.where( ).eq( "idSensor", idSensor ).findList( );
 		return ok( Json.toJson( dato ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Dato dato = Dato.find.byId( id );
 		return ok( Json.toJson( dato ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -54,7 +54,7 @@ public class DatoController extends Controller
 		return ok( Json.toJson( dato ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Dato dato = Dato.find.byId( id );

@@ -24,6 +24,7 @@ public class Dato extends Model
 
 	private Date timeStamp;
 
+	@javax.persistence.ManyToOne
 	private Sensor sensor;
 
 	public Dato( )

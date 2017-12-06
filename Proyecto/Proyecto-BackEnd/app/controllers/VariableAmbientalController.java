@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class VariableAmbientalController extends Controller
 {
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -26,21 +26,21 @@ public class VariableAmbientalController extends Controller
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieveAll( )
 	{
 		List<VariableAmbiental> variableAmbiental = VariableAmbiental.find.findList( );
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		VariableAmbiental variableAmbiental = VariableAmbiental.find.byId( id );
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -51,7 +51,7 @@ public class VariableAmbientalController extends Controller
 		return ok( Json.toJson( variableAmbiental ) );
 	}
 
-	@RolesAllowed( { Roles.ADMIN, Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		VariableAmbiental variableAmbiental = VariableAmbiental.find.byId( id );

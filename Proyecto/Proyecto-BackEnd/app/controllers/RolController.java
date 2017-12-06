@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RolController extends Controller
 {
-	@RolesAllowed( { Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result create( )
 	{
@@ -30,14 +30,14 @@ public class RolController extends Controller
 		return ok( Json.toJson( roles ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result retrieve( Long id )
 	{
 		Rol rol = Rol.find.byId( id );
 		return ok( Json.toJson( rol ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	@BodyParser.Of( BodyParser.Json.class )
 	public Result update( Long id )
 	{
@@ -48,7 +48,7 @@ public class RolController extends Controller
 		return ok( Json.toJson( rol ) );
 	}
 
-	@RolesAllowed( { Roles.SYSO } )
+	@RolesAllowed( { Roles.ADMIN, Roles.SUPERVISOR } )
 	public Result delete( Long id )
 	{
 		Rol rol = Rol.find.byId( id );
