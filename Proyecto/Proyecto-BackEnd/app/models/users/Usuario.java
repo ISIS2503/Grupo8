@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class Usuario extends Model
 	public static final Model.Finder<Long, Usuario> find = new Finder<>( "usersdb", Usuario.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	@ManyToMany( cascade = CascadeType.REMOVE )

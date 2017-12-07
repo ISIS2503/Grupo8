@@ -3,6 +3,7 @@ package models.main;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ public class SistemaMinas extends Model
 	public static final Model.Finder<Long, SistemaMinas> find = new Finder<>( SistemaMinas.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Map<Long, Long[]> mapaSensores;

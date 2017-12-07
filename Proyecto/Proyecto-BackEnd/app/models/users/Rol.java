@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -12,6 +13,7 @@ public class Rol extends Model
 	public static final Model.Finder<Long, Rol> find = new Finder<>( "usersdb", Rol.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private String name;
@@ -49,7 +51,8 @@ public class Rol extends Model
 	}
 
 	@Override
-	public String toString() {
-		return this.getName();
+	public String toString( )
+	{
+		return this.getName( );
 	}
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.LinkedList;
@@ -19,6 +20,7 @@ public class Nivel extends Model
 	public static final Model.Finder<Long, Nivel> find = new Finder<>( Nivel.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	@javax.persistence.Column( unique = true )

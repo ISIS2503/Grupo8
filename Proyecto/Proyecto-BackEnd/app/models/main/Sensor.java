@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class Sensor extends Model
 	public static final Model.Finder<Long, Sensor> find = new Finder<>( Sensor.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Float minimo;

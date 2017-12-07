@@ -1,11 +1,12 @@
 package models.main;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author dnarvaez27
@@ -16,6 +17,7 @@ public class Actuador extends Model
 	public static final Model.Finder<Long, Actuador> find = new Finder<>( Actuador.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Boolean activo;

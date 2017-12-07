@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -15,6 +16,7 @@ public class VariableAmbiental extends Model
 	public static final Model.Finder<Long, VariableAmbiental> find = new Finder<>( VariableAmbiental.class );
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Float valorMaximo;
