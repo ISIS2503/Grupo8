@@ -286,3 +286,21 @@ html, body, .full-size {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.container-microcontroladores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+    padding: 20px;
+}
+.gauge-microcontrolador {
+    width: 600px;
+    height: 400px;
+    float: left;
+
+}
+
+.highcharts-axis-title{
+    font-size: 16px;
+    font-weight: bold;
+}
